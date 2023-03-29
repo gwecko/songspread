@@ -31,7 +31,7 @@ interface Tracks extends Array<Track>{}
 const TrackList: React.FC<Props> = (Props) => {
   const [tracks, setTracks] = useState<Tracks>();
   const [timeRange, setTimeRange] = useState('short_term')
-  const [songLimit, setSongLimit] = useState(1)
+  const [songLimit, setSongLimit] = useState(5)
   
   
 
@@ -58,7 +58,7 @@ const TrackList: React.FC<Props> = (Props) => {
   const ListItems = () => {
       console.log(tracks)
       return <>{
-        tracks!.map((track, i) => {
+        tracks?.map((track, i) => {
           const songDuration = formatDuration(track.duration_ms)
           const songName = track.name
           const artistName = track.album.artists[0].name

@@ -6,10 +6,10 @@ declare module "next-auth" {
    */
   interface Session {
     token: {
-      /** Oauth access token */
-      accessToken?: String
-      picture?: String
-      tracks?: JSON
+      name?: string
+      email: string
+      picture?: string
+      accessToken?: string
     } & DefaultSession['user'];
   }
   
