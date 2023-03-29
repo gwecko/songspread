@@ -4,8 +4,7 @@ import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
 import { useSession } from "next-auth/react"
-import TrackList from './TrackList'
-import SignInButton from './SignInButton'
+import { SignInButton, TrackList } from '@/components'
 
 const inter = Inter({ subsets: ['latin'] })
 // https://www.urlencoder.io
