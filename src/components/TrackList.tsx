@@ -41,7 +41,7 @@ const TrackList: React.FC<Props> = (Props) => {
       limit: songLimit,
     });
   const options = {
-    headers: { Authorization: `Bearer ${Props.session.token?.accessToken}` },
+    headers: { Authorization: `Bearer ${Props.session?.token.accessToken}` },
   };
   
   

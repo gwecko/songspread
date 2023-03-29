@@ -7,8 +7,6 @@ interface Props {
 }
 
 const SignInButton: React.FC<Props> = () => {
-  const [tracks, setTracks] = useState<Object>({});
-
   return (
     <div>
       <button onClick={() => signIn('spotify')}>Login to Spotify</button>
