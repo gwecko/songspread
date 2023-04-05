@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { signOut } from "next-auth/react";
 import queryString from "query-string";
 import { formatDuration } from "@/helpers";
+import { List, ListItem, ListIcon, OrderedList, UnorderedList, Flex, Center, Image } from "@chakra-ui/react";
 
 interface Props {
   session: {
@@ -56,34 +57,32 @@ const TrackList: React.FC<Props> = (Props) => {
   const { name, email, picture } = Props.session.token
   
   const ListItems = () => {
-      console.log(tracks)
-      return <>{
+    console.log(tracks)
+    return <>
+        <ListItem>{name}</ListItem>
+        <ListItem>{email}</ListItem>
+        {
         tracks?.map((track, i) => {
           const songDuration = formatDuration(track.duration_ms)
           const songName = track.name
           const artistName = track.album.artists[0].name
           const albumName = track.album.name
-          return <li key={i}>{songName} ({songDuration}) by {artistName}  |  album: {albumName}</li>
+          return <ListItem  key={i}>{songName} ({songDuration}) by {artistName}  |  album: {albumName}</ListItem>
         })
-      }</>
+      }
+    </>
   }
   
   return (
-    <div>
-      <h1>Swaggg</h1>
-      <ul>
-        <ListItems/>
-        <li>{name}</li>
-        <li>{email}</li>
-        {/*eslint-disable-next-line @next/next/no-img-element*/}
-        <li><img src={picture} alt="profile picture" /></li>
-        <li>
-          <a href="#" onClick={() => signOut()}>
-            sign out
-          </a>
-        </li>
-      </ul>
-    </div>
+    <UnorderedList spacing={'10px'} styleType={'none'}>
+      <ListItems/>
+      <ListItem><Image src={picture} alt="profile picture" /></ListItem>
+      <ListItem>
+        <a href="#" onClick={() => signOut()}>
+          sign out
+        </a>
+      </ListItem>
+    </UnorderedList>
   );
 };
 
