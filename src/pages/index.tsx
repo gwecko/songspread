@@ -21,7 +21,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       {console.log(loading)}
-      <Box display={'flex'} flexDirection={'column'} minH={'100vh'} alignItems={'center'} bgGradient={'linear(to bottom, gray.300 60%, purple.200)'} bgAttachment={'fixed'}>
+      <Box display={'flex'} flexDirection={'column'} minH={'100vh'} alignItems={'center'} bg={'gray.300'} bgGradient={'linear(to bottom, gray.300 60%, purple.200)'} bgAttachment={'fixed'}>
         <Heading bgGradient={'linear(to bottom, gray.400 20%, purple.500)'} bgClip={'text'} fontSize={'5xl'} fontWeight={'extrabold'} paddingY={10}>SongSpread</Heading>
           {
             !session
