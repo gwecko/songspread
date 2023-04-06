@@ -9,7 +9,7 @@ const clientId = process.env.SPOTIFY_CLIENT_ID
 const clientSecret = process.env.SPOTIFY_SECRET
 
 const authOptions = {
-  // secret: 'xkw6r+eGjopDbPYKRiEGFRdOdPDBpVIFpZqk3I8L9OU=',
+  secret: 'xkw6r+eGjopDbPYKRiEGFRdOdPDBpVIFpZqk3I8L9OU=',
   providers: [
     SpotifyProvider({
       clientId: clientId,
