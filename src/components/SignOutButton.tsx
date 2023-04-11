@@ -6,9 +6,10 @@ interface Props {}
 
 const SignOutButton: React.FC<Props> = () => {
   return (
-    <Box p={8}>
+    <Box p={4}>
       <Button
         colorScheme={"purple"}
+        variant={'link'}
         _active={{ transform: "scale(0.95)" }}
         onClick={() => signOut()}
       >
