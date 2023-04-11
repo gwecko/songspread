@@ -3,7 +3,7 @@ import Head from "next/head";
 import Image from "next/image";
 import styles from "@/styles/Home.module.css";
 import { useSession } from "next-auth/react";
-import { SignInButton, TrackList, ListTabs } from "@/components";
+import { SignInButton, TrackList, ListTabs, SignOutButton, DownloadButton } from "@/components";
 import { Box, Center, Flex, Heading, Spacer, Stack } from "@chakra-ui/react";
 
 // the home page; at location '/'
@@ -31,6 +31,7 @@ export default function Home() {
         bg={"gray.400"}
         bgGradient={"linear(to bottom, gray.300 60%, purple.200)"}
         bgAttachment={"fixed"}
+        id="swag"
       >
         <Heading
           bgGradient={"linear(to bottom, gray.400 20%, purple.500)"}
@@ -41,7 +42,17 @@ export default function Home() {
         >
           SongSpread
         </Heading>
-        {!session ? <SignInButton /> : <ListTabs session={session} />}
+        {!session ? (
+          <SignInButton />
+        ) : (
+          <>
+            <Box id="imageDownloadDiv">
+              <ListTabs session={session} />
+            </Box>
+            <DownloadButton />
+            <SignOutButton />
+          </>
+        )}
       </Box>
     </>
   );

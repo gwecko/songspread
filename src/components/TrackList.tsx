@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { signOut } from "next-auth/react";
+import React, { RefObject, useEffect, useState } from "react";
 import queryString from "query-string";
 import { formatDuration } from "@/helpers";
 import {
@@ -12,7 +11,6 @@ import {
   Stack,
   Spinner,
 } from "@chakra-ui/react";
-import SignOutButton from "./SignOutButton";
 
 interface Props {
   timeRange?: string;
@@ -43,7 +41,7 @@ interface Tracks extends Array<Track> {}
 
 const TrackList: React.FC<Props> = (Props) => {
   const [tracks, setTracks] = useState<Tracks>();
-  const [timeRange, setTimeRange] = useState(Props.timeRange || "short_term");
+  const {timeRange} = Props
   const [songLimit, setSongLimit] = useState(5);
 
   const url =
@@ -66,15 +64,15 @@ const TrackList: React.FC<Props> = (Props) => {
   }, []);
 
   const { name, email, picture } = Props.session.token;
-
-  const SongList = () => {
+  
+  const List: React.FC = () => {
     return (
       <UnorderedList spacing={"10px"} styleType={"none"}>
         {tracks?.map((track, i) => {
-          const songDuration = formatDuration(track.duration_ms);
-          const songName = track.name;
-          const artistName = track.album.artists[0].name;
-          const albumName = track.album.name;
+          const songDuration = formatDuration(track.duration_ms),
+          songName = track.name,
+          artistName = track.album.artists[0].name,
+          albumName = track.album.name;
           return (
             <ListItem key={i}>
               {songName} ({songDuration}) - {artistName} | album: {albumName}
@@ -89,8 +87,7 @@ const TrackList: React.FC<Props> = (Props) => {
     <Spinner color="purple.400" size="xl" thickness=".6em" />
   ) : (
     <Stack align={"center"} wrap={"wrap"} maxW={"600px"} w={"80%"}>
-      <SongList />
-      <SignOutButton />
+        <List />
     </Stack>
   );
 };
