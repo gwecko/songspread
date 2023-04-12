@@ -39,7 +39,7 @@ const ListTabs: React.FC<Props> = (Props) => {
         position={'fixed'}
         mt={3}
         mb={8}
-        defaultValue={numTracks}
+        defaultValue={48}
         min={5}
         max={150}
         onChange={(val) => setNumTracks(Math.round(val /= 10))}
@@ -64,7 +64,7 @@ const ListTabs: React.FC<Props> = (Props) => {
 
       <Divider w={"80%"} />
 
-      <TabPanels>
+      <TabPanels textAlign={'left'} ml={'10%'}>
         <TabPanel>
           <TrackList
             session={Props.session}
