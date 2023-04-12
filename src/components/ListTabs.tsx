@@ -1,6 +1,6 @@
-import { Tabs, TabList, Tab, TabPanels, TabPanel, Text, Divider } from "@chakra-ui/react";
+import { Tabs, TabList, Tab, TabPanels, TabPanel, Text, Divider, SliderTrack, SliderFilledTrack, Slider, SliderThumb, SliderMark } from "@chakra-ui/react";
 import TrackList from "./TrackList";
-import React from "react";
+import React, { useState } from "react";
 
 interface Props {
   session: any
@@ -18,6 +18,13 @@ const ListTabs: React.FC<Props> = (Props) => {
   // implement adjustable song numbers
   // option to export playlist to account
   
+  const [numTracks, setNumTracks] = useState(5)
+  const labelStyles = {
+    mt: '2',
+    fontSize: "md",
+    ml: '-2.5',
+  };
+  
   
   return (
     <Tabs variant={"soft-rounded"} colorScheme={"purple"} align={"center"}>
@@ -26,18 +33,58 @@ const ListTabs: React.FC<Props> = (Props) => {
         <Tab>six months</Tab>
         <Tab>all months</Tab>
       </TabList>
-      
-      <Divider pt={2} w={'80%'}/>
-      
+
+      <Slider
+        w={'300px'}
+        position={'fixed'}
+        mt={3}
+        mb={8}
+        defaultValue={numTracks}
+        min={5}
+        max={150}
+        onChange={(val) => setNumTracks(Math.round(val /= 10))}
+      >
+        <SliderMark value={1} mt={2} fontSize={'md'} ml='1.5'>
+          1
+        </SliderMark>
+        <SliderMark value={50} {...labelStyles}>
+          5
+        </SliderMark>
+        <SliderMark value={100} {...labelStyles}>
+          10
+        </SliderMark>
+        <SliderMark value={150} {...labelStyles}>
+          15
+        </SliderMark>
+        <SliderTrack bgColor={"purple.100"}>
+          <SliderFilledTrack bgColor={'purple.300'}/>
+        </SliderTrack>
+        <SliderThumb bgColor={"purple.500"} />
+      </Slider>
+
+      <Divider w={"80%"} />
+
       <TabPanels>
         <TabPanel>
-          <TrackList session={Props.session} timeRange={short} />
+          <TrackList
+            session={Props.session}
+            timeRange={short}
+            numTracks={numTracks}
+          />
         </TabPanel>
         <TabPanel>
-          <TrackList session={Props.session} timeRange={medium} />
+          <TrackList
+            session={Props.session}
+            timeRange={medium}
+            numTracks={numTracks}
+          />
         </TabPanel>
         <TabPanel>
-          <TrackList session={Props.session} timeRange={long} />
+          <TrackList
+            session={Props.session}
+            timeRange={long}
+            numTracks={numTracks}
+          />
         </TabPanel>
       </TabPanels>
     </Tabs>
