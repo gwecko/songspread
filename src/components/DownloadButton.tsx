@@ -7,7 +7,7 @@ const DownloadButton: React.FC = (Props) => {
   const handleDownload = async () => {
     const element = document.getElementById('imageDownloadDiv')!
     console.log(element)
-    const canvas = await html2canvas(element, { backgroundColor: "#c1adea"}),
+    const canvas = await html2canvas(element),
       data = canvas.toDataURL("image/jpg", 1),
       link = document.createElement("a");
     

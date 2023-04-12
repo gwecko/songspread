@@ -13,6 +13,7 @@ import {
 } from "@chakra-ui/react";
 
 interface Props {
+  numTracks: number;
   timeRange?: string;
   session: {
     token: {
@@ -41,14 +42,14 @@ interface Tracks extends Array<Track> {}
 
 const TrackList: React.FC<Props> = (Props) => {
   const [tracks, setTracks] = useState<Tracks>();
-  const {timeRange} = Props
-  const [songLimit, setSongLimit] = useState(5);
+  const { timeRange, numTracks } = Props
+  
 
   const url =
     "https://api.spotify.com/v1/me/top/tracks?" +
     queryString.stringify({
       time_range: timeRange,
-      limit: songLimit,
+      limit: 15,
     });
   const options = {
     headers: { Authorization: `Bearer ${Props.session?.token.accessToken}` },
@@ -69,15 +70,17 @@ const TrackList: React.FC<Props> = (Props) => {
     return (
       <UnorderedList spacing={"10px"} styleType={"none"}>
         {tracks?.map((track, i) => {
-          const songDuration = formatDuration(track.duration_ms),
-          songName = track.name,
-          artistName = track.album.artists[0].name,
-          albumName = track.album.name;
-          return (
-            <ListItem key={i}>
-              {songName} ({songDuration}) - {artistName} | album: {albumName}
-            </ListItem>
-          );
+          while (i < numTracks) {
+            const songDuration = formatDuration(track.duration_ms),
+              songName = track.name,
+              artistName = track.album.artists[0].name,
+              albumName = track.album.name;
+            return (
+              <ListItem key={i}>
+                {i+1}. {songName} ({songDuration}) - {artistName} | album: {albumName}
+              </ListItem>
+            );
+          }
         })}
       </UnorderedList>
     );
