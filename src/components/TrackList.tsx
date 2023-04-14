@@ -42,8 +42,7 @@ interface Tracks extends Array<Track> {}
 
 const TrackList: React.FC<Props> = (Props) => {
   const [tracks, setTracks] = useState<Tracks>();
-  const { timeRange, numTracks } = Props
-  
+  const { timeRange, numTracks } = Props;
 
   const url =
     "https://api.spotify.com/v1/me/top/tracks?" +
@@ -65,7 +64,7 @@ const TrackList: React.FC<Props> = (Props) => {
   }, []);
 
   const { name, email, picture } = Props.session.token;
-  
+
   const List: React.FC = () => {
     return (
       <UnorderedList spacing={"10px"} styleType={"none"}>
@@ -77,7 +76,8 @@ const TrackList: React.FC<Props> = (Props) => {
               albumName = track.album.name;
             return (
               <ListItem key={i}>
-                {i+1}. {songName} ({songDuration}) - {artistName} | album: {albumName}
+                {i + 1}. {songName} ({songDuration}) - {artistName} | album:{" "}
+                {albumName}
               </ListItem>
             );
           }
@@ -86,11 +86,13 @@ const TrackList: React.FC<Props> = (Props) => {
     );
   };
 
-  return !tracks ? (
-    <Spinner color="purple.400" size="xl" thickness=".6em" />
-  ) : (
+  return (
     <Stack align={"center"} wrap={"wrap"} maxW={"600px"} w={"80%"}>
+      {!tracks ? (
+        <Spinner color="purple.400" size="xl" thickness=".6em" />
+      ) : (
         <List />
+      )}
     </Stack>
   );
 };
