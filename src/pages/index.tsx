@@ -46,7 +46,7 @@ export default function Home() {
           <SignInButton />
         ) : (
           <>
-            <Box id="imageDownloadDiv">
+            <Box>
               <ListTabs session={session} />
             </Box>
             <DownloadButton />

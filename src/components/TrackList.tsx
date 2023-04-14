@@ -76,8 +76,7 @@ const TrackList: React.FC<Props> = (Props) => {
               albumName = track.album.name;
             return (
               <ListItem key={i}>
-                {i + 1}. {songName} ({songDuration}) - {artistName} | album:{" "}
-                {albumName}
+                {i + 1}. {songName} - {artistName}
               </ListItem>
             );
           }
@@ -87,7 +86,7 @@ const TrackList: React.FC<Props> = (Props) => {
   };
 
   return (
-    <Stack align={"center"} wrap={"wrap"} maxW={"600px"} w={"80%"}>
+    <Stack align={"center"} wrap={"wrap"}>
       {!tracks ? (
         <Spinner color="purple.400" size="xl" thickness=".6em" />
       ) : (
