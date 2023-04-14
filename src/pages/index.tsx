@@ -10,7 +10,6 @@ import { Box, Center, Flex, Heading, Spacer, Stack } from "@chakra-ui/react";
 export default function Home() {
   const { data: session, status } = useSession();
   const loading = status === "loading";
-  const {accessToken} = session?.token
 
   return (
     <>
@@ -43,7 +42,7 @@ export default function Home() {
         >
           SongSpread
         </Heading>
-        {!accessToken ? (
+        {!session?.token.accessToken ? (
           <SignInButton />
         ) : (
           <>
