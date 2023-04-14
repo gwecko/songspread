@@ -64,7 +64,7 @@ const ListTabs: React.FC<Props> = (Props) => {
 
       <Divider w={"80%"} />
 
-      <TabPanels textAlign={'left'} ml={'10%'}>
+      <TabPanels textAlign={'left'} id="convertToImage">
         <TabPanel>
           <TrackList
             session={Props.session}
