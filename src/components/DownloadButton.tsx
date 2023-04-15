@@ -1,25 +1,28 @@
-import { Button } from "@chakra-ui/react"
-import * as htmlToImage from 'html-to-image'
-import { defaultConfig } from "next/dist/server/config-shared";
+import { createBlobForDownload } from "@/helpers";
+import { Button } from "@chakra-ui/react";
+import * as htmlToImage from "html-to-image";
 
 // can filter out elements with options argument
 //https://www.npmjs.com/package/html-to-image
 const imageOptions = {
   canvasWidth: undefined,
   canvasHeight: undefined,
-  backgroundColor: '#D6BCFA'
+  backgroundColor: "#D6BCFA",
 };
 
-const DownloadButton: React.FC = (Props) => {
+const DownloadButton: React.FC = () => {
   const handleDownload = async () => {
     const element = document.getElementById("convertToImage")!;
-    const dataUrl = await htmlToImage.toPng(element, imageOptions)
-    const link = document.createElement('a')
-    link.href = dataUrl
-    link.target = '_blank'
-    link.click()
-  }
-  
+    const dataUrl = await htmlToImage.toPng(element, imageOptions);
+    // const link = document.createElement("a");
+    // link.href = dataUrl
+    // link.target = '_self'
+    // link.click()
+    
+    const blobUrl = createBlobForDownload(dataUrl)
+    window.open(blobUrl, "_blank");
+  };
+
   return (
     <Button mt={5} colorScheme={"purple"} onClick={handleDownload}>
       Download List
@@ -27,4 +30,4 @@ const DownloadButton: React.FC = (Props) => {
   );
 };
 
-export default DownloadButton
+export default DownloadButton;
