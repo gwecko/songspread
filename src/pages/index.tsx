@@ -31,7 +31,6 @@ export default function Home() {
         bg={"gray.400"}
         bgGradient={"linear(to bottom, gray.300 60%, purple.200)"}
         bgAttachment={"fixed"}
-        id="swag"
       >
         <Heading
           bgGradient={"linear(to bottom, gray.400 20%, purple.500)"}
