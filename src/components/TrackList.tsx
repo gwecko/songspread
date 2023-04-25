@@ -67,7 +67,7 @@ const TrackList: React.FC<Props> = (Props) => {
 
   const List: React.FC = () => {
     return (
-      <UnorderedList spacing={"10px"} styleType={"none"}>
+      <UnorderedList spacing={".5em"} styleType={"none"} fontSize={'2xs'}>
         {tracks?.map((track, i) => {
           while (i < numTracks) {
             const songDuration = formatDuration(track.duration_ms),

@@ -1,7 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import Head from "next/head";
 import Image from "next/image";
-import styles from "@/styles/Home.module.css";
 import { useSession } from "next-auth/react";
 import { SignInButton, TrackList, ListTabs, SignOutButton, DownloadButton } from "@/components";
 import { Box, Center, Flex, Heading, Spacer, Stack } from "@chakra-ui/react";
@@ -37,7 +36,7 @@ export default function Home() {
           bgClip={"text"}
           fontSize={"5xl"}
           fontWeight={"extrabold"}
-          paddingY={10}
+          paddingY={2}
         >
           SongSpread
         </Heading>

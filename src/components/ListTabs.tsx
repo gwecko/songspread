@@ -19,15 +19,20 @@ const ListTabs: React.FC<Props> = (Props) => {
   // option to export playlist to account
   
   const [numTracks, setNumTracks] = useState(5)
-  const labelStyles = {
-    mt: '2',
-    fontSize: "md",
-    ml: '-2.5',
+  const sliderStyles = {
+    fontSize: 'sm',
+    fontWeight: 'semibold',
+    color: 'purple.800'
   };
   
   
   return (
-    <Tabs variant={"soft-rounded"} colorScheme={"purple"} align={"center"}>
+    <Tabs
+      variant={"soft-rounded"}
+      colorScheme={"purple"}
+      align={"center"}
+      size={'sm'}
+    >
       <TabList>
         <Tab>one month</Tab>
         <Tab>six months</Tab>
@@ -35,36 +40,28 @@ const ListTabs: React.FC<Props> = (Props) => {
       </TabList>
 
       <Slider
-        w={'300px'}
-        position={'fixed'}
-        mt={3}
-        mb={8}
-        defaultValue={48}
+        w={"70%"}
+        position={"fixed"}
+        mt={4}
+        mb={6}
+        ml={'auto'}
+        defaultValue={numTracks}
         min={5}
-        max={150}
-        onChange={(val) => setNumTracks(Math.round(val /= 10))}
+        max={15}
+        onChange={(val) => setNumTracks(val)}
       >
-        <SliderMark value={1} mt={2} fontSize={'md'} ml='1.5'>
-          1
-        </SliderMark>
-        <SliderMark value={50} {...labelStyles}>
-          5
-        </SliderMark>
-        <SliderMark value={100} {...labelStyles}>
-          10
-        </SliderMark>
-        <SliderMark value={150} {...labelStyles}>
-          15
-        </SliderMark>
+        <SliderMark value={5} mt={"2"} ml={'-1'}{...sliderStyles}>5</SliderMark>
+        <SliderMark value={10} mt={"2"} ml={'-2'}{...sliderStyles}>10</SliderMark>
+        <SliderMark value={15} mt={"2"} ml={'-2'}{...sliderStyles}>15</SliderMark>
         <SliderTrack bgColor={"purple.100"}>
-          <SliderFilledTrack bgColor={'purple.300'}/>
+          <SliderFilledTrack bgColor={"purple.300"} />
         </SliderTrack>
-        <SliderThumb bgColor={"purple.500"} />
+        <SliderThumb bgColor={"purple.500"} w={'25px'} />
       </Slider>
 
       <Divider w={"80%"} />
 
-      <TabPanels textAlign={'left'} id="convertToImage">
+      <TabPanels textAlign={"left"} id="convertToImage">
         <TabPanel>
           <TrackList
             session={Props.session}
