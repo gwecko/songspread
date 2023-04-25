@@ -25,11 +25,12 @@ export default function Home() {
       <Box
         display={"flex"}
         flexDirection={"column"}
+        h={'-webkit-fit-content'}
         minH={"100vh"}
         alignItems={"center"}
         bg={"gray.400"}
-        bgGradient={"linear(to bottom, gray.300 60%, purple.200)"}
-        bgAttachment={"fixed"}
+        bgGradient={"linear(to bottom, gray.300 60%, purple.300)"}    
+        bgAttachment={'fixed'}
       >
         <Heading
           bgGradient={"linear(to bottom, gray.400 20%, purple.500)"}
