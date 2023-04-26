@@ -42,8 +42,7 @@ const ListTabs: React.FC<Props> = (Props) => {
       <Slider
         w={"70%"}
         position={"fixed"}
-        mt={4}
-        mb={6}
+        my={4}
         ml={'auto'}
         defaultValue={numTracks}
         min={5}
@@ -54,12 +53,12 @@ const ListTabs: React.FC<Props> = (Props) => {
         <SliderMark value={10} mt={"2"} ml={'-2'}{...sliderStyles}>10</SliderMark>
         <SliderMark value={15} mt={"2"} ml={'-2'}{...sliderStyles}>15</SliderMark>
         <SliderTrack bgColor={"purple.100"}>
-          <SliderFilledTrack bgColor={"purple.300"} />
+          <SliderFilledTrack bgColor={"purple.100"} />
         </SliderTrack>
         <SliderThumb bgColor={"purple.500"} w={'25px'} />
       </Slider>
 
-      <Divider w={"80%"} />
+      <Divider w={"100%"} mt={2}/>
 
       <TabPanels textAlign={"left"} id="convertToImage">
         <TabPanel>
