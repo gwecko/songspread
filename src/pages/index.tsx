@@ -18,26 +18,28 @@ export default function Home() {
           name="description"
           content="Grant is good and this is his spotify app"
         />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+        />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       {console.log(loading)}
       <Box
         display={"flex"}
         flexDirection={"column"}
-        h={'-webkit-fit-content'}
         minH={"100vh"}
         alignItems={"center"}
         bg={"gray.400"}
-        bgGradient={"linear(to bottom, gray.300 60%, purple.300)"}    
-        bgAttachment={'fixed'}
+        bgGradient={"linear(to bottom, gray.300 30%, purple.400 90%)"}
+        bgAttachment={"fixed"}
       >
         <Heading
-          bgGradient={"linear(to bottom, gray.400 20%, purple.500)"}
+          bgGradient={"linear(to bottom, gray.200, purple.500 70%)"}
           bgClip={"text"}
-          fontSize={"5xl"}
+          fontSize={"3.5em"}
           fontWeight={"extrabold"}
-          paddingY={2}
+          marginY={5}
         >
           SongSpread
         </Heading>
