@@ -1,14 +1,18 @@
 /* eslint-disable @next/next/no-img-element */
 import Head from "next/head";
 import Image from "next/image";
-import { useSession } from "next-auth/react";
+import { useSession, signIn } from "next-auth/react";
 import { SignInButton, TrackList, ListTabs, SignOutButton, DownloadButton } from "@/components";
 import { Box, Center, Flex, Heading, Spacer, Stack } from "@chakra-ui/react";
+import { useEffect } from "react";
 
 // the home page; at location '/'
 export default function Home() {
   const { data: session, status } = useSession();
   const loading = status === "loading";
+  
+  
+  console.log(session)
 
   return (
     <>
@@ -24,7 +28,6 @@ export default function Home() {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      {console.log(loading)}
       <Box
         display={"flex"}
         flexDirection={"column"}
@@ -35,7 +38,7 @@ export default function Home() {
         bgAttachment={"fixed"}
       >
         <Heading
-          bgGradient={"linear(to bottom, gray.200, purple.500 70%)"}
+          bgGradient={"linear(to bottom, gray.200, purple.500 55%)"}
           bgClip={"text"}
           fontSize={"3.5em"}
           fontWeight={"extrabold"}

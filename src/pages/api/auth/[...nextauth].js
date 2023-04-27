@@ -2,7 +2,6 @@ import NextAuth from "next-auth";
 import SpotifyProvider from "next-auth/providers/spotify";
 import { NextApiRequest, NextApiResponse } from "next";
 import { redirect } from "next/dist/server/api-utils";
-import queryString from "query-string";
 
 
 const clientId = process.env.SPOTIFY_CLIENT_ID
@@ -25,11 +24,15 @@ const authOptions = {
       if (account) {
         token.accessToken = account.access_token
         token.picture = user.image
+        token.refreshToken = account.refresh_token
+      } else {
+        // if token is expired, try to refresh
       }
       return token
     },
 
-    async session(session) {  
+    async session(session) { 
+      // console.log(session)      
       return session
     },
   },
