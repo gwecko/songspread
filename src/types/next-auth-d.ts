@@ -12,8 +12,7 @@ declare module "next-auth" {
       picture?: string
       accessToken?: string
       refreshToken?: string
-    }
-    // & DefaultSession['user'];
+    } & DefaultSession['user'];
   }
   
 }

@@ -11,6 +11,11 @@ export default function Home() {
   const { data: session, status } = useSession();
   const loading = status === "loading";
   
+  // useEffect(() => {
+  //   if (session?.error === "RefreshAccessTokenError") {
+  //     signIn('spotify'); // Force sign in to hopefully resolve error
+  //   }
+  // }, [session]);
   
   console.log(session)
 
@@ -46,7 +51,7 @@ export default function Home() {
         >
           SongSpread
         </Heading>
-        {!session?.token.accessToken ? (
+        {!session?.token?.accessToken ? (
           <SignInButton />
         ) : (
           <>
