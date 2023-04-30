@@ -21,56 +21,17 @@ const authOptions = {
   ],
   callbacks: {
     async jwt({ token, account, user, profile }) {
-      console.log(account)
       if (account) {
         token.accessToken = account.access_token
-        token.picture = user.image
         token.refreshToken = account.refresh_token
-        return token
-      // }
-      // else if (Date.now() < account.expires_at * 1000) {
-      //   // if token is not expired, return it
-      //   return token
-      } else {
-        // If access token has expired, try to refresh it
-        try {
-          const res = await fetch("https://accounts.spotify.com/api/token", {
-            headers: { "Content-Type": "application/x-www-form-urlencoded" },
-            body: new URLSearchParams({
-              client_id: clientId,
-              client_secret: clientSecret,
-              grant_type: "refresh_token",
-              refresh_token: account.refresh_token,
-            }),
-            method: "POST",
-          })
-
-          const tokens = await res.json()
-          console.log('%%%%%tokens%%%%%')
-          console.log('%%%%%tokens%%%%%')
-          console.log('%%%%%tokens%%%%%')
-          console.log(tokens)
-          if (!res.ok) throw tokens
-
-          return {
-            ...token, // Keep the previous token properties
-            access_token: tokens.access_token,
-            expires_at: Math.floor(Date.now() / 1000 + tokens.expires_in),
-            // Fall back to old refresh token, but note that
-            // many providers may only allow using a refresh token once.
-            refresh_token: tokens.refresh_token ?? token.refresh_token,
-          }
-        } catch (error) {
-          console.error("Error refreshing access token", error)
-          // The error property will be used client-side to handle the refresh token error
-          return { ...token, error: "RefreshAccessTokenError" }
-        }
-      }
+        token.expiresAt = account.expires_at
+      } 
+      return token
     },
     
 
-    async session(session) { 
-      // console.log(session)      
+    async session(session, token) { 
+      console.log(session)      
       return session
     },
   },
@@ -78,9 +39,8 @@ const authOptions = {
 
 
 
-export default (req, res) => {
-  NextAuth(req, res, authOptions);
-}
+// eslint-disable-next-line import/no-anonymous-default-export
+export default (req, res) => { NextAuth(req, res, authOptions) }
 
 /* >JWT params:
 logging the account:

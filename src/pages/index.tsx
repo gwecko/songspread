@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import Head from "next/head";
 import Image from "next/image";
-import { useSession, signIn } from "next-auth/react";
+import { useSession, signIn, signOut } from "next-auth/react";
 import { SignInButton, TrackList, ListTabs, SignOutButton, DownloadButton } from "@/components";
 import { Box, Center, Flex, Heading, Spacer, Stack } from "@chakra-ui/react";
 import { useEffect } from "react";
@@ -10,14 +10,9 @@ import { useEffect } from "react";
 export default function Home() {
   const { data: session, status } = useSession();
   const loading = status === "loading";
+  console.log(session?.session.expiresAt)
   
-  // useEffect(() => {
-  //   if (session?.error === "RefreshAccessTokenError") {
-  //     signIn('spotify'); // Force sign in to hopefully resolve error
-  //   }
-  // }, [session]);
-  
-  console.log(session)
+
 
   return (
     <>
@@ -51,17 +46,17 @@ export default function Home() {
         >
           SongSpread
         </Heading>
-        {!session?.token?.accessToken ? (
-          <SignInButton />
-        ) : (
-          <>
-            <Box>
-              <ListTabs session={session} />
-            </Box>
-            <DownloadButton />
-            <SignOutButton />
-          </>
-        )}
+        
+        {!session
+          ? <SignInButton />
+          : <>
+              <Box>
+                <ListTabs session={session} />
+              </Box>
+              <DownloadButton />
+              <SignOutButton />
+            </>
+        }
       </Box>
     </>
   );

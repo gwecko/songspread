@@ -26,6 +26,7 @@ const ListTabs: React.FC<Props> = (Props) => {
       variant={"soft-rounded"}
       colorScheme={"purple"}
       align={"center"}
+      w={'100%'}
       size={'sm'}
     >
       
@@ -36,7 +37,8 @@ const ListTabs: React.FC<Props> = (Props) => {
       </TabList>
 
       <Slider
-        w={"70%"}
+        w={'80%'}
+        maxW={'300px'}
         position={"fixed"}
         my={4}
         ml={'auto'}
