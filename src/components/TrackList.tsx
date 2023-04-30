@@ -63,7 +63,7 @@ const TrackList: React.FC<Props> = (Props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const { name, email, picture } = Props.session.token;
+  // const { name, email, picture } = Props.session.token;
 
   const List: React.FC = () => {
     return (
