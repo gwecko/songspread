@@ -56,7 +56,7 @@ const ListTabs: React.FC<Props> = (Props) => {
         <SliderThumb bgColor={"purple.500"} w={'25px'} />
       </Slider>
 
-      <Divider w={"100%"} mt={2}/>
+      <Divider w={"80%"} mt={2}/>
 
       <TabPanels textAlign={"left"} id="convertToImage">
         <TabPanel>

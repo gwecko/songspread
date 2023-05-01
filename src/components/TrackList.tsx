@@ -1,6 +1,6 @@
 import React, { RefObject, useEffect, useState } from "react";
 import queryString from "query-string";
-import { formatDuration } from "@/helpers";
+import { formatDuration, formatArtist } from "@/helpers";
 import {
   List,
   ListItem,
@@ -10,7 +10,21 @@ import {
   Box,
   Stack,
   Spinner,
+  Link,
 } from "@chakra-ui/react";
+
+import { defineStyle, defineStyleConfig } from "@chakra-ui/react";
+
+const noUnderline = defineStyle({
+  textDecoration: "underline",
+  fontcolor: "red",
+  fontFamily: "serif",
+});
+
+export const linkTheme = defineStyleConfig({
+  variants: { noUnderline },
+});
+
 
 interface Props {
   numTracks: number;
@@ -26,19 +40,14 @@ interface Props {
 }
 
 interface Track {
-  name: String;
+  name: string;
+  artists: Object[]
   duration_ms: number;
-  album: {
-    artists: [
-      {
-        name: String;
-      }
-    ];
-    name: String;
-  };
+  album: { name: string; };
+  external_urls: { spotify: string }
 }
 
-interface Tracks extends Array<Track> {}
+interface Tracks extends Array<Track> { }
 
 const TrackList: React.FC<Props> = (Props) => {
   const [tracks, setTracks] = useState<Tracks>();
@@ -63,20 +72,21 @@ const TrackList: React.FC<Props> = (Props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // const { name, email, picture } = Props.session.token;
-
   const List: React.FC = () => {
     return (
-      <UnorderedList spacing={".5em"} styleType={"none"} fontSize={['xs', 'sm', 'md']}>
+      <UnorderedList spacing={".5em"} styleType={"none"} fontSize={['sm', 'md']}>
         {tracks?.map((track, i) => {
           while (i < numTracks) {
             const songDuration = formatDuration(track.duration_ms),
+              artistNames = formatArtist(track.artists),
               songName = track.name,
-              artistName = track.album.artists[0].name,
+              songLink = track.external_urls.spotify,
               albumName = track.album.name;
             return (
-              <ListItem key={i}>
-                {i + 1}. {songName} - {artistName}
+              <ListItem key={i} w={'80%'} margin={'auto'}>
+                <Link href={songLink} isExternal _hover={{ 'text-decoration': 'none' }}>
+                  {i + 1}. {songName} - {artistNames}
+                </Link>
               </ListItem>
             );
           }
@@ -87,11 +97,10 @@ const TrackList: React.FC<Props> = (Props) => {
 
   return (
     <Stack align={"center"} wrap={"wrap"}>
-      {!tracks ? (
-        <Spinner color="purple.400" size="xl" thickness=".6em" />
-      ) : (
-        <List />
-      )}
+      {!tracks
+        ? <Spinner color="purple.400" size="xl" thickness=".6em" />
+        : <List />
+      }
     </Stack>
   );
 };
