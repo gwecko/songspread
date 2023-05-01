@@ -10,7 +10,6 @@ import { useEffect } from "react";
 export default function Home() {
   const { data: session, status } = useSession();
   const loading = status === "loading";
-  console.log(session?.session.expiresAt)
   
 
 
@@ -46,7 +45,7 @@ export default function Home() {
         >
           SongSpread
         </Heading>
-        
+    
         {!session
           ? <SignInButton />
           : <>

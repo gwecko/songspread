@@ -31,7 +31,7 @@ const authOptions = {
     
 
     async session(session, token) { 
-      console.log(session)      
+      // console.log(session)      
       return session
     },
   },

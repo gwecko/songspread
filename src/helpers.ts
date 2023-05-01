@@ -6,6 +6,12 @@ export function formatDuration(duration: number) {
     : `${ms.getMinutes()}:${seconds}`;
 }
 
+
+export function formatArtist(artists: any[]) {
+  return artists.map((artist) => artist.name).join(", ");
+}
+
+
 export function createBlobForDownload(base64ImageData: string) {
   const contentType = "image/png";
   const byteCharacters = atob(
