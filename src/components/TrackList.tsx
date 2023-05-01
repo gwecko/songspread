@@ -84,7 +84,7 @@ const TrackList: React.FC<Props> = (Props) => {
               albumName = track.album.name;
             return (
               <ListItem key={i} w={'80%'} margin={'auto'}>
-                <Link href={songLink} isExternal _hover={{ 'text-decoration': 'none' }}>
+                <Link href={songLink} _hover={{ 'textDecoration': 'none' }} isExternal>
                   {i + 1}. {songName} - {artistNames}
                 </Link>
               </ListItem>
