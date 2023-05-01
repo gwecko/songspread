@@ -2,9 +2,7 @@ import React from "react";
 import { signOut } from "next-auth/react";
 import { Box, Button } from "@chakra-ui/react";
 
-interface Props {}
-
-const SignOutButton: React.FC<Props> = () => {
+const SignOutButton: React.FC = () => {
   return (
     <Box p={4}>
       <Button

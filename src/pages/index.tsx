@@ -2,9 +2,8 @@
 import Head from "next/head";
 import Image from "next/image";
 import { useSession, signIn, signOut } from "next-auth/react";
-import { SignInButton, TrackList, ListTabs, SignOutButton, DownloadButton } from "@/components";
+import { Layout, SignInButton, TrackList, ListTabs, SignOutButton, DownloadButton } from "@/components";
 import { Box, Center, Flex, Heading, Spacer, Stack } from "@chakra-ui/react";
-import { useEffect } from "react";
 
 // the home page; at location '/'
 export default function Home() {
@@ -16,10 +15,10 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Grant is good</title>
+        <title>SongSpread &#x1F47E;</title>
         <meta
           name="description"
-          content="Grant is good and this is his spotify app"
+          content="SongSpread shows your top songs from Spotify."
         />
         <meta
           name="viewport"
@@ -27,36 +26,20 @@ export default function Home() {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Box
-        display={"flex"}
-        flexDirection={"column"}
-        minH={"100vh"}
-        alignItems={"center"}
-        bg={"gray.400"}
-        bgGradient={"linear(to bottom, gray.300 30%, purple.400 90%)"}
-        bgAttachment={"fixed"}
-      >
-        <Heading
-          bgGradient={"linear(to bottom, gray.200, purple.500 55%)"}
-          bgClip={"text"}
-          fontSize={"3.5em"}
-          fontWeight={"extrabold"}
-          marginY={5}
-        >
-          SongSpread
-        </Heading>
-    
-        {!session
-          ? <SignInButton />
-          : <>
-              <Box>
-                <ListTabs session={session} />
-              </Box>
-              <DownloadButton />
-              <SignOutButton />
-            </>
-        }
-      </Box>
+
+      <Layout>
+        {!session ? (
+          <SignInButton />
+        ) : (
+          <>
+            <Box id="boxDownload">
+              <ListTabs session={session} />
+            </Box>
+            <DownloadButton />
+            <SignOutButton />
+          </>
+        )}
+      </Layout>
     </>
   );
 }
