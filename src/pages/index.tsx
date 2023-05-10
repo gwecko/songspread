@@ -1,16 +1,17 @@
 /* eslint-disable @next/next/no-img-element */
 import Head from "next/head";
 import Image from "next/image";
-import { useSession, signIn, signOut } from "next-auth/react";
-import { Layout, SignInButton, TrackList, ListTabs, SignOutButton, DownloadButton } from "@/components";
+import { useSession } from "next-auth/react";
+import { Layout, SignInButton, ListTabs, SignOutButton, DownloadButton } from "@/components";
 import { Box, Center, Flex, Heading, Spacer, Stack } from "@chakra-ui/react";
 
 // the home page; at location '/'
 export default function Home() {
   const { data: session, status } = useSession();
   const loading = status === "loading";
+  console.log(session)
+  const username = session?.user?.name
   
-
 
   return (
     <>
@@ -35,7 +36,7 @@ export default function Home() {
             <Box id="boxDownload">
               <ListTabs session={session} />
             </Box>
-            <DownloadButton />
+              <DownloadButton />
             <SignOutButton />
           </>
         )}
