@@ -8,6 +8,6 @@ export function formatDuration(duration: number) {
 
 
 export function formatArtist(artists: any[]) {
-  return artists.map((artist) => artist.name).join(", ");
+  return artists.map((a) => a.name).join(", ");
 }
 
