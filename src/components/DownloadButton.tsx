@@ -23,8 +23,9 @@ const DownloadButton: React.FC = () => {
     const element = document.getElementById("tabDownload")!,
       canvas = await html2canvas(element, imageOptions),
       dataUrl = canvas.toDataURL()
+    
     router.push({
-      pathname: '/download/[dataUrl]',
+      pathname: '/my-image/[dataUrl]',
       query: { dataUrl: dataUrl },
     })
   }
