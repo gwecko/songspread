@@ -1,4 +1,4 @@
-import React, { RefObject, useEffect, useState } from "react";
+import React, { RefObject, useEffect, useRef, useState } from "react";
 import queryString from "query-string";
 import { formatDuration, formatArtist } from "@/helpers";
 import {
@@ -11,20 +11,11 @@ import {
   Stack,
   Spinner,
   Link,
+  Slide,
+  useDisclosure,
+  SlideFade,
 } from "@chakra-ui/react";
-
-import { defineStyle, defineStyleConfig } from "@chakra-ui/react";
-
-const noUnderline = defineStyle({
-  textDecoration: "underline",
-  fontcolor: "red",
-  fontFamily: "serif",
-});
-
-export const linkTheme = defineStyleConfig({
-  variants: { noUnderline },
-});
-
+import { CSSTransition, TransitionGroup } from "react-transition-group";
 
 interface Props {
   numTracks: number;
@@ -50,7 +41,7 @@ interface Track {
 interface Tracks extends Array<Track> { }
 
 const TrackList: React.FC<Props> = (Props) => {
-  const [tracks, setTracks] = useState<Tracks>();
+  const [fetchedTracks, setFetchedTracks] = useState<Tracks>();
   const { timeRange, numTracks } = Props;
 
   const url =
@@ -67,37 +58,36 @@ const TrackList: React.FC<Props> = (Props) => {
     fetch(url, options)
       .then((res) => res.json())
       .then((res) => {
-        setTracks(res.items);
+        setFetchedTracks(res.items);
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const List: React.FC = () => {
+  const List = () => {
+    const [displayedTracks, setDisplayedTracks] = useState<Tracks>()
+    useEffect(() => {
+      setDisplayedTracks(fetchedTracks?.slice(0, numTracks))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [numTracks])
+    
     return (
-      <UnorderedList spacing={".5em"} styleType={"none"} fontSize={['sm', 'md']}>
-        {tracks?.map((track, i) => {
-          while (i < numTracks) {
-            const songDuration = formatDuration(track.duration_ms),
-              artistNames = formatArtist(track.artists),
-              songName = track.name,
-              songLink = track.external_urls.spotify,
-              albumName = track.album.name;
+      <TransitionGroup>
+          {displayedTracks?.map((track, index) => {
             return (
-              <ListItem key={i} w={'80%'} margin={'auto'}>
-                <Link href={songLink} _hover={{ 'textDecoration': 'none' }} isExternal>
-                  {i + 1}. {songName} - {artistNames}
-                </Link>
-              </ListItem>
-            );
-          }
-        })}
-      </UnorderedList>
-    );
+              <CSSTransition key={index}>
+                <div>
+                {track.name}
+                </div>
+              </CSSTransition>
+            )
+          })}
+      </TransitionGroup>
+    )
   };
 
   return (
     <Stack align={"center"} wrap={"wrap"}>
-      {!tracks
+      {!fetchedTracks
         ? <Spinner color="purple.400" size="xl" thickness=".6em" />
         : <List />
       }
