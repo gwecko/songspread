@@ -1,4 +1,4 @@
-@keyframes roll-down {
+/* @keyframes roll-down {
   0% {
     transform: rotateX(0) translateY(0);
   }
@@ -8,6 +8,23 @@
 }
 
 .roll-down {
-  /* animation: roll-down 2s linear infinite; */
-  display: none;
+  animation: roll-down 2s linear infinite;
+} */
+
+.fade-enter {
+  opacity: .5;
+}
+
+.fade-enter-active {
+  opacity: .5;
+  transition: opacity 500ms ease-in;
+}
+
+.fade-exit {
+  opacity: 0;
+}
+
+.fade-exit-active {
+  opacity: .5;
+  transition: opacity 500ms ease-in;
 }

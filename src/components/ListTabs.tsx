@@ -8,10 +8,7 @@ interface Props {
 
 const ListTabs: React.FC<Props> = (Props) => {
   
-  const timeRanges = ['short_term', 'medium_term', 'long_term']
-  const [ short, medium, long ] = timeRanges
-  
-  // option to export playlist to account
+  const [short, medium, long] = ["short_term", "medium_term", "long_term"];
   
   const [numTracks, setNumTracks] = useState(5)
   const sliderStyles = {
