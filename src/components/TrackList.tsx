@@ -14,6 +14,9 @@ import {
   Slide,
   useDisclosure,
   SlideFade,
+  ScaleFade,
+  Collapse,
+  Fade,
 } from "@chakra-ui/react";
 
 interface Props {
@@ -40,19 +43,17 @@ interface Track {
 interface Tracks extends Array<Track> {}
 
 const TrackList: React.FC<Props> = (Props) => {
-  const [tracks, setTracks] = useState<Tracks>();
   const { timeRange, numTracks } = Props;
+  const [tracks, setTracks] = useState<Tracks>();
 
-  const url =
-    "https://api.spotify.com/v1/me/top/tracks?" +
-    queryString.stringify({
+  // get data from spotify on page load
+  const url = "https://api.spotify.com/v1/me/top/tracks?" + queryString.stringify({
       time_range: timeRange,
       limit: 15,
     });
   const options = {
     headers: { Authorization: `Bearer ${Props.session?.token.accessToken}` },
   };
-
   useEffect(() => {
     fetch(url, options)
       .then((res) => res.json())
@@ -61,6 +62,8 @@ const TrackList: React.FC<Props> = (Props) => {
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  
+  
 
   const List: React.FC = () => {
 
@@ -71,11 +74,9 @@ const TrackList: React.FC<Props> = (Props) => {
         songLink = track.external_urls.spotify,
         albumName = track.album.name;
       return (
-        <ListItem key={i} w={"80%"} margin={"auto"}>
-          <Link href={songLink} _hover={{ textDecoration: "none" }} isExternal>
+          <Link key={i} href={songLink} _hover={{ textDecoration: "none" }} isExternal>
             {i + 1}. {songName} - {artistNames}
           </Link>
-        </ListItem>
       );
     })
 
@@ -86,7 +87,18 @@ const TrackList: React.FC<Props> = (Props) => {
           fontSize={["sm", "md"]}
         >
         {listItems?.map((item, i) => {
-          return i < numTracks ? item : null
+          if (i < numTracks) {
+            return (
+              <ListItem key={i} w={"80%"} margin={"auto"}>
+                {i + 1 === numTracks ? (
+                  <SlideFade in={true} unmountOnExit offsetY={'-1.5em'}>
+                    {item}
+                  </SlideFade>
+                ) : (
+                  item
+                )}
+              </ListItem>
+            )}
         })}
         </UnorderedList>
     );
