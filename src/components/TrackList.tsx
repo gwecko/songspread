@@ -1,4 +1,4 @@
-import React, { RefObject, useEffect, useRef, useState } from "react";
+import React, { RefObject, useEffect, useState } from "react";
 import queryString from "query-string";
 import { formatDuration, formatArtist } from "@/helpers";
 import {
@@ -15,7 +15,6 @@ import {
   useDisclosure,
   SlideFade,
 } from "@chakra-ui/react";
-import { CSSTransition, TransitionGroup } from "react-transition-group";
 
 interface Props {
   numTracks: number;
@@ -32,16 +31,16 @@ interface Props {
 
 interface Track {
   name: string;
-  artists: Object[]
+  artists: Object[];
   duration_ms: number;
-  album: { name: string; };
-  external_urls: { spotify: string }
+  album: { name: string };
+  external_urls: { spotify: string };
 }
 
-interface Tracks extends Array<Track> { }
+interface Tracks extends Array<Track> {}
 
 const TrackList: React.FC<Props> = (Props) => {
-  const [fetchedTracks, setFetchedTracks] = useState<Tracks>();
+  const [tracks, setTracks] = useState<Tracks>();
   const { timeRange, numTracks } = Props;
 
   const url =
@@ -58,39 +57,48 @@ const TrackList: React.FC<Props> = (Props) => {
     fetch(url, options)
       .then((res) => res.json())
       .then((res) => {
-        setFetchedTracks(res.items);
+        setTracks(res.items);
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const List = () => {
-    const [displayedTracks, setDisplayedTracks] = useState<Tracks>()
-    useEffect(() => {
-      setDisplayedTracks(fetchedTracks?.slice(0, numTracks))
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [numTracks])
-    
+  const List: React.FC = () => {
+
+    const listItems = tracks?.map((track, i) => {
+      const songDuration = formatDuration(track.duration_ms),
+        artistNames = formatArtist(track.artists),
+        songName = track.name,
+        songLink = track.external_urls.spotify,
+        albumName = track.album.name;
+      return (
+        <ListItem key={i} w={"80%"} margin={"auto"}>
+          <Link href={songLink} _hover={{ textDecoration: "none" }} isExternal>
+            {i + 1}. {songName} - {artistNames}
+          </Link>
+        </ListItem>
+      );
+    })
+
     return (
-      <TransitionGroup>
-          {displayedTracks?.map((track, index) => {
-            return (
-              <CSSTransition key={index}>
-                <div>
-                {track.name}
-                </div>
-              </CSSTransition>
-            )
-          })}
-      </TransitionGroup>
-    )
+        <UnorderedList
+          spacing={".5em"}
+          styleType={"none"}
+          fontSize={["sm", "md"]}
+        >
+        {listItems?.map((item, i) => {
+          return i < numTracks ? item : null
+        })}
+        </UnorderedList>
+    );
   };
 
   return (
     <Stack align={"center"} wrap={"wrap"}>
-      {!fetchedTracks
-        ? <Spinner color="purple.400" size="xl" thickness=".6em" />
-        : <List />
-      }
+      {!tracks ? (
+        <Spinner color="purple.400" size="xl" thickness=".6em" />
+      ) : (
+        <List />
+      )}
     </Stack>
   );
 };
