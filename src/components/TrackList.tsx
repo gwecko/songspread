@@ -20,7 +20,7 @@ import {
 } from "@chakra-ui/react";
 
 interface Props {
-  numTracks: number;
+  numTracksToDisplay: number;
   timeRange?: string;
   session: {
     token: {
@@ -43,8 +43,9 @@ interface Track {
 interface Tracks extends Array<Track> {}
 
 const TrackList: React.FC<Props> = (Props) => {
-  const { timeRange, numTracks } = Props;
+  const { timeRange, numTracksToDisplay } = Props;
   const [tracks, setTracks] = useState<Tracks>();
+  const [currentListLength, setCurrentListLength] = useState(numTracksToDisplay)
 
   // get data from spotify on page load
   const url = "https://api.spotify.com/v1/me/top/tracks?" + queryString.stringify({
@@ -64,7 +65,6 @@ const TrackList: React.FC<Props> = (Props) => {
   }, []);
   
   
-
   const List: React.FC = () => {
 
     const listItems = tracks?.map((track, i) => {
@@ -74,33 +74,75 @@ const TrackList: React.FC<Props> = (Props) => {
         songLink = track.external_urls.spotify,
         albumName = track.album.name;
       return (
-          <Link key={i} href={songLink} _hover={{ textDecoration: "none" }} isExternal>
-            {i + 1}. {songName} - {artistNames}
-          </Link>
+        <Link key={i} href={songLink} _hover={{ textDecoration: "none" }} isExternal>
+          {i + 1}. {songName} - {artistNames}
+        </Link>
       );
     })
 
-    return (
+    const StaticList = () => {
+      console.log("*** STATIC ***");
+      console.log(`currentListLength: ${currentListLength}`);
+      console.log(`numTracksToDisplay: ${numTracksToDisplay}`);
+      setCurrentListLength(numTracksToDisplay)
+      
+      return (
         <UnorderedList
           spacing={".5em"}
           styleType={"none"}
           fontSize={["sm", "md"]}
         >
-        {listItems?.map((item, i) => {
-          if (i < numTracks) {
-            return (
-              <ListItem key={i} w={"80%"} margin={"auto"}>
-                {i + 1 === numTracks ? (
-                  <SlideFade in={true} unmountOnExit offsetY={'-1.5em'}>
-                    {item}
-                  </SlideFade>
-                ) : (
-                  item
-                )}
-              </ListItem>
-            )}
-        })}
+          {listItems?.map((item, i) => {
+            if (i < numTracksToDisplay) {
+              return (
+                <ListItem key={i} w={'80%'} margin={'auto'}>
+                  {item}
+                </ListItem>
+              )
+            }
+          })}
         </UnorderedList>
+      )
+    }
+    
+    const AnimatedList = () => {
+      console.log("*** ANIMATED ***");
+      console.log(`currentListLength: ${currentListLength}`);
+      console.log(`numTracksToDisplay: ${numTracksToDisplay}`);
+      setCurrentListLength(numTracksToDisplay)
+      return (
+        <UnorderedList
+          spacing={".5em"}
+          styleType={"none"}
+          fontSize={["sm", "md"]}
+        >
+          {listItems?.map((item, i) => {
+            if (i < numTracksToDisplay) {
+              if (i + 1 != numTracksToDisplay) {
+                return (
+                  <ListItem key={i} w={"80%"} margin={"auto"}>
+                    {item}
+                  </ListItem>
+                )
+              } else {
+                return (
+                  <ListItem key={i} w={"80%"} margin={"auto"}>
+                    <SlideFade in={true} offsetY={"-1em"}>
+                      {item}
+                    </SlideFade>
+                  </ListItem>
+                )
+              }
+            }
+          })}
+        </UnorderedList>
+      )
+    }
+    
+      return (
+        numTracksToDisplay > currentListLength ?
+          <AnimatedList /> :
+          <StaticList />
     );
   };
 

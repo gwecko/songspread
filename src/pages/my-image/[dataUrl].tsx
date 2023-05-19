@@ -17,7 +17,7 @@ const DownloadPage: React.FC = () => {
       </Head>
       <Layout>
         <h1>booyah bitch</h1>
-        <Image src={imageUrl} id="song-image" alt="list of top songs" fill />
+        <Image src={imageUrl} id="song-image" alt="list of top songs" width={.8 * (window.innerWidth)} height={.8 * window.innerHeight}/>
         <h2>Press and hold to save</h2>
       </Layout>
     </>
