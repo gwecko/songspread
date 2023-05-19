@@ -10,7 +10,7 @@ const ListTabs: React.FC<Props> = (Props) => {
   
   const [short, medium, long] = ["short_term", "medium_term", "long_term"];
   
-  const [numTracks, setNumTracks] = useState(5)
+  const [numTracksToDisplay, setNumTracksToDisplay] = useState(5)
   const sliderStyles = {
     fontSize: 'sm',
     fontWeight: 'semibold',
@@ -39,10 +39,10 @@ const ListTabs: React.FC<Props> = (Props) => {
         position={"fixed"}
         my={4}
         ml={'auto'}
-        defaultValue={numTracks}
+        defaultValue={numTracksToDisplay}
         min={5}
         max={15}
-        onChange={(val) => setNumTracks(val)}
+        onChange={(val) => setNumTracksToDisplay(val)}
       >
         <SliderMark value={5} ml={'-1'} {...sliderStyles}>5</SliderMark>
         <SliderMark value={10} ml={'-2'} {...sliderStyles}>10</SliderMark>
@@ -60,21 +60,21 @@ const ListTabs: React.FC<Props> = (Props) => {
           <TrackList
             session={Props.session}
             timeRange={short}
-            numTracks={numTracks}
+            numTracksToDisplay={numTracksToDisplay}
           />
         </TabPanel>
         <TabPanel>
           <TrackList
             session={Props.session}
             timeRange={medium}
-            numTracks={numTracks}
+            numTracksToDisplay={numTracksToDisplay}
           />
         </TabPanel>
         <TabPanel>
           <TrackList
             session={Props.session}
             timeRange={long}
-            numTracks={numTracks}
+            numTracksToDisplay={numTracksToDisplay}
           />
         </TabPanel>
       </TabPanels>
