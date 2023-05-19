@@ -1,6 +1,8 @@
 import { Layout } from "@/components";
+import { Button, Heading } from "@chakra-ui/react";
 import Head from "next/head";
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
 
@@ -16,9 +18,12 @@ const DownloadPage: React.FC = () => {
         <title>SongSpread &#x1F47E; my list</title>
       </Head>
       <Layout>
-        <h1>booyah bitch</h1>
-        <Image src={imageUrl} id="song-image" alt="list of top songs" width={.8 * (window.innerWidth)} height={.8 * window.innerHeight}/>
+        <Heading size={['xs', 'sm']}>Thanks for using SongSpread!</Heading>
+        <Image src={imageUrl} id="song-image" alt="list of top songs" width={380} height={720} />
         <h2>Press and hold to save</h2>
+        <Button colorScheme="purple">
+          <Link href={'/'}>Back</Link>
+        </Button>
       </Layout>
     </>
   );
