@@ -25,6 +25,7 @@ const ListTabs: React.FC<Props> = (Props) => {
       align={"center"}
       w={'100%'}
       size={'sm'}
+      isLazy
     >
       
       <TabList>
