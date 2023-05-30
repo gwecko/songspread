@@ -1,5 +1,5 @@
 import { Layout } from "@/components";
-import { Button, Heading } from "@chakra-ui/react";
+import { Box, Button, Heading } from "@chakra-ui/react";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
@@ -18,11 +18,17 @@ const DownloadPage: React.FC = () => {
         <title>SongSpread &#x1F47E; my list</title>
       </Head>
       <Layout>
-        <Heading size={['xs', 'sm']}>Thanks for using SongSpread!</Heading>
-        <Image src={imageUrl} id="song-image" alt="list of top songs" width={380} height={720} />
+        <Heading size={["xs", "sm"]}>Thanks for using SongSpread!</Heading>
+        <Image
+          src={imageUrl}
+          id="song-image"
+          alt="list of top songs"
+          width={380}
+          height={380}
+        />
         <h2>Press and hold to save</h2>
         <Button colorScheme="purple">
-          <Link href={'/'}>Back</Link>
+          <Link href={"/"}>Back</Link>
         </Button>
       </Layout>
     </>
