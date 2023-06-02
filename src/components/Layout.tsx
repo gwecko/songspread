@@ -24,7 +24,7 @@ const Layout = ({children}: Props) => {
           marginY={5}
         >
           SongSpread
-      </Heading>
+        </Heading>
       
       {children}
     

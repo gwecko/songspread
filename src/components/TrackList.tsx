@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { FC, ReactNode, useEffect, useRef, useState } from "react";
 import queryString from "query-string";
 import { formatDuration, formatArtist } from "@/helpers";
 import {
@@ -18,6 +18,7 @@ import {
   Collapse,
   Fade,
 } from "@chakra-ui/react";
+import { AnimatePresence, motion, useIsPresent } from "framer-motion";
 
 interface Props {
   numTracksToDisplay: number;
@@ -32,7 +33,7 @@ interface Props {
   };
 }
 
-interface Track {
+interface FetchedTrack {
   name: string;
   artists: Object[];
   duration_ms: number;
@@ -40,19 +41,21 @@ interface Track {
   external_urls: { spotify: string };
 }
 
-interface DisplayedTrack {
+type Track = {
   songDuration: string,
   artistNames: string,
   songName: string,
   songLink: string,
   albumName: string,
+  number: number,
   isDisplayed: boolean,
 }
 
 const TrackList: React.FC<Props> = (Props) => {
   const { timeRange, numTracksToDisplay } = Props;
-  const [tracks, setTracks] = useState<Track[]>();
-  const [isDisplayed, setIsDisplayed] = useState(Array<boolean>(15).fill(false))
+  const [listLength, setListLength] = useState(numTracksToDisplay)
+  const [allTracks, setAllTracks] = useState<ReactNode[] | undefined>(undefined);
+  const [displayedTracks, setDisplayedTracks] = useState([...Array(15)])
   
   // get data from spotify on page load
   const url = "https://api.spotify.com/v1/me/top/tracks?" + queryString.stringify({
@@ -62,57 +65,85 @@ const TrackList: React.FC<Props> = (Props) => {
   const options = {
     headers: { Authorization: `Bearer ${Props.session?.token.accessToken}` },
   };
+  
   useEffect(() => {
     fetch(url, options)
       .then((res) => res.json())
       .then((res) => {
-        setTracks(res.items);
+        // Array of object data formatted to what I want
+        const tracks: Track[] = res.items.map((item: FetchedTrack, i: number) => {
+          return {
+            songDuration: formatDuration(item.duration_ms),
+            artistNames: formatArtist(item.artists),
+            songName: item.name,
+            songLink: item.external_urls.spotify,
+            albumName: item.album.name,
+            number: i + 1,
+            isDisplayed: i < numTracksToDisplay,
+          }
+        })
+        
+        // Array of track JSX
+        const tracksJSX = tracks.map((track, i) => (
+            <Item key={i} {...track} />
+        ))
+        setAllTracks(tracksJSX)
+        setDisplayedTracks(tracksJSX.slice(0, listLength))
       })
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   
-  // list of all fifteen songs. Array of object data
-  const allTrackData = tracks?.map((track, i) => {
-    return {
-      songDuration: formatDuration(track.duration_ms),
-      artistNames: formatArtist(track.artists),
-      songName: track.name,
-      songLink: track.external_urls.spotify,
-      albumName: track.album.name,
-      id: i,
-      isDisplayed: i < numTracksToDisplay,
+  useEffect(() => {
+    if (displayedTracks.length < numTracksToDisplay) {
+      displayedTracks.push(allTracks?.at(listLength))
+      setDisplayedTracks(displayedTracks)
+    } else if (displayedTracks.length > numTracksToDisplay) {
+      displayedTracks.pop()
+      setDisplayedTracks(displayedTracks)
     }
-  })
+  }, [listLength, allTracks, displayedTracks, numTracksToDisplay])
+  
+  
+  const Items = () => {
+    return (
+      <AnimatePresence>
+        {displayedTracks}
+      </AnimatePresence>
+    )
+  };
+  
+  const Item = ({ songLink, songName, artistNames, number }: Track) => {
+    const isPresent = useIsPresent();
+    
+    const animations = {
+      initial: { scale: .8, opacity: .5 },
+      animate: { scale: 1, opacity: 1 }, 
+      exit: { scale: 0, opacity: 0 }
+    }
+
+    return (
+      <motion.h2 {...animations} layout>
+        <Link href={songLink} _hover={{ textDecoration: "none" }} isExternal>
+          {number}. {songName} - {artistNames}
+        </Link>
+      </motion.h2>
+    );
+  };
   
 
-  const allTrackJSX = allTrackData?.map((trackData, i) => (
-    <ListItem key={i} hidden={trackData.id > numTracksToDisplay - 1}>
-      <Link
-        href={trackData.songLink}
-        _hover={{ textDecoration: "none" }}
-        isExternal
-      >
-        {trackData.id + 1}. {trackData.songName} - {trackData.artistNames}
-      </Link>
-    </ListItem>
-  ))
-
   return (
-    <Stack align={"center"} wrap={"wrap"}>
-      {!tracks ? (
-        <Spinner color="purple.400" size="xl" thickness=".6em" />
-      ) : (
-        <UnorderedList
-          spacing={".5em"}
-          styleType={"none"}
-          fontSize={["sm", "md"]}
-          w={"80%"}
-          margin={"auto"}
-        >
-          {allTrackJSX}
-        </UnorderedList>
-      )}
-    </Stack>
+    allTracks !== undefined ? (
+      <Box
+        fontSize={["sm", "md"]}
+        w={"80%"}
+        margin={"auto"}
+        flexWrap={'wrap'}
+      >
+        <Items />
+      </Box>
+    ) : (
+      <Spinner color="purple.400" size="xl" thickness=".6em" />
+    )
   );
 };
 
