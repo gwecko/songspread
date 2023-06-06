@@ -4,11 +4,8 @@ import Spotify from "next-auth/providers/spotify";
 import { Box, Button } from "@chakra-ui/react";
 import SpotifyIcon from "./SpotifyIcon";
 
-interface Props{
 
-}
-
-const SignInButton: React.FC<Props> = () => {
+const SignInButton: React.FC = () => {
   return (
     <Box p={8}>
       <Button

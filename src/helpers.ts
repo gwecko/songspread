@@ -11,3 +11,9 @@ export function formatArtist(artists: any[]) {
   return artists.map((a) => a.name).join(", ");
 }
 
+export function boolVisibleStates(numVisible: number, arrLength: number) {
+  return Array(numVisible)
+    .fill(true)
+    .concat(Array(arrLength - numVisible).fill(false));
+}
+

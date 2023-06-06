@@ -51,7 +51,7 @@ type Track = {
   songLink: string,
   albumName: string,
   listNumber: number,
-  isHidden: boolean,
+  isDisplayed: boolean,
 }
 
 const TrackList: React.FC<Props> = (Props) => {
@@ -82,67 +82,68 @@ const TrackList: React.FC<Props> = (Props) => {
             songLink: item.external_urls.spotify,
             albumName: item.album.name,
             listNumber: i + 1,
-            isHidden: i >= numTracksToDisplay,
+            isDisplayed: i <= numTracksToDisplay
           }
         })
-        setTrackData([...tracks])
-        // setTrackData([...tracks.slice(numTracksToDisplay, 15)])
-        // setDisplayedTrackData([...tracks.slice(0, numTracksToDisplay)])
+        setTrackData([...tracks.slice(numTracksToDisplay, 15)])
+        setDisplayedTrackData([...tracks.slice(0, numTracksToDisplay)])
       })
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   
   // controls displayed through transferring a track between the arrays
-  // useEffect(() => {
-  //   if (trackData && displayedTrackData) {
-  //     // add a new track to the displayed list
-  //     if (numTracksToDisplay > displayedTrackData.length) {
-  //       const track: any = trackData.shift()
-  //       setDisplayedTrackData([...displayedTrackData, track])
-  //       setTrackData([...trackData])
-  //     }
-  //     // remove a track from the displayed list
-  //     else if (numTracksToDisplay < displayedTrackData.length) {
-  //       const track: any = displayedTrackData.pop()
-  //       setDisplayedTrackData([...displayedTrackData])
-  //       setTrackData([track, ...trackData])
-  //     }
-  //   }
-  // // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [numTracksToDisplay])
+  useEffect(() => {
+    if (trackData && displayedTrackData) {
+      // add a new track to the displayed list
+      if (numTracksToDisplay > displayedTrackData.length) {
+        const track: any = trackData.shift()
+        setDisplayedTrackData([...displayedTrackData, track])
+        setTrackData([...trackData])
+      }
+      // remove a track from the displayed list
+      else if (numTracksToDisplay < displayedTrackData.length) {
+        const track: any = displayedTrackData.pop()
+        setDisplayedTrackData([...displayedTrackData])
+        setTrackData([track, ...trackData])
+      }
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [numTracksToDisplay])
   
-  const Item = ({ songLink, songName, artistNames, listNumber, isHidden }: Track, key: Key) => {
+  
+  const Item = ({ songLink, songName, artistNames, listNumber, isDisplayed }: Track) => {
     
-    const isPresent = useIsPresent();
+    const isPresent = useIsPresent()
     
     const animation = {
-      key: songName,
-      layout: true,
-      layoutDependency: numTracksToDisplay,
       variants: {
-        hidden: { opacity: 0, scaleY: 0, zIndex: 0 },
-        in: { opacity: 1, scaleY: 1, zIndex: 1 },
+        lastItem: { opacity: .7, scale: .9 },
+        in: { opacity: 1, scale: 1 },
       },
-      initial: listNumber === numTracksToDisplay ? 'hidden' : false,
+      initial: listNumber === numTracksToDisplay ? 'lastItem' : 'in',
       animate: 'in',
-      exit: { opacity: 0, scaleY: 0, zIndex: -1 },
+      exit: { opacity: .4, scaleY: 0, translateY: '-20px'},
       transition: { duration: 0.3 },
     };
-
-    return ( 
-        listNumber <= numTracksToDisplay ? <motion.h2 {...animation}>
-          <Link href={songLink} _hover={{ textDecoration: "none" }} isExternal>
+    
+    return (
+      <motion.h2 {...animation} key={songName}>
+        <Link
+          href={songLink}
+          isExternal
+          _hover={{ textDecoration: "none" }}
+        >
             {listNumber}. {songName} - {artistNames}
-          </Link>
-        </motion.h2> : null
+        </Link>
+      </motion.h2>
     );
   };
   
 
-  return trackData !== undefined ? (
-    <Box fontSize={["sm", "md"]} w={"80%"} margin={"auto"} flexWrap={"wrap"}>
+  return displayedTrackData ? (
+    <Box fontSize={["sm", "md"]} w={"80%"} margin={"auto"}>
       <AnimatePresence>
-        {trackData.map((track, i) => (
+        {displayedTrackData.map((track, i) => (
           <Item key={i} {...track} />
         ))}
       </AnimatePresence>
