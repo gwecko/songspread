@@ -116,14 +116,28 @@ const TrackList: React.FC<Props> = (Props) => {
     const isPresent = useIsPresent()
     
     const animation = {
+      layout: true,
+      transition: { duration: 0.2 },
       variants: {
-        lastItem: { opacity: .7, scale: .9 },
-        in: { opacity: 1, scale: 1 },
+        lastItem: {
+          opacity: 0.5,
+          scale: 1,
+          transform: "rotateX(90deg)",
+        },
+        in: {
+          opacity: 1,
+          scale: 1,
+          transform: "rotateX(0deg)",
+          transition: { type: "spring", stiffness: '700', },
+        },
       },
-      initial: listNumber === numTracksToDisplay ? 'lastItem' : 'in',
-      animate: 'in',
-      exit: { opacity: .4, scaleY: 0, translateY: '-20px'},
-      transition: { duration: 0.3 },
+      initial: listNumber === numTracksToDisplay ? "lastItem" : "in",
+      animate: "in",
+      exit: {
+        opacity: 0,
+        transform: "rotateX(90deg)",
+        transition: { ease: "easeIn", duration: 0.2 },
+      },
     };
     
     return (
