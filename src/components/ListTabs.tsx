@@ -4,7 +4,6 @@ import {
   Tab,
   TabPanels,
   TabPanel,
-  Text,
   Divider,
   SliderTrack,
   SliderFilledTrack,
@@ -32,7 +31,24 @@ const ListTabs: React.FC<Props> = (Props) => {
   };
 
   return (
-    <Box>
+    <Box display={'flex'}>
+      <Slider
+        defaultValue={numTracksToDisplay}
+        min={5}
+        max={15}
+        onChange={(val) => setNumTracksToDisplay(val)}
+        orientation={'vertical'}
+        isReversed
+        h={"35vh"}
+        minH={'250px'}
+        transform={"translateY(50%)"}
+      >
+        <SliderTrack bgColor={"purple.100"}>
+          <SliderFilledTrack bgColor={"purple.100"} />
+        </SliderTrack>
+        <SliderThumb boxSize={"10"} bgColor={"purple.500"} w={"14px"} _focus={{ decoration: 'none'}}/>
+      </Slider>
+      
       <Tabs
         variant={"soft-rounded"}
         colorScheme={"purple"}
@@ -73,33 +89,6 @@ const ListTabs: React.FC<Props> = (Props) => {
           </TabPanel>
         </TabPanels>
       </Tabs>
-      
-      <Slider
-        w={"80%"}
-        maxW={"300px"}
-        position={"fixed"}
-        bottom={"0"}
-        left={'50%'}
-        transform={'translateX(-50%)'}
-        defaultValue={numTracksToDisplay}
-        min={5}
-        max={15}
-        onChange={(val) => setNumTracksToDisplay(val)}
-      >
-        <SliderMark value={5} ml={"-1"} {...sliderStyles}>
-          5
-        </SliderMark>
-        <SliderMark value={10} ml={"-2"} {...sliderStyles}>
-          10
-        </SliderMark>
-        <SliderMark value={15} ml={"-2"} {...sliderStyles}>
-          15
-        </SliderMark>
-        <SliderTrack bgColor={"purple.100"}>
-          <SliderFilledTrack bgColor={"purple.100"} />
-        </SliderTrack>
-        <SliderThumb bgColor={"purple.500"} w={"25px"} />
-      </Slider>
     </Box>
   );
 };
