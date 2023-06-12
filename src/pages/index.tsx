@@ -34,8 +34,7 @@ export default function Home() {
             <Box id="boxDownload" display={'block'}>
               <ListTabs session={session} />
             </Box>
-              <Box display={'block'}
-                pos={'fixed'} bottom={'10%'} textAlign={'center'} overflowY={'hidden'}>
+              <Box mt={'auto'} position={'sticky'} textAlign={'center'}>
               <DownloadButton />
               <SignOutButton />
             </Box>

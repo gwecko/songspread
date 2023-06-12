@@ -42,6 +42,7 @@ const ListTabs: React.FC<Props> = (Props) => {
         h={"35vh"}
         minH={'250px'}
         transform={"translateY(50%)"}
+        ml={'10%'}
       >
         <SliderTrack bgColor={"purple.100"}>
           <SliderFilledTrack bgColor={"purple.100"} />
@@ -52,8 +53,8 @@ const ListTabs: React.FC<Props> = (Props) => {
       <Tabs
         variant={"soft-rounded"}
         colorScheme={"purple"}
-        align={"center"}
-        w={"100%"}
+        textAlign={"center"}
+        w={"80%"}
         size={"sm"}
         isLazy
       >
