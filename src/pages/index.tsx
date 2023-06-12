@@ -31,10 +31,11 @@ export default function Home() {
           <SignInButton />
         ) : (
           <>
-            <Box id="boxDownload">
+            <Box id="boxDownload" display={'block'}>
               <ListTabs session={session} />
             </Box>
-            <Box pos={'fixed'} bottom={'10%'} textAlign={'center'}>
+              <Box display={'block'}
+                pos={'fixed'} bottom={'10%'} textAlign={'center'} overflowY={'hidden'}>
               <DownloadButton />
               <SignOutButton />
             </Box>
