@@ -29,34 +29,42 @@ const ListTabs: React.FC<Props> = (Props) => {
     color: "purple.800",
     mt: 2,
   };
+  const tabPanelStyles ={ pl: '0', }
 
   return (
-    <Box display={'flex'}>
+    <Box display={"flex"} >
       <Slider
         defaultValue={numTracksToDisplay}
         min={5}
         max={15}
         onChange={(val) => setNumTracksToDisplay(val)}
-        orientation={'vertical'}
+        orientation={"vertical"}
         isReversed
+        position={'fixed'}
+        top={'50%'}
+        left={'20px'}
         h={"35vh"}
-        minH={'250px'}
+        minH={"250px"}
         transform={"translateY(50%)"}
-        ml={'10%'}
+        // ml={"10%"}
       >
         <SliderTrack bgColor={"purple.100"}>
           <SliderFilledTrack bgColor={"purple.100"} />
         </SliderTrack>
-        <SliderThumb boxSize={"5"} bgColor={"purple.500"} w={"35px"} _focus={{ decoration: 'none', border: 'none'}}/>
+        <SliderThumb
+          boxSize={"5"}
+          bgColor={"purple.500"}
+          w={"35px"}
+          _focus={{ decoration: "none", border: "none" }}
+        />
       </Slider>
-      
+
       <Tabs
         variant={"soft-rounded"}
         colorScheme={"purple"}
-        textAlign={"left"}
-        m={0}
-        p={0}
-        w={"100%"}
+        textAlign={"center"}
+        align="center"
+        w={"80%"}
         size={"sm"}
         isLazy
       >
@@ -66,24 +74,24 @@ const ListTabs: React.FC<Props> = (Props) => {
           <Tab>all months</Tab>
         </TabList>
 
-        <Divider w={"80%"} mt={3} />
+        <Divider w={"90%"} mt={3} ml={'auto'}/>
 
-        <TabPanels textAlign={"left"} id="tabDownload">
-          <TabPanel>
+        <TabPanels textAlign={"left"} id="tabDownload" w={'80%'}>
+          <TabPanel {...tabPanelStyles}>
             <TrackList
               session={Props.session}
               timeRange={short}
               numTracksToDisplay={numTracksToDisplay}
             />
           </TabPanel>
-          <TabPanel>
+          <TabPanel {...tabPanelStyles}>
             <TrackList
               session={Props.session}
               timeRange={medium}
               numTracksToDisplay={numTracksToDisplay}
             />
           </TabPanel>
-          <TabPanel>
+          <TabPanel {...tabPanelStyles}>
             <TrackList
               session={Props.session}
               timeRange={long}
