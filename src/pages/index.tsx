@@ -3,7 +3,7 @@ import Head from "next/head";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
 import { Layout, SignInButton, ListTabs, SignOutButton, DownloadButton } from "@/components";
-import { Box } from "@chakra-ui/react";
+import { Box, Flex, Grid, Stack, Wrap } from "@chakra-ui/react";
 
 // the home page; at location '/'
 export default function Home() {
@@ -30,15 +30,15 @@ export default function Home() {
         {status !== 'authenticated' ? (
           <SignInButton />
         ) : (
-          <>
+          <Stack>
             <Box id="boxDownload" display={'block'}>
               <ListTabs session={session} />
             </Box>
-              <Box mt={'auto'} position={'sticky'} textAlign={'center'}>
+            <Box mt={'auto'} position={'sticky'} textAlign={'center'}>
               <DownloadButton />
               <SignOutButton />
             </Box>
-          </>
+          </Stack>
         )}
       </Layout>
     </>

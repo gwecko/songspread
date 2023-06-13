@@ -11,6 +11,9 @@ import {
   SliderThumb,
   SliderMark,
   Box,
+  Grid,
+  GridItem,
+  Flex,
 } from "@chakra-ui/react";
 import TrackList from "./TrackList";
 import React, { useState } from "react";
@@ -23,83 +26,73 @@ const ListTabs: React.FC<Props> = (Props) => {
   const [short, medium, long] = ["short_term", "medium_term", "long_term"];
 
   const [numTracksToDisplay, setNumTracksToDisplay] = useState(5);
-  const sliderStyles = {
-    fontSize: "sm",
-    fontWeight: "semibold",
-    color: "purple.800",
-    mt: 2,
-  };
-  const tabPanelStyles ={ pl: '0', }
 
   return (
-    <Box display={"flex"} >
-      <Slider
-        defaultValue={numTracksToDisplay}
-        min={5}
-        max={15}
-        onChange={(val) => setNumTracksToDisplay(val)}
-        orientation={"vertical"}
-        isReversed
-        position={'fixed'}
-        top={'50%'}
-        left={'20px'}
-        h={"35vh"}
-        minH={"250px"}
-        transform={"translateY(50%)"}
-        // ml={"10%"}
-      >
-        <SliderTrack bgColor={"purple.100"}>
-          <SliderFilledTrack bgColor={"purple.100"} />
-        </SliderTrack>
-        <SliderThumb
-          boxSize={"5"}
-          bgColor={"purple.500"}
-          w={"35px"}
-          _focus={{ decoration: "none", border: "none" }}
-        />
-      </Slider>
+    <Box w={"100vw"}>
+      <Flex>
+        <Tabs
+          variant={"soft-rounded"}
+          colorScheme={"purple"}
+          size={"sm"}
+          align="center"
+          isLazy
+        >
+          <TabList>
+            <Tab>one month</Tab>
+            <Tab>six months</Tab>
+            <Tab>all months</Tab>
+          </TabList>
 
-      <Tabs
-        variant={"soft-rounded"}
-        colorScheme={"purple"}
-        textAlign={"center"}
-        align="center"
-        w={"80%"}
-        size={"sm"}
-        isLazy
-      >
-        <TabList>
-          <Tab>one month</Tab>
-          <Tab>six months</Tab>
-          <Tab>all months</Tab>
-        </TabList>
-
-        <Divider w={"90%"} mt={3} ml={'auto'}/>
-
-        <TabPanels textAlign={"left"} id="tabDownload" w={'80%'}>
-          <TabPanel {...tabPanelStyles}>
-            <TrackList
-              session={Props.session}
-              timeRange={short}
-              numTracksToDisplay={numTracksToDisplay}
+          <Divider w={"80%"} mt={2} />
+          <TabPanels id="tabDownload" textAlign={"left"}>
+            <TabPanel w={"95%"}>
+              <TrackList
+                session={Props.session}
+                timeRange={short}
+                numTracksToDisplay={numTracksToDisplay}
+              />
+            </TabPanel>
+            <TabPanel w={"95%"}>
+              <TrackList
+                session={Props.session}
+                timeRange={medium}
+                numTracksToDisplay={numTracksToDisplay}
+              />
+            </TabPanel>
+            <TabPanel w={"95%"}>
+              <TrackList
+                session={Props.session}
+                timeRange={long}
+                numTracksToDisplay={numTracksToDisplay}
+              />
+            </TabPanel>
+          </TabPanels>
+        </Tabs>
+        <Box position={"fixed"} right={"7%"} top={"15%"}>
+          <Slider
+            defaultValue={numTracksToDisplay}
+            min={5}
+            max={15}
+            onChange={(val) => setNumTracksToDisplay(val)}
+            orientation={"vertical"}
+            isReversed
+            position={"fixed"}
+            top={"100px"}
+            h={"35vh"}
+            minH={"250px"}
+          >
+            <SliderTrack bgColor={"purple.100"}>
+              <SliderFilledTrack bgColor={"purple.100"} />
+            </SliderTrack>
+            <SliderThumb
+              boxSize={"5"}
+              bgColor={"purple.500"}
+              w={"35px"}
+              _focus={{ decoration: "none", border: "none" }}
             />
-          </TabPanel>
-          <TabPanel {...tabPanelStyles}>
-            <TrackList
-              session={Props.session}
-              timeRange={medium}
-              numTracksToDisplay={numTracksToDisplay}
-            />
-          </TabPanel>
-          <TabPanel {...tabPanelStyles}>
-            <TrackList
-              session={Props.session}
-              timeRange={long}
-              numTracksToDisplay={numTracksToDisplay}
-            />
-          </TabPanel>
-        </TabPanels>
-      </Tabs>
+          </Slider>
+        </Box>
+      </Flex>
     </Box>
   );
 };
