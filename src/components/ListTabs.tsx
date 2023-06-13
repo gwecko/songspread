@@ -47,14 +47,16 @@ const ListTabs: React.FC<Props> = (Props) => {
         <SliderTrack bgColor={"purple.100"}>
           <SliderFilledTrack bgColor={"purple.100"} />
         </SliderTrack>
-        <SliderThumb boxSize={"10"} bgColor={"purple.500"} w={"14px"} _focus={{ decoration: 'none'}}/>
+        <SliderThumb boxSize={"5"} bgColor={"purple.500"} w={"35px"} _focus={{ decoration: 'none', border: 'none'}}/>
       </Slider>
       
       <Tabs
         variant={"soft-rounded"}
         colorScheme={"purple"}
-        textAlign={"center"}
-        w={"80%"}
+        textAlign={"left"}
+        m={0}
+        p={0}
+        w={"100%"}
         size={"sm"}
         isLazy
       >
