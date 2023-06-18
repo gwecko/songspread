@@ -29,7 +29,7 @@ const ListTabs: React.FC<Props> = (Props) => {
 
   return (
     <Box w={"100vw"}>
-      <Flex>
+      <Flex justifyContent={'center'}>
         <Tabs
           variant={"soft-rounded"}
           colorScheme={"purple"}
@@ -45,7 +45,7 @@ const ListTabs: React.FC<Props> = (Props) => {
 
           <Divider w={"80%"} mt={2} />
           <TabPanels id="tabDownload" textAlign={"left"}>
-            <TabPanel w={"95%"}>
+            <TabPanel w={"95%"} >
               <TrackList
                 session={Props.session}
                 timeRange={short}

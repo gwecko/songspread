@@ -18,6 +18,7 @@ import {
   Collapse,
   Fade,
   list,
+  Flex,
 } from "@chakra-ui/react";
 import { AnimatePresence, motion, useIsPresent } from "framer-motion";
 import { zIndex } from "html2canvas/dist/types/css/property-descriptors/z-index";
@@ -163,7 +164,9 @@ const TrackList: React.FC<Props> = (Props) => {
       </AnimatePresence>
     </Box>
   ) : (
-    <Spinner color="purple.400" size="xl" thickness=".6em" />
+      <Flex justifyContent={'center'}>
+        <Spinner color="purple.400" size="xl" thickness=".6em" />
+      </Flex>
   );
 };
 
