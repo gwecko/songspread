@@ -32,7 +32,7 @@ interface Props {
       name?: string;
       email: string;
       picture?: string;
-      accessToken?: string;
+      access_token?: string;
     };
   };
 }
@@ -66,16 +66,16 @@ const TrackList: React.FC<Props> = (Props) => {
     limit: 15,
   });
   const options = {
-    headers: { Authorization: `Bearer ${Props.session?.token.accessToken}` },
+    headers: { Authorization: `Bearer ${Props.session?.token.access_token}` },
   };
   
   // data fetching
   useEffect(() => {
     fetch(url, options)
       .then((res) => res.json())
-      .then((res) => {
+      .then(async (res) => {
         // Array of object data formatted to what I want
-        const tracks: Track[] = res.items.map((item: FetchedTrack, i: number) => {
+        const tracks: Track[] = await res.items?.map((item: FetchedTrack, i: number) => {
           return {
             songDuration: formatDuration(item.duration_ms),
             artistNames: formatArtist(item.artists),

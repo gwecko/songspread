@@ -1,6 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
 import Head from "next/head";
-import Image from "next/image";
 import { useSession } from "next-auth/react";
 import { Layout, SignInButton, ListTabs, SignOutButton, DownloadButton } from "@/components";
 import { Box, Flex, Grid, Stack, Wrap } from "@chakra-ui/react";
