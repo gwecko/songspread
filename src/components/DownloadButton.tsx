@@ -1,8 +1,6 @@
 import { Button } from "@chakra-ui/react";
 import html2canvas from "html2canvas";
-import Link from "next/link";
-import { Router, useRouter } from "next/router";
-import { useState } from "react";
+import { useRouter } from "next/router";
 
 // supported CSS properties:
 // https://html2canvas.hertzen.com/features/

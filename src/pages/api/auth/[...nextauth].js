@@ -1,41 +1,50 @@
 import NextAuth from "next-auth";
 import SpotifyProvider from "next-auth/providers/spotify";
-import { NextApiRequest, NextApiResponse } from "next";
-import { redirect } from "next/dist/server/api-utils";
 
 
 const clientId = process.env.SPOTIFY_CLIENT_ID
 const clientSecret = process.env.SPOTIFY_SECRET
 
 const authOptions = {
-  secret: 'xkw6r+eGjopDbPYKRiEGFRdOdPDBpVIFpZqk3I8L9OU=',
+  secret: "xkw6r+eGjopDbPYKRiEGFRdOdPDBpVIFpZqk3I8L9OU=",
   providers: [
     SpotifyProvider({
       clientId: clientId,
       clientSecret: clientSecret,
       authorization: {
-        url: 'https://accounts.spotify.com/authorize?',
-        params: { scope: 'user-top-read user-read-email', response_type: 'code' }
-      }
-    })
+        url: "https://accounts.spotify.com/authorize?",
+        params: {
+          scope:
+            "user-top-read user-read-email playlist-modify-public playlist-modify-private ugc-image-upload",
+          response_type: "code",
+        },
+      },
+    }),
   ],
   callbacks: {
     async jwt({ token, account, user, profile }) {
       if (account) {
-        token.accessToken = account.access_token
-        token.refreshToken = account.refresh_token
-        token.expiresAt = account.expires_at
-      } 
-      return token
+        return {
+          access_token: account.access_token,
+          expires_at: Math.floor(Date.now() / 1000 + account.expires_in),
+          refresh_token: account.refresh_token,
+        };
+      } else if (Date.now() > token.expires_at * 1000) {
+        // clause above should be 'less-than'
+        return token;
+      } else {
+      
+      }
+      // return token;
+      // ### TOKEN MUST BE RETURNED OUTSIDE OF 'IF' STATEMENT ###
     },
-    
 
-    async session(session, token) { 
-      // console.log(session)      
-      return session
+    async session(session, token) {
+      console.log(token);
+      return session;
     },
   },
-}
+};
 
 
 
