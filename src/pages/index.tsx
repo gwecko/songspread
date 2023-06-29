@@ -1,14 +1,21 @@
 /* eslint-disable @next/next/no-img-element */
 import Head from "next/head";
-import { useSession } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import { Layout, SignInButton, ListTabs, SignOutButton, DownloadButton } from "@/components";
-import { Box, Flex, Grid, Stack, Wrap } from "@chakra-ui/react";
+import { Box, Stack } from "@chakra-ui/react";
+import { cl } from "@/helpers";
+import { useEffect } from "react";
 
 // the home page; at location '/'
 export default function Home() {
   const { data: session, status } = useSession();
   const loading = status === "loading";
   
+  useEffect(() => {
+    if (session?.error === "RefreshAccessTokenError") {
+      signIn('spotify'); // Force sign in to hopefully resolve error
+    }
+  }, [session]);
 
   return (
     <>
@@ -26,14 +33,14 @@ export default function Home() {
       </Head>
 
       <Layout>
-        {status !== 'authenticated' ? (
+        {status === "unauthenticated" || loading ? (
           <SignInButton />
         ) : (
           <Stack>
-            <Box id="boxDownload" display={'block'}>
+            <Box id="boxDownload" display={"block"}>
               <ListTabs session={session} />
             </Box>
-            <Box mt={'auto'} position={'sticky'} textAlign={'center'}>
+            <Box mt={"auto"} position={"sticky"} textAlign={"center"}>
               <DownloadButton />
               <SignOutButton />
             </Box>

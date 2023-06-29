@@ -1,5 +1,5 @@
 export function cl(thing: any) {
-  console.log(...thing)
+  console.log(thing)
 }
 
 export function formatDuration(duration: number) {

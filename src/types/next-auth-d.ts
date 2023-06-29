@@ -7,14 +7,15 @@ declare module "next-auth" {
   interface Session {
     error?: any
     token: {
-      name?: string
-      email: string
-      picture?: string
+      // name?: string
+      // email: string
+      // picture?: string
       access_token?: string
       refresh_token?: string
+      expires_at?: any
     } 
     session: {
-      expires_at: string
+      // expires_at: string
     }
      & DefaultSession['user'];
   }
