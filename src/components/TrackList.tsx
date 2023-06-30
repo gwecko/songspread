@@ -91,7 +91,7 @@ const TrackList: React.FC<Props> = (Props) => {
         setDisplayedTrackData([...tracks.slice(0, numTracksToDisplay)]);
       })
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [Props.session]);
   
   // controls displayed through transferring a track between the arrays
   useEffect(() => {
