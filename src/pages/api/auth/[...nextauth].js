@@ -10,8 +10,8 @@ const authOptions = {
   secret: "xkw6r+eGjopDbPYKRiEGFRdOdPDBpVIFpZqk3I8L9OU=",
   providers: [
     SpotifyProvider({
-      clientId: clientId,
-      clientSecret: clientSecret,
+      clientId: client_id,
+      clientSecret: client_secret,
       authorization: {
         url: "https://accounts.spotify.com/authorize?",
         params: {
@@ -40,7 +40,7 @@ const authOptions = {
         return token;
       } else {
         try {
-          const response = await fetch("https://accounts.spotify.com/api/token", {
+          const res = await fetch("https://accounts.spotify.com/api/token", {
             headers: { "Content-Type": "application/x-www-form-urlencoded" },
             body: new URLSearchParams({
               client_id: client_id,
@@ -51,25 +51,25 @@ const authOptions = {
             method: "POST",
           })
           
-          const tokens = await response.json()
+          const tokens = await res.json()
           
-          if (!response.ok) throw tokens
+          if (!res.ok) throw tokens
           
           return {
             ...token,
             access_token: tokens.access_token,
             expires_at: tokens.expires_at * 1000,
-            refresh_token: tokens.refresh_token ?? token.refresh_token
+            refresh_token: tokens.refresh_token ?? token.refresh_token,
           }
         } catch (error) {
-          console.log('Error refreshing access token', error)
+          console.error("Error refreshing access token", error)
           return { ...token, error: "RefreshAccessTokenError" };
         }
       }
     },
 
     async session(session, token) {
-      session.error = token.error
+      session.error = token?.error
       return session;
     },
   },
