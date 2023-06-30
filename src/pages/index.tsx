@@ -13,7 +13,7 @@ export default function Home() {
   
   useEffect(() => {
     if (session?.error === "RefreshAccessTokenError") {
-      signIn(); // Force sign in to hopefully resolve error
+      signIn('spotify'); // Force sign in to hopefully resolve error
     }
   }, [session]);
 
@@ -33,7 +33,7 @@ export default function Home() {
       </Head>
 
       <Layout>
-        {status === "unauthenticated" || loading ? (
+        {status === "unauthenticated" ? (
           <SignInButton />
         ) : (
           <Stack>
