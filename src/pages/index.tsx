@@ -13,7 +13,7 @@ export default function Home() {
   
   useEffect(() => {
     if (session?.error === "RefreshAccessTokenError") {
-      signIn('spotify'); // Force sign in to hopefully resolve error
+      signIn(); // Force sign in to hopefully resolve error
     }
   }, [session]);
 
