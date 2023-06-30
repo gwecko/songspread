@@ -130,7 +130,7 @@ const TrackList: React.FC<Props> = (Props) => {
           opacity: 1,
           scale: 1,
           transform: "rotateX(0deg)",
-          transition: { type: "spring", stiffness: '700', },
+          transition: { type: "spring", stiffness: '500', },
         },
       },
       initial: listNumber === numTracksToDisplay ? "lastItem" : "in",
