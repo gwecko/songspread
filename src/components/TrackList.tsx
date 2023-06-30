@@ -73,9 +73,9 @@ const TrackList: React.FC<Props> = (Props) => {
   useEffect(() => {
     fetch(url, options)
       .then((res) => res.json())
-      .then(async (res) => {
+      .then((res) => {
         // Array of object data formatted to what I want
-        const tracks: Track[] = await res.items?.map((item: FetchedTrack, i: number) => {
+        return res.items?.map((item: FetchedTrack, i: number) => {
           return {
             songDuration: formatDuration(item.duration_ms),
             artistNames: formatArtist(item.artists),
@@ -86,8 +86,9 @@ const TrackList: React.FC<Props> = (Props) => {
             isDisplayed: i <= numTracksToDisplay
           }
         })
-        setTrackData([...tracks.slice(numTracksToDisplay, 15)])
-        setDisplayedTrackData([...tracks.slice(0, numTracksToDisplay)])
+      }).then(tracks => {
+        setTrackData([...tracks.slice(numTracksToDisplay, 15)]);
+        setDisplayedTrackData([...tracks.slice(0, numTracksToDisplay)]);
       })
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -169,7 +170,5 @@ const TrackList: React.FC<Props> = (Props) => {
       </Flex>
   );
 };
-
-// const TrackList = () => { return <>boop</> }
 
 export default TrackList;
