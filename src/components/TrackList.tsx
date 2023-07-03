@@ -19,6 +19,7 @@ import {
   Fade,
   list,
   Flex,
+  Heading,
 } from "@chakra-ui/react";
 import { AnimatePresence, motion, useIsPresent } from "framer-motion";
 import { zIndex } from "html2canvas/dist/types/css/property-descriptors/z-index";
@@ -112,6 +113,11 @@ const TrackList: React.FC<Props> = (Props) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [numTracksToDisplay])
   
+  const skeletonStyles = {
+    height: "1.2em", 
+    startColor: "gray.200",
+    endColor: "purple.200",
+  }
   
   const Item = ({ songLink, songName, artistNames, listNumber, isDisplayed }: Track) => {
     
@@ -155,7 +161,6 @@ const TrackList: React.FC<Props> = (Props) => {
     );
   };
   
-
   return displayedTrackData ? (
     <Box fontSize={["sm", "md"]} w={"80%"} margin={"auto"}>
       <AnimatePresence>
@@ -165,9 +170,13 @@ const TrackList: React.FC<Props> = (Props) => {
       </AnimatePresence>
     </Box>
   ) : (
-      <Flex justifyContent={'center'}>
-        <Spinner color="purple.400" size="xl" thickness=".6em" />
-      </Flex>
+    <Stack w={'50vw'}>
+      <Skeleton {...skeletonStyles} speed={0.7} />
+      <Skeleton {...skeletonStyles} speed={0.9} />
+      <Skeleton {...skeletonStyles} speed={1.1} />
+      <Skeleton {...skeletonStyles} speed={0.9} />
+      <Skeleton {...skeletonStyles} speed={0.7} />
+    </Stack>
   );
 };
 
