@@ -170,7 +170,7 @@ const TrackList: React.FC<Props> = (Props) => {
       </AnimatePresence>
     </Box>
   ) : (
-    <Stack w={'50vw'}>
+    <Stack w={'65vw'} maxW={'300px'}>
       <Skeleton {...skeletonStyles} speed={0.7} />
       <Skeleton {...skeletonStyles} speed={0.9} />
       <Skeleton {...skeletonStyles} speed={1.1} />
