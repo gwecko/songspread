@@ -56,18 +56,18 @@ type Track = {
   isDisplayed: boolean,
 }
 
-const TrackList: React.FC<Props> = (Props) => {
-  const { timeRange, numTracksToDisplay } = Props;
+const TrackList: React.FC<Props> = ({timeRange, numTracksToDisplay, session}) => {
   const [trackData, setTrackData] = useState<Track[]>()
   const [displayedTrackData, setDisplayedTrackData] = useState<Track[]>()
+  const songNumLimit = 15
   
   // get data from spotify on page load
   const url = "https://api.spotify.com/v1/me/top/tracks?" + queryString.stringify({
     time_range: timeRange,
-    limit: 15,
+    limit: songNumLimit,
   });
   const options = {
-    headers: { Authorization: `Bearer ${Props.session?.token.access_token}` },
+    headers: { Authorization: `Bearer ${session?.token.access_token}` },
   };
   
   // data fetching
@@ -92,7 +92,7 @@ const TrackList: React.FC<Props> = (Props) => {
         setDisplayedTrackData([...tracks.slice(0, numTracksToDisplay)]);
       })
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [Props.session]);
+  }, [session]);
   
   // controls displayed through transferring a track between the arrays
   useEffect(() => {
@@ -159,13 +159,13 @@ const TrackList: React.FC<Props> = (Props) => {
   return displayedTrackData ? (
     <Box fontSize={["sm", "md"]} w={"80%"} margin={"auto"}>
       <AnimatePresence>
-        {displayedTrackData?.map((track, i) => (
+        {displayedTrackData.map((track, i) => (
           <Item key={i} {...track} />
         ))}
       </AnimatePresence>
     </Box>
   ) : (
-      <LoadingSkeleton length={numTracksToDisplay} />
+      <LoadingSkeleton maxLength={songNumLimit} displayLength={numTracksToDisplay} />
   );
 };
 
