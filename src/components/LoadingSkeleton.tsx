@@ -13,7 +13,7 @@ interface Props {
  * @see https://chakra-ui.com/docs/components/skeleton/props
  * @returns chakra UI Skeleton JSX
  */
-const LoadingSkeleton: React.FC<Props> = ({displayLength, maxLength}) => {
+const LoadingSkeleton: React.FC<Props> = ({maxLength, displayLength}) => {
   
   /* timing oscillates based on index */
   const interval = Array.from({ length: maxLength }).map((_, i) => {
