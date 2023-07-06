@@ -4,13 +4,20 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { MutableRefObject, useEffect, useRef } from "react";
 
 
 const DownloadPage: React.FC = () => {
 
   const router = useRouter()
   const imageUrl: any = router.query.dataUrl!
+  const focusRef = useRef<HTMLImageElement>(null);
+  
+  useEffect(() => {
+    if (focusRef.current) {
+      focusRef.current.focus()
+    }
+  }, [])
   
   return (
     <>
@@ -28,11 +35,12 @@ const DownloadPage: React.FC = () => {
             alt="list of top songs"
             width={380}
             height={380}
+            ref={focusRef}
           />
         </Box>
-        <Button colorScheme="purple" w={'25%'}>
-          <Link href={"/"}>back</Link>
-        </Button>
+        <Link href={"/"}>
+          <Button colorScheme="purple" width={'10em'}>back</Button>
+        </Link>
       </Layout>
     </>
   );

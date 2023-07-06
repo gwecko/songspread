@@ -1,9 +1,7 @@
-/* eslint-disable @next/next/no-img-element */
 import Head from "next/head";
 import { signIn, useSession } from "next-auth/react";
 import { Layout, SignInButton, ListTabs, SignOutButton, DownloadButton } from "@/components";
 import { Box, Stack } from "@chakra-ui/react";
-import { cl } from "@/helpers";
 import { useEffect } from "react";
 
 // the home page; at location '/'
@@ -12,8 +10,9 @@ export default function Home() {
   const loading = status === "loading";
   
   useEffect(() => {
+    // Force sign in attempt to resolve error. String is passed from JWT
     if (session?.error === "RefreshAccessTokenError") {
-      signIn('spotify'); // Force sign in to hopefully resolve error
+      signIn('spotify');
     }
   }, [session]);
 
@@ -42,7 +41,7 @@ export default function Home() {
             </Box>
             <Box mt={"auto"} position={"sticky"} textAlign={"center"}>
               <DownloadButton />
-              <SignOutButton />
+              {/* <SignOutButton /> */}
             </Box>
           </Stack>
         )}

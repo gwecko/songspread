@@ -8,29 +8,33 @@ import { useRouter } from "next/router";
 const imageOptions = {
   // width: window.innerWidth,
   // height: window.innerHeight,
-  // backgroundColor: "#D6BCFA",
+  backgroundColor: "#D6BCFA",
 };
 
-
 const DownloadButton: React.FC = () => {
-  
-  const router = useRouter()
+  const router = useRouter();
 
   const getDataUrl = async (e: any) => {
-    e.preventDefault()
+    e.preventDefault();
     const element = document.getElementById("tabDownload")!,
       canvas = await html2canvas(element, imageOptions),
-      dataUrl = canvas.toDataURL()
-    
+      dataUrl = canvas.toDataURL();
+
     router.push({
-      pathname: '/my-image/[dataUrl]',
+      pathname: "/my-image/[dataUrl]",
       query: { dataUrl: dataUrl },
-    })
-  }
+    });
+  };
 
   return (
-    <Button mt={5} colorScheme={"purple"} onClick={(e)=>getDataUrl(e)} role='link'>
-        Download Image
+    <Button
+      mt={5}
+      px={'3em'}
+      colorScheme={"purple"}
+      onClick={(e) => getDataUrl(e)}
+      role="link"
+    >
+      Get Image
     </Button>
   );
 };
