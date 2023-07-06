@@ -23,6 +23,7 @@ import {
 } from "@chakra-ui/react";
 import { AnimatePresence, motion, useIsPresent } from "framer-motion";
 import LoadingSkeleton from "./LoadingSkeleton";
+import BorderAnimation from "./BorderAnimation";
 
 
 interface Props {
@@ -117,7 +118,7 @@ const TrackList: React.FC<Props> = ({timeRange, numTracksToDisplay, session}) =>
     
     const isPresent = useIsPresent()
     
-    const animation = {
+    const itemAnimation = {
       layout: true,
       transition: { duration: 0.2 },
       variants: {
@@ -143,7 +144,7 @@ const TrackList: React.FC<Props> = ({timeRange, numTracksToDisplay, session}) =>
     };
     
     return (
-      <motion.h2 {...animation} key={songName}>
+      <motion.h2 {...itemAnimation} key={songName}>
         <Link
           href={songLink}
           isExternal

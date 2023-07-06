@@ -1,6 +1,7 @@
 import { Button } from "@chakra-ui/react";
 import html2canvas from "html2canvas";
 import { useRouter } from "next/router";
+import BorderAnimation from "./BorderAnimation";
 
 // supported CSS properties:
 // https://html2canvas.hertzen.com/features/

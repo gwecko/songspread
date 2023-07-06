@@ -1,11 +1,12 @@
 import { Box, Heading } from "@chakra-ui/react"
 import { ReactNode } from "react"
+import BorderAnimation from "./BorderAnimation"
 
 type Props = {
   children: ReactNode
 }
 
-const Layout = ({children}: Props) => {
+const Layout: React.FC<Props> = ({children}) => {
   return (
     <Box
         display={"flex"}
@@ -15,13 +16,14 @@ const Layout = ({children}: Props) => {
         bg={"gray.400"}
         bgGradient={"linear(to bottom, gray.300 30%, purple.400 90%)"}
         bgAttachment={"fixed"}
-      >
-        <Heading
+    >
+      <Heading
+          as={'h1'}
           bgGradient={"linear(to bottom, gray.200, purple.500 55%)"}
           bgClip={"text"}
           fontSize={"3.5em"}
           fontWeight={"extrabold"}
-          marginY={5}
+          marginTop={5}
         >
           SongSpread
         </Heading>
