@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { signIn, useSession } from "next-auth/react";
-import { Layout, SignInButton, ListTabs, SignOutButton, DownloadButton } from "@/components";
+import { Layout, SignInButton, ListTabs, SignOutButton, DownloadButton, SpotifyIcon } from "@/components";
 import { Box, Stack } from "@chakra-ui/react";
 import { useEffect } from "react";
 
@@ -40,7 +40,7 @@ export default function Home() {
               <ListTabs session={session} />
             </Box>
             <Box mt={"auto"} position={"sticky"} textAlign={"center"}>
-              <DownloadButton />
+                <DownloadButton />
               {/* <SignOutButton /> */}
             </Box>
           </Stack>
