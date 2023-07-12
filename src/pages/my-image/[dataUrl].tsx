@@ -1,7 +1,5 @@
-import { Layout } from "@/components";
-import BorderAnimation from "@/components/BorderAnimation";
-import { Box, Button, Text, border } from "@chakra-ui/react";
-import { motion } from "framer-motion";
+import { Layout, BorderAnimation } from "@/components";
+import { Box, Button, Text, } from "@chakra-ui/react";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
@@ -16,21 +14,10 @@ const DownloadPage: React.FC = () => {
   const height = 380
   const width = 380
 
-  // fixes a bug where initial tap & hold to save does not work
+  // attempt to fix bug where initial tap & hold to save does not work
   useEffect(() => {
-    if (focusRef.current) {
-      focusRef.current.focus();
-    }
+    focusRef.current?.focus()
   }, []);
-  
-
-  /* const borderAnimation = {
-    
-    backgroundImage: 'linear-gradient(to right, #a8c0ff, #3f2b96)',
-    initial: { rotate: '0' },
-    animate: {rotate: '360'},
-    transition: { repeat: 'Infinity', duration: '2' }
-  } */
 
   return (
     <>
