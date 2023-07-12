@@ -4,11 +4,13 @@ import { ReactNode } from "react";
 
 interface Props {
   children: ReactNode;
-  width?: number;
-  height?: number;
+  dimensions: [
+    height: number,
+    width: number,
+  ]
 }
 
-const BorderAnimation: React.FC<Props> = ({ children, width, height }) => {
+const BorderAnimation: React.FC<Props> = ({ children, dimensions: [height, width] }) => {
   const colorStart = "#CBD5E0";
   const colorEnd = "#B794F4";
 
@@ -31,8 +33,8 @@ const BorderAnimation: React.FC<Props> = ({ children, width, height }) => {
         style={{
           position: "absolute",
           background: `conic-gradient(from 0deg, ${colorStart}, ${colorEnd}, ${colorStart})`,
-          height: height ? 2 * height : '80vw',
-          width: width ? 2 * width : '80vw',
+          height: height ? 3 * height : '100vh',
+          width: width ? 3 * width : '100vw',
           top: '40%',
           translateY: '-50%',
           left: '50%',
