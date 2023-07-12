@@ -23,7 +23,6 @@ import {
 } from "@chakra-ui/react";
 import { AnimatePresence, motion, useIsPresent } from "framer-motion";
 import LoadingSkeleton from "./LoadingSkeleton";
-import BorderAnimation from "./BorderAnimation";
 
 
 interface Props {
@@ -116,8 +115,6 @@ const TrackList: React.FC<Props> = ({timeRange, numTracksToDisplay, session}) =>
   
   const Item = ({ songLink, songName, artistNames, listNumber, isDisplayed }: Track) => {
     
-    const isPresent = useIsPresent()
-    
     const itemAnimation = {
       layout: true,
       transition: { duration: 0.2 },
@@ -138,7 +135,7 @@ const TrackList: React.FC<Props> = ({timeRange, numTracksToDisplay, session}) =>
       animate: "in",
       exit: {
         opacity: 0,
-        transform: "rotateX(90deg)",
+        transform: "rotateX(180deg)",
         transition: { ease: "easeIn", duration: 0.2 },
       },
     };
@@ -158,7 +155,12 @@ const TrackList: React.FC<Props> = ({timeRange, numTracksToDisplay, session}) =>
 
   
   return displayedTrackData ? (
-    <Box fontSize={["sm", "md"]} w={"80%"} margin={"auto"}>
+    <Box
+      fontSize={["sm", "md"]}
+      w={['80%', null, null, null, '480px']}
+      margin={"auto"}
+      padding={0}
+    >
       <AnimatePresence>
         {displayedTrackData.map((track, i) => (
           <Item key={i} {...track} />
@@ -166,7 +168,10 @@ const TrackList: React.FC<Props> = ({timeRange, numTracksToDisplay, session}) =>
       </AnimatePresence>
     </Box>
   ) : (
-      <LoadingSkeleton maxLength={songNumLimit} displayLength={numTracksToDisplay} />
+    <LoadingSkeleton
+      maxLength={songNumLimit}
+      displayLength={numTracksToDisplay}
+    />
   );
 };
 
