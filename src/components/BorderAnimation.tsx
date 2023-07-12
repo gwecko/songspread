@@ -5,8 +5,8 @@ import { ReactNode } from "react";
 interface Props {
   children: ReactNode;
   dimensions: [
-    height: number,
-    width: number,
+    height: number | undefined,
+    width: number | undefined,
   ]
 }
 
