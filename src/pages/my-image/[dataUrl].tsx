@@ -13,8 +13,8 @@ const DownloadPage: React.FC = () => {
   const imageUrl: any = router.query.dataUrl!;
   const focusRef = useRef<HTMLImageElement>(null);
   // height and width should be same, otherwise image gets wonky
-  const imageHeight = 380
-  const imageWidth = 380
+  const height = 380
+  const width = 380
 
   // fixes a bug where initial tap & hold to save does not work
   useEffect(() => {
@@ -45,13 +45,13 @@ const DownloadPage: React.FC = () => {
           —— Tap + hold image to save ——
         </Text>
         <Box my={3} zIndex={2}>
-          <BorderAnimation height={imageHeight} width={imageWidth}>
+          <BorderAnimation dimensions={[height, width ]}>
             <Image
               src={imageUrl}
               id="song-image"
               alt="list of top songs"
-              width={imageWidth}
-              height={imageHeight}
+              width={width}
+              height={height}
               ref={focusRef}
             />
           </BorderAnimation>
