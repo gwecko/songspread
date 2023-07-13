@@ -86,8 +86,10 @@ const TrackList: React.FC<Props> = ({timeRange, numTracksToDisplay, session}) =>
               listNumber: i + 1,
             }
           })
+        } else {
+          return []
         }
-      }).then(tracks => {
+      }).then((tracks) => {
         setTrackData([...tracks.slice(numTracksToDisplay, 15)]);
         setDisplayedTrackData([...tracks.slice(0, numTracksToDisplay)]);
       })

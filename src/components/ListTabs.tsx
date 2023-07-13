@@ -36,6 +36,7 @@ const ListTabs: React.FC<Props> = (Props) => {
           size={"sm"}
           align="center"
           isLazy
+          // lazyBehavior='keepMounted'
         >
           <TabList>
             <Tab>one month</Tab>
