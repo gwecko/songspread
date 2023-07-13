@@ -53,12 +53,11 @@ type Track = {
   songLink: string,
   albumName: string,
   listNumber: number,
-  isDisplayed: boolean,
 }
 
 const TrackList: React.FC<Props> = ({timeRange, numTracksToDisplay, session}) => {
-  const [trackData, setTrackData] = useState<Track[]>()
-  const [displayedTrackData, setDisplayedTrackData] = useState<Track[]>()
+  const [trackData, setTrackData] = useState<Track[]>(Array.from({ length: numTracksToDisplay }));
+  const [displayedTrackData, setDisplayedTrackData] = useState<Track[]>(Array.from({length: numTracksToDisplay}))
   const songNumLimit = 15
   
   // get data from spotify on page load
@@ -75,18 +74,19 @@ const TrackList: React.FC<Props> = ({timeRange, numTracksToDisplay, session}) =>
     fetch(url, options)
       .then((res) => res.json())
       .then((res) => {
-        // Array of object data formatted to what I want
-        return res.items?.map((item: FetchedTrack, i: number) => {
-          return {
-            songDuration: formatDuration(item.duration_ms),
-            artistNames: formatArtist(item.artists),
-            songName: item.name,
-            songLink: item.external_urls.spotify,
-            albumName: item.album.name,
-            listNumber: i + 1,
-            isDisplayed: i <= numTracksToDisplay
-          }
-        })
+        // Array of formatted object data
+        if (res.items) {
+          return res.items?.map((item: FetchedTrack, i: number) => {
+            return {
+              songDuration: formatDuration(item.duration_ms),
+              artistNames: formatArtist(item.artists),
+              songName: item.name,
+              songLink: item.external_urls.spotify,
+              albumName: item.album.name,
+              listNumber: i + 1,
+            }
+          })
+        }
       }).then(tracks => {
         setTrackData([...tracks.slice(numTracksToDisplay, 15)]);
         setDisplayedTrackData([...tracks.slice(0, numTracksToDisplay)]);
@@ -113,7 +113,7 @@ const TrackList: React.FC<Props> = ({timeRange, numTracksToDisplay, session}) =>
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [numTracksToDisplay])
   
-  const Item = ({ songLink, songName, artistNames, listNumber, isDisplayed }: Track) => {
+  const Item = ({ songLink, songName, artistNames, listNumber, }: Track) => {
     
     const itemAnimation = {
       layout: true,
