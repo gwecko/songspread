@@ -1,7 +1,7 @@
 import Head from "next/head";
 import { signIn, useSession } from "next-auth/react";
 import { Layout, SignInButton, ListTabs, SignOutButton, DownloadButton, SpotifyIcon } from "@/components";
-import { Box, Stack } from "@chakra-ui/react";
+import { Box, Heading, Stack } from "@chakra-ui/react";
 import { useEffect } from "react";
 
 // the home page; at location '/'
@@ -33,11 +33,14 @@ export default function Home() {
 
       <Layout>
         {status === "unauthenticated" ? (
-          <SignInButton />
+          <Box textAlign={'center'}>
+            <SignInButton />
+            <Heading as={'h2'} fontSize={'sm'}>Please be patient (: I&apos;m waiting for Spotify to approve the app for public release</Heading>
+          </Box>
         ) : (
           <Stack>
             <Box id="boxDownload" display={"block"}>
-              <ListTabs session={session} />
+                <ListTabs session={session} />
             </Box>
             <Box mt={"auto"} position={"sticky"} textAlign={"center"}>
                 <DownloadButton />
