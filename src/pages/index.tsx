@@ -43,8 +43,8 @@ export default function Home() {
                 <ListTabs session={session} />
             </Box>
             <Box mt={"auto"} position={"sticky"} textAlign={"center"}>
-                <DownloadButton />
-              {/* <SignOutButton /> */}
+              <DownloadButton />
+              <SignOutButton />
             </Box>
           </Stack>
         )}

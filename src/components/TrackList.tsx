@@ -56,9 +56,9 @@ type Track = {
 }
 
 const TrackList: React.FC<Props> = ({timeRange, numTracksToDisplay, session}) => {
-  const [trackData, setTrackData] = useState<Track[]>(Array.from({ length: numTracksToDisplay }));
-  const [displayedTrackData, setDisplayedTrackData] = useState<Track[]>(Array.from({length: numTracksToDisplay}))
   const songNumLimit = 15
+  const [trackData, setTrackData] = useState<Track[]>();
+  const [displayedTrackData, setDisplayedTrackData] = useState<Track[]>()
   
   // get data from spotify on page load
   const url = "https://api.spotify.com/v1/me/top/tracks?" + queryString.stringify({
@@ -76,7 +76,7 @@ const TrackList: React.FC<Props> = ({timeRange, numTracksToDisplay, session}) =>
       .then((res) => {
         // Array of formatted object data
         if (res.items) {
-          return res.items?.map((item: FetchedTrack, i: number) => {
+          return res.items.map((item: FetchedTrack, i: number) => {
             return {
               songDuration: formatDuration(item.duration_ms),
               artistNames: formatArtist(item.artists),
@@ -86,9 +86,10 @@ const TrackList: React.FC<Props> = ({timeRange, numTracksToDisplay, session}) =>
               listNumber: i + 1,
             }
           })
-        } else {
+          // prevents TypeError: undefined is not an object (tracks.slice)
+        } /* else {
           return []
-        }
+        } */
       }).then((tracks) => {
         setTrackData([...tracks.slice(numTracksToDisplay, 15)]);
         setDisplayedTrackData([...tracks.slice(0, numTracksToDisplay)]);
