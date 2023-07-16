@@ -45,7 +45,7 @@ const ListTabs: React.FC<Props> = ({ session }) => {
             <Tab>all months</Tab>
           </TabList>
 
-          <Divider w={"80%"} mt={2} />
+          <Divider my={3} />
           <Box mx={5} mt={3}> {/* needed for padding on editable page but not image page */}
             <TabPanels textAlign={"left"} id="tabDownload">
               <TabPanel {...panelStyles}> {/* weird image padding is here */}
