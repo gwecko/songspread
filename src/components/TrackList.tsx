@@ -38,7 +38,7 @@ interface Props {
   };
 }
 
-interface FetchedTrack {
+type FetchedTrack = {
   name: string;
   artists: Object[];
   duration_ms: number;
@@ -87,10 +87,10 @@ const TrackList: React.FC<Props> = ({timeRange, numTracksToDisplay, session}) =>
             }
           })
           // prevents TypeError: undefined is not an object (tracks.slice)
-        } /* else {
+        } else {
           return []
-        } */
-      }).then((tracks) => {
+        }
+      }).then((tracks: Track[]) => {
         setTrackData([...tracks.slice(numTracksToDisplay, 15)]);
         setDisplayedTrackData([...tracks.slice(0, numTracksToDisplay)]);
       })
@@ -157,7 +157,7 @@ const TrackList: React.FC<Props> = ({timeRange, numTracksToDisplay, session}) =>
   };
 
   
-  return displayedTrackData ? (
+  return displayedTrackData?.length ? (
     <Box
       fontSize={["sm", "md"]}
       w={['80%', null, null, null, '480px']}

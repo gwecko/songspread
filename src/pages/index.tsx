@@ -32,7 +32,7 @@ export default function Home() {
       </Head>
 
       <Layout>
-        {status !== "authenticated" ? (
+        {status === "unauthenticated" ? (
           <Box textAlign={'center'}>
             <SignInButton />
             <Heading as={'h2'} fontSize={'sm'}>Please be patient (: I&apos;m waiting for Spotify to approve the app for public release</Heading>
