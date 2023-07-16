@@ -9,10 +9,7 @@ import {
   SliderFilledTrack,
   Slider,
   SliderThumb,
-  SliderMark,
   Box,
-  Grid,
-  GridItem,
   Flex,
 } from "@chakra-ui/react";
 import TrackList from "./TrackList";
@@ -22,54 +19,60 @@ interface Props {
   session: any;
 }
 
-const ListTabs: React.FC<Props> = (Props) => {
+const ListTabs: React.FC<Props> = ({ session }) => {
   const [short, medium, long] = ["short_term", "medium_term", "long_term"];
 
   const [numTracksToDisplay, setNumTracksToDisplay] = useState(5);
+  const panelStyles = {
+    p: 0,
+    m: 0,
+  }
 
   return (
-    <Box w={"100vw"}>
-      <Flex justifyContent={'center'}>
+    <Box>
+      <Flex justifyContent={"center"}>
         <Tabs
-          variant={"soft-rounded"}
+          variant={'soft-rounded'}
           colorScheme={"purple"}
           size={"sm"}
           align="center"
           isLazy
           // lazyBehavior='keepMounted'
         >
-          <TabList>
+          <TabList w={"max-content"}>
             <Tab>one month</Tab>
             <Tab>six months</Tab>
             <Tab>all months</Tab>
           </TabList>
 
           <Divider w={"80%"} mt={2} />
-          <TabPanels id="tabDownload" textAlign={"left"}>
-            <TabPanel w={"95%"} >
-              <TrackList
-                session={Props.session}
-                timeRange={short}
-                numTracksToDisplay={numTracksToDisplay}
-              />
-            </TabPanel>
-            <TabPanel w={"95%"}>
-              <TrackList
-                session={Props.session}
-                timeRange={medium}
-                numTracksToDisplay={numTracksToDisplay}
-              />
-            </TabPanel>
-            <TabPanel w={"95%"}>
-              <TrackList
-                session={Props.session}
-                timeRange={long}
-                numTracksToDisplay={numTracksToDisplay}
-              />
-            </TabPanel>
-          </TabPanels>
+          <Box mx={5} mt={3}> {/* needed for padding on editable page but not image page */}
+            <TabPanels textAlign={"left"} id="tabDownload">
+              <TabPanel {...panelStyles}> {/* weird image padding is here */}
+                <TrackList
+                  session={session}
+                  timeRange={short}
+                  numTracksToDisplay={numTracksToDisplay}
+                />
+              </TabPanel>
+              <TabPanel {...panelStyles}>
+                <TrackList
+                  session={session}
+                  timeRange={medium}
+                  numTracksToDisplay={numTracksToDisplay}
+                />
+              </TabPanel>
+              <TabPanel {...panelStyles}>
+                <TrackList
+                  session={session}
+                  timeRange={long}
+                  numTracksToDisplay={numTracksToDisplay}
+                />
+              </TabPanel>
+            </TabPanels>
+          </Box>
         </Tabs>
-        <Box position={"fixed"} right={"7%"} top={"15%"}>
+        <Box position={"fixed"} right={"6%"} top={"15%"}>
           <Slider
             defaultValue={numTracksToDisplay}
             min={5}

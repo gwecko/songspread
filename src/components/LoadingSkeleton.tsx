@@ -1,4 +1,4 @@
-import { Stack, Skeleton } from "@chakra-ui/react";
+import { Skeleton, Stack } from "@chakra-ui/react";
 
 interface Props {
   maxLength: number
@@ -27,7 +27,7 @@ const LoadingSkeleton: React.FC<Props> = ({maxLength, displayLength}) => {
   };
 
   return (
-    <Stack w={"65vw"} maxW={"600px"}>
+    <Stack>
       {Array.from({ length: maxLength }).map((_, i) =>
         i < displayLength ? (
           <Skeleton {...skeletonStyles} key={i} speed={interval[i]} />
