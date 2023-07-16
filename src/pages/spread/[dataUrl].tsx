@@ -11,8 +11,8 @@ const DownloadPage: React.FC = () => {
   const imageUrl: any = router.query.dataUrl!;
   const focusRef = useRef<HTMLImageElement>(null);
   // height and width should be same, otherwise image gets wonky
-  const height = 380
-  const width = 380
+  const width = 1920
+  const height = width
 
   // attempt to fix bug where initial tap & hold to save does not work
   useEffect(() => {
@@ -29,9 +29,9 @@ const DownloadPage: React.FC = () => {
           powered by Spotify
         </Text>
         <Text fontSize={"sm"} mt={3}>
-          —— Tap + hold image to save ——
+          —— Press + hold image to save ——
         </Text>
-        <Box my={3} zIndex={2}>
+        <Box my={3} px={3}>
           <BorderAnimation dimensions={[height, width ]}>
             <Image
               src={imageUrl}

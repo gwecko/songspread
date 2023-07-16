@@ -1,7 +1,6 @@
 import { Button } from "@chakra-ui/react";
 import html2canvas from "html2canvas";
 import { useRouter } from "next/router";
-import BorderAnimation from "./BorderAnimation";
 
 // supported CSS properties:
 // https://html2canvas.hertzen.com/features/
@@ -22,7 +21,7 @@ const DownloadButton: React.FC = () => {
       dataUrl = canvas.toDataURL();
 
     router.push({
-      pathname: "/my-image/[dataUrl]",
+      pathname: `/spread/[dataUrl]`,
       query: { dataUrl: dataUrl },
     });
   };

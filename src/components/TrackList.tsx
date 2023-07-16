@@ -21,7 +21,7 @@ import {
   Flex,
   Heading,
 } from "@chakra-ui/react";
-import { AnimatePresence, motion, useIsPresent } from "framer-motion";
+import { AnimatePresence, motion, } from "framer-motion";
 import LoadingSkeleton from "./LoadingSkeleton";
 
 
@@ -171,10 +171,12 @@ const TrackList: React.FC<Props> = ({timeRange, numTracksToDisplay, session}) =>
       </AnimatePresence>
     </Box>
   ) : (
-    <LoadingSkeleton
-      maxLength={songNumLimit}
-      displayLength={numTracksToDisplay}
-    />
+      <Box>
+        <LoadingSkeleton
+          maxLength={songNumLimit}
+          displayLength={numTracksToDisplay}
+        />
+    </Box>
   );
 };
 
