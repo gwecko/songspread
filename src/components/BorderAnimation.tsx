@@ -5,8 +5,8 @@ import { ReactNode } from "react";
 interface Props {
   children: ReactNode;
   dimensions: [
-    height: number | undefined,
-    width: number | undefined,
+    height?: number | undefined,
+    width?: number | undefined,
   ]
 }
 
@@ -35,7 +35,7 @@ const BorderAnimation: React.FC<Props> = ({ children, dimensions: [height, width
             background: `conic-gradient(from 0deg, ${colorStart}, ${colorEnd}, ${colorStart})`,
             height: height ? 3 * height : "100vh",
             width: width ? 3 * width : "100vw",
-            top: "40%",
+            top: "50%",
             translateY: "-50%",
             left: "50%",
             translateX: "-50%",

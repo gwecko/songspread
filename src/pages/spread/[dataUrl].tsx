@@ -31,7 +31,7 @@ const DownloadPage: React.FC = () => {
         <Text fontSize={"sm"} mt={3}>
           —— Press + hold image to save ——
         </Text>
-        <Box my={3} px={3}>
+        <Box my={3} px={3} maxW={'600px'}>
           <BorderAnimation dimensions={[height, width ]}>
             <Image
               src={imageUrl}
@@ -43,11 +43,13 @@ const DownloadPage: React.FC = () => {
             />
           </BorderAnimation>
         </Box>
-        <Link href={"/"}>
-          <Button colorScheme="purple" width={"10em"}>
-            back
-          </Button>
-        </Link>
+        <Box mb={'10%'}>
+          <Link href={"/"}>
+            <Button colorScheme="purple" width={"10em"}>
+              back
+            </Button>
+          </Link>
+        </Box>
       </Layout>
     </>
   );

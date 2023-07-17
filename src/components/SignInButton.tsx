@@ -7,7 +7,7 @@ import SpotifyIcon from "./SpotifyIcon";
 
 const SignInButton: React.FC = () => {
   return (
-    <Box p={8}>
+    <Box>
       <Button
         size={'lg'}
         colorScheme={"purple"}
