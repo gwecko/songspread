@@ -21,11 +21,10 @@ interface Props {
 
 const ListTabs: React.FC<Props> = ({ session }) => {
   const [short, medium, long] = ["short_term", "medium_term", "long_term"];
-
   const [numTracksToDisplay, setNumTracksToDisplay] = useState(5);
   const panelStyles = {
-    p: 0,
     m: 0,
+    pl: '20px',
   }
 
   return (
@@ -45,9 +44,9 @@ const ListTabs: React.FC<Props> = ({ session }) => {
             <Tab>all months</Tab>
           </TabList>
 
-          <Divider my={3} />
-          <Box mx={5} mt={3}> {/* needed for padding on editable page but not image page */}
-            <TabPanels textAlign={"left"} id="tabDownload">
+          <Divider mt={3} w={'80vw'} />
+          <Box textAlign={'center'} mx={'2em'} maxW={'320px'}> {/* needed for padding on editable page but not image page */}
+            <TabPanels textAlign={"left"} id="tabDownload" m={0}>
               <TabPanel {...panelStyles}> {/* weird image padding is here */}
                 <TrackList
                   session={session}

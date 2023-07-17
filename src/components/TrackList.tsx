@@ -20,10 +20,10 @@ import {
   list,
   Flex,
   Heading,
+  Text,
 } from "@chakra-ui/react";
-import { AnimatePresence, motion, } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import LoadingSkeleton from "./LoadingSkeleton";
-
 
 interface Props {
   numTracksToDisplay: number;
@@ -44,31 +44,37 @@ type FetchedTrack = {
   duration_ms: number;
   album: { name: string };
   external_urls: { spotify: string };
-}
+};
 
 type Track = {
-  songDuration: string,
-  artistNames: string,
-  songName: string,
-  songLink: string,
-  albumName: string,
-  listNumber: number,
-}
+  songDuration: string;
+  artistNames: string;
+  songName: string;
+  songLink: string;
+  albumName: string;
+  listNumber: number;
+};
 
-const TrackList: React.FC<Props> = ({timeRange, numTracksToDisplay, session}) => {
-  const songNumLimit = 15
+const TrackList: React.FC<Props> = ({
+  timeRange,
+  numTracksToDisplay,
+  session,
+}) => {
+  const songNumLimit = 15;
   const [trackData, setTrackData] = useState<Track[]>();
-  const [displayedTrackData, setDisplayedTrackData] = useState<Track[]>()
-  
+  const [displayedTrackData, setDisplayedTrackData] = useState<Track[]>();
+
   // get data from spotify on page load
-  const url = "https://api.spotify.com/v1/me/top/tracks?" + queryString.stringify({
-    time_range: timeRange,
-    limit: songNumLimit,
-  });
+  const url =
+    "https://api.spotify.com/v1/me/top/tracks?" +
+    queryString.stringify({
+      time_range: timeRange,
+      limit: songNumLimit,
+    });
   const options = {
     headers: { Authorization: `Bearer ${session?.token.access_token}` },
   };
-  
+
   // data fetching
   useEffect(() => {
     fetch(url, options)
@@ -84,40 +90,40 @@ const TrackList: React.FC<Props> = ({timeRange, numTracksToDisplay, session}) =>
               songLink: item.external_urls.spotify,
               albumName: item.album.name,
               listNumber: i + 1,
-            }
-          })
+            };
+          });
           // prevents TypeError: undefined is not an object (tracks.slice)
         } else {
-          return []
+          return [];
         }
-      }).then((tracks: Track[]) => {
+      })
+      .then((tracks: Track[]) => {
         setTrackData([...tracks.slice(numTracksToDisplay, 15)]);
         setDisplayedTrackData([...tracks.slice(0, numTracksToDisplay)]);
-      })
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [session]);
-  
+
   // controls displayed through transferring a track between the arrays
   useEffect(() => {
     if (trackData && displayedTrackData) {
       // add a new track to the displayed list
       if (numTracksToDisplay > displayedTrackData.length) {
-        const track: any = trackData.shift()
-        setDisplayedTrackData([...displayedTrackData, track])
-        setTrackData([...trackData])
+        const track: any = trackData.shift();
+        setDisplayedTrackData([...displayedTrackData, track]);
+        setTrackData([...trackData]);
       }
       // remove a track from the displayed list
       else if (numTracksToDisplay < displayedTrackData.length) {
-        const track: any = displayedTrackData.pop()
-        setDisplayedTrackData([...displayedTrackData])
-        setTrackData([track, ...trackData])
+        const track: any = displayedTrackData.pop();
+        setDisplayedTrackData([...displayedTrackData]);
+        setTrackData([track, ...trackData]);
       }
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [numTracksToDisplay])
-  
-  const Item = ({ songLink, songName, artistNames, listNumber, }: Track) => {
-    
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [numTracksToDisplay]);
+
+  const Item = ({ songLink, songName, artistNames, listNumber }: Track) => {
     const itemAnimation = {
       layout: true,
       transition: { duration: 0.2 },
@@ -131,7 +137,7 @@ const TrackList: React.FC<Props> = ({timeRange, numTracksToDisplay, session}) =>
           opacity: 1,
           scale: 1,
           transform: "rotateX(0deg)",
-          transition: { type: "spring", stiffness: '500', },
+          transition: { type: "spring", stiffness: "500" },
         },
       },
       initial: listNumber === numTracksToDisplay ? "lastItem" : "in",
@@ -142,40 +148,45 @@ const TrackList: React.FC<Props> = ({timeRange, numTracksToDisplay, session}) =>
         transition: { ease: "easeIn", duration: 0.2 },
       },
     };
-    
+
     return (
-      <motion.h2 {...itemAnimation} key={songName}>
-        <Link
-          href={songLink}
-          isExternal
-          _hover={{ textDecoration: "none" }}
-        >
-            {listNumber}. {songName} - {artistNames}
+      <motion.li {...itemAnimation} key={songName}>
+        <Link href={songLink} isExternal display={'inline'} _hover={{ textDecoration: "none" }}>
+          {/* <Text
+            pr={"0.5em"}
+            display={"inline"}
+            fontWeight={"light"}
+            fontStyle={"normal"}
+          >
+            {listNumber}.
+          </Text> */}
+          <Text display={"inline"} fontWeight={"semibold"} color={"purple.900"}>
+            {songName}
+          </Text>
+          <Text fontWeight={"light"} display={"inline"}>
+            {' '}- {artistNames}
+          </Text>
         </Link>
-      </motion.h2>
+      </motion.li>
     );
   };
 
-  
   return displayedTrackData?.length ? (
-    <Box
-      fontSize={["sm", "md"]}
-      w={['80%', null, null, null, '480px']}
-      margin={"auto"}
-      padding={0}
-    >
+    <Box fontSize={["sm", "md"]} w={["80%", null, null, null, "480px"]}>
       <AnimatePresence>
-        {displayedTrackData.map((track, i) => (
-          <Item key={i} {...track} />
-        ))}
+        <List as={'ol'} styleType={'ordered'} fontWeight={'thin'}>
+          {displayedTrackData.map((track, i) => (
+            <Item key={i} {...track} />
+          ))}
+        </List>
       </AnimatePresence>
     </Box>
   ) : (
-      <Box>
-        <LoadingSkeleton
-          maxLength={songNumLimit}
-          displayLength={numTracksToDisplay}
-        />
+    <Box w={"85%"} mx={"auto"}>
+      <LoadingSkeleton
+        maxLength={songNumLimit}
+        displayLength={numTracksToDisplay}
+      />
     </Box>
   );
 };

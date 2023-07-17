@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { signIn, useSession } from "next-auth/react";
-import { Layout, SignInButton, ListTabs, SignOutButton, DownloadButton, SpotifyIcon } from "@/components";
+import { Layout, SignInButton, ListTabs, SignOutButton, DownloadButton, SpotifyIcon, BorderAnimation } from "@/components";
 import { Box, Heading, Stack } from "@chakra-ui/react";
 import { useEffect } from "react";
 
@@ -33,9 +33,11 @@ export default function Home() {
 
       <Layout>
         {status === "unauthenticated" ? (
-          <Box textAlign={'center'}>
-            <SignInButton />
-            <Heading as={'h2'} fontSize={'sm'}>Please be patient (: I&apos;m waiting for Spotify to approve the app for public release</Heading>
+          <Box textAlign={'center'} margin={'20%'}>
+            <BorderAnimation dimensions={[]}>
+              <SignInButton />
+            </BorderAnimation>
+            <Heading as={'h2'} fontSize={'sm'} fontWeight={'semibold'} pt={'10%'}>Please be patient (: I&apos;m waiting for Spotify to approve the app for public release</Heading>
           </Box>
         ) : (
           <Stack>
