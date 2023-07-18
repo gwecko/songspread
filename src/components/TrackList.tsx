@@ -21,6 +21,7 @@ import {
   Flex,
   Heading,
   Text,
+  OrderedList,
 } from "@chakra-ui/react";
 import { AnimatePresence, motion } from "framer-motion";
 import LoadingSkeleton from "./LoadingSkeleton";
@@ -151,30 +152,36 @@ const TrackList: React.FC<Props> = ({
 
     return (
       <motion.li {...itemAnimation} key={songName}>
-        <Link href={songLink} isExternal display={'inline'} _hover={{ textDecoration: "none" }}>
-          {/* <Text
-            pr={"0.5em"}
-            display={"inline"}
-            fontWeight={"light"}
-            fontStyle={"normal"}
-          >
+        <Link
+          href={songLink}
+          isExternal
+          _hover={{ textDecoration: "none" }}
+          textIndent={'-1.2em'}
+        >
+          <Text display={"inline-block"} fontWeight={'thin'} color={'gray.700'}>
             {listNumber}.
-          </Text> */}
-          <Text display={"inline"} fontWeight={"semibold"} color={"purple.900"}>
-            {songName}
           </Text>
-          <Text fontWeight={"light"} display={"inline"}>
-            {' '}- {artistNames}
-          </Text>
+          <Box display={"inline"}>
+            <Text
+              fontWeight={"semibold"}
+              color={"purple.900"}
+              display={"inline"}
+            >
+              {songName}
+            </Text>
+            <Text fontWeight={"thin"} display={"inline"}>
+              &nbsp;-&nbsp;{artistNames}
+            </Text>
+          </Box>
         </Link>
       </motion.li>
     );
   };
 
   return displayedTrackData?.length ? (
-    <Box fontSize={["sm", "md"]} w={["80%", null, null, null, "480px"]}>
+    <Box fontSize={["sm", "md"]} w={["95%", null, null, null, "480px"]}>
       <AnimatePresence>
-        <List as={'ol'} styleType={'ordered'} fontWeight={'thin'}>
+        <List>
           {displayedTrackData.map((track, i) => (
             <Item key={i} {...track} />
           ))}
