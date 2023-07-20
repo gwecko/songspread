@@ -24,7 +24,7 @@ const ListTabs: React.FC<Props> = ({ session }) => {
   const [numTracksToDisplay, setNumTracksToDisplay] = useState(5);
   const panelStyles = {
     m: 0,
-    pl: '15px',
+    pl: '30px', // item numbers will be cut off otherwise
   }
 
   return (
