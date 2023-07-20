@@ -189,7 +189,7 @@ const TrackList: React.FC<Props> = ({
       </AnimatePresence>
     </Box>
   ) : (
-    <Box w={"85%"} mx={"auto"}>
+    <Box w={"100%"} mx={"auto"}>
       <LoadingSkeleton
         maxLength={songNumLimit}
         displayLength={numTracksToDisplay}
