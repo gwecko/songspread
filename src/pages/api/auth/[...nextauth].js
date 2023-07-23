@@ -25,18 +25,19 @@ const authOptions = {
   
   callbacks: {
     async jwt({ token, account, user, profile }) {
+      // returning login
       if (account) {
-        // cl('in if(account)')
-        // cl(JSON.stringify(account))
+        cl(token.name)
+        cl(token.picture)
         return {
+          username: token.name,
+          profile_pic: token.picture,
           access_token: account.access_token,
           expires_at: account.expires_at * 1000,
           refresh_token: account.refresh_token,
         };
       } else if (Date.now() < token.expires_at) {
-        // cl('in else if')
-        // cl(`Date.now: ${Date.now()}`)
-        // cl(`expires_at: ${token.expires_at}`)
+        cl(account)
         return token;
       } else {
         try {
@@ -57,10 +58,12 @@ const authOptions = {
           
           return {
             ...token,
+            username: tokens.name,
+            profile_pic: tokens.picture,
             access_token: tokens.access_token,
             expires_at: tokens.expires_at * 1000,
             refresh_token: tokens.refresh_token ?? token.refresh_token,
-          }
+          };
         } catch (error) {
           console.error("Error refreshing access token", error)
           return { ...token, error: "RefreshAccessTokenError" };
