@@ -27,8 +27,6 @@ const authOptions = {
     async jwt({ token, account, user, profile }) {
       // returning login
       if (account) {
-        cl(token.name)
-        cl(token.picture)
         return {
           username: token.name,
           profile_pic: token.picture,
@@ -55,6 +53,7 @@ const authOptions = {
           const tokens = await res.json()
           
           if (!res.ok) throw tokens
+          cl(tokens)
           
           return {
             ...token,

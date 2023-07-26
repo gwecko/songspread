@@ -23,7 +23,7 @@ const LoadingSkeleton: React.FC<Props> = ({maxLength, displayLength}) => {
   const skeletonStyles = {
     height: "1.2em",
     startColor: "gray.200",
-    endColor: "purple.200",
+    endColor: "purple.300",
   };
 
   return (
