@@ -1,4 +1,5 @@
-import { Box, Heading } from "@chakra-ui/react";
+import { Box, Heading, keyframes } from "@chakra-ui/react";
+import { motion } from "framer-motion";
 import { ReactNode } from "react";
 
 type Props = {
@@ -6,6 +7,14 @@ type Props = {
 };
 
 const Layout: React.FC<Props> = ({ children }) => {
+  
+  const animationKeyframes = keyframes`
+    0% { background-position: 0% 0% }
+    100% { background-position: 200% 0% }
+  `;
+  const animation = `${animationKeyframes} 2s ease-in-out infinite`;
+  const animationGradient = `linear-gradient(to right, #9F7AEA, #6B46C1, #9F7AEA)`;
+  
   return (
     <Box
       display={"flex"}
@@ -17,13 +26,18 @@ const Layout: React.FC<Props> = ({ children }) => {
       bgAttachment={"fixed"}
     >
       <Heading
-        as={"h1"}
-        bgGradient={"linear(to bottom, gray.200, purple.500 55%)"}
-        bgClip={"text"}
-        fontSize={"3.5em"}
-        fontWeight={"extrabold"}
-        marginTop={3}
-        letterSpacing={"tight"}
+        as={motion.h1}
+        style={{
+          fontSize: "3.5em",
+          color: "transparent",
+          backgroundImage: animationGradient,
+          backgroundSize: "200% 100%",
+          backgroundClip: "text",
+        }}
+        fontWeight={'extrabold'}
+        letterSpacing={"tighter"}
+        animation={animation}
+        whiteSpace={"nowrap"}
       >
         SongSpread
       </Heading>

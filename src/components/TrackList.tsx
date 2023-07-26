@@ -151,7 +151,7 @@ const TrackList: React.FC<Props> = ({
     };
 
     return (
-      <motion.li {...itemAnimation} key={songName}>
+      <motion.li {...itemAnimation} style={{lineHeight: '1.15em', paddingBottom: '0.5em'}} key={songName}>
         <Link
           href={songLink}
           isExternal

@@ -20,6 +20,7 @@ import TrackList from "./TrackList";
 import React, { useState } from "react";
 import { cl } from "@/helpers";
 import { motion } from "framer-motion";
+import { content } from "html2canvas/dist/types/css/property-descriptors/content";
 
 interface Props {
   session: any;
@@ -32,7 +33,7 @@ interface Props {
 const ListTabs: React.FC<Props> = ({ session }) => {
   const [short, medium, long] = ["short_term", "medium_term", "long_term"];
   const [numTracksToDisplay, setNumTracksToDisplay] = useState(5);
-  const username = session?.token?.username;
+  const username = session?.token.username ?? session?.token.name
   const panelStyles = {
     m: 0,
     pl: "30px", // item numbers will be cut off otherwise
@@ -66,30 +67,26 @@ const ListTabs: React.FC<Props> = ({ session }) => {
           <Divider mt={3} w={"80vw"} />
           <Box /* needed for padding on editable page but not image page */
             textAlign={"center"}
-            mx={"2em"}
+            mx={"auto"}
             maxW={"320px"}
             id="tabDownload"
           >
             {username ? (
-              <Box
-                as={motion.div}
-                style={{
-                  fontSize: "x-large",
-                  color: "transparent",
-                  backgroundImage: animationGradient,
-                  backgroundSize: "200% 100%",
-                  backgroundClip: "text",
-                }}
-                fontWeight={'bold'}
-                letterSpacing={'tighter'}
-                ml={'-5%'}
-                animation={animation}
+              <Heading
+                as="h2"
+                color={"purple.500"}
+                fontSize={"1.7em"}
+                marginTop={3}
+                letterSpacing={"-0.06em"}
+                fontWeight={"normal"}
+                ml={"-5%"}
+                mb={"15px"}
                 whiteSpace={"nowrap"}
               >
                 {username}&apos;s SongSpread
-              </Box>
+              </Heading>
             ) : (
-              <Box height={"30px"} />
+              <Box height={"3em"} />
             )}
 
             <TabPanels textAlign={"left"}>
