@@ -17,7 +17,7 @@ import {
   color,
 } from "@chakra-ui/react";
 import TrackList from "./TrackList";
-import React, { useState } from "react";
+import React, { MutableRefObject, useEffect, useRef, useState } from "react";
 import { cl } from "@/helpers";
 import { motion } from "framer-motion";
 import { content } from "html2canvas/dist/types/css/property-descriptors/content";
@@ -33,7 +33,11 @@ interface Props {
 const ListTabs: React.FC<Props> = ({ session }) => {
   const [short, medium, long] = ["short_term", "medium_term", "long_term"];
   const [numTracksToDisplay, setNumTracksToDisplay] = useState(5);
+  const [timespanText, setTimespanText] = useState('1-month')
   const username = session?.token.username ?? session?.token.name
+  const shortTermRef = useRef(null)
+  const mediumTermRef = useRef(null)
+  const longTermRef = useRef(null)
   const panelStyles = {
     m: 0,
     pl: "30px", // item numbers will be cut off otherwise
@@ -46,6 +50,18 @@ const ListTabs: React.FC<Props> = ({ session }) => {
   `;
   const animation = `${animationKeyframes} 2s ease-in-out infinite`;
   const animationGradient = `linear-gradient(to right, #9F7AEA, #6B46C1, #9F7AEA)`;
+  
+  // useEffect(() => {
+    function handleTabFocus(ref: MutableRefObject<any>) {
+      if (ref === shortTermRef) {
+        setTimespanText('1-month')
+      } else if (ref === mediumTermRef) {
+        setTimespanText('6-month')
+      } else {
+        setTimespanText('all-time')
+      }
+    }
+  // }, [])
 
   return (
     <Box>
@@ -83,32 +99,48 @@ const ListTabs: React.FC<Props> = ({ session }) => {
                 mb={"15px"}
                 whiteSpace={"nowrap"}
               >
-                {username}&apos;s SongSpread
+                {username}&apos;s{" "}
+                <Text fontWeight={"semibold"} display={"inline"}>
+                  {timespanText}
+                </Text>{" "}
+                SongSpread
               </Heading>
             ) : (
               <Box height={"3em"} />
             )}
 
             <TabPanels textAlign={"left"}>
-              <TabPanel {...panelStyles}>
+              <TabPanel
+                {...panelStyles}
+                onClick={() => handleTabFocus(shortTermRef)}
+              >
                 {/* weird image padding is here */}
                 <TrackList
-                  session={session}
+                  ref={shortTermRef}
                   timeRange={short}
+                  session={session}
                   numTracksToDisplay={numTracksToDisplay}
                 />
               </TabPanel>
-              <TabPanel {...panelStyles}>
+              <TabPanel
+                {...panelStyles}
+                onClick={() => handleTabFocus(mediumTermRef)}
+              >
                 <TrackList
-                  session={session}
+                  ref={mediumTermRef}
                   timeRange={medium}
+                  session={session}
                   numTracksToDisplay={numTracksToDisplay}
                 />
               </TabPanel>
-              <TabPanel {...panelStyles}>
+              <TabPanel
+                {...panelStyles}
+                onClick={() => handleTabFocus(longTermRef)}
+              >
                 <TrackList
-                  session={session}
+                  ref={longTermRef}
                   timeRange={long}
+                  session={session}
                   numTracksToDisplay={numTracksToDisplay}
                 />
               </TabPanel>

@@ -27,6 +27,8 @@ const authOptions = {
     async jwt({ token, account, user, profile }) {
       // returning login
       if (account) {
+        cl('if account:')
+        cl(token)
         return {
           username: token.name,
           profile_pic: token.picture,
@@ -35,8 +37,13 @@ const authOptions = {
           refresh_token: account.refresh_token,
         };
       } else if (Date.now() < token.expires_at) {
-        cl(account)
-        return token;
+        cl('in the else if:')
+        cl(token)
+        return {
+          ...token,
+          username: token.username,
+          profile_pic: token.profile_pic,
+        }
       } else {
         try {
           const res = await fetch("https://accounts.spotify.com/api/token", {
@@ -53,7 +60,8 @@ const authOptions = {
           const tokens = await res.json()
           
           if (!res.ok) throw tokens
-          cl(tokens)
+          cl('else try:')
+          // cl(tokens)
           
           return {
             ...token,
