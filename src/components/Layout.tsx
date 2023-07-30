@@ -12,7 +12,7 @@ const Layout: React.FC<Props> = ({ children }) => {
     0% { background-position: 0% 0% }
     100% { background-position: 200% 0% }
   `;
-  const animation = `${animationKeyframes} 2s ease-in-out infinite`;
+  const animation = `${animationKeyframes} 3s ease-in-out infinite`;
   const animationGradient = `linear-gradient(to right, #9F7AEA, #6B46C1, #9F7AEA)`;
   
   return (

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { MutableRefObject, ReactHTMLElement, useEffect, useState } from "react";
 import queryString from "query-string";
 import { formatDuration, formatArtist, cl } from "@/helpers";
 import {
@@ -27,6 +27,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import LoadingSkeleton from "./LoadingSkeleton";
 
 interface Props {
+  ref: MutableRefObject<any>;
   numTracksToDisplay: number;
   timeRange?: string;
   session: {
