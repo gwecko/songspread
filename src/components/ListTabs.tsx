@@ -84,7 +84,8 @@ const ListTabs: React.FC<Props> = ({ session }) => {
           <Box /* needed for padding on editable page but not image page */
             textAlign={"center"}
             mx={"auto"}
-            maxW={"320px"}
+            w={'fit-content'}
+            maxW={"400px"}
             id="tabDownload"
           >
             {username ? (
