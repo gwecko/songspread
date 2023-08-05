@@ -1,28 +1,7 @@
-import React, { MutableRefObject, ReactHTMLElement, useEffect, useState } from "react";
+import React, { MutableRefObject, useEffect, useState } from "react";
 import queryString from "query-string";
 import { formatDuration, formatArtist, cl } from "@/helpers";
-import {
-  List,
-  ListItem,
-  UnorderedList,
-  Image,
-  Skeleton,
-  Box,
-  Stack,
-  Spinner,
-  Link,
-  Slide,
-  useDisclosure,
-  SlideFade,
-  ScaleFade,
-  Collapse,
-  Fade,
-  list,
-  Flex,
-  Heading,
-  Text,
-  OrderedList,
-} from "@chakra-ui/react";
+import { List, Box, Link, Text } from "@chakra-ui/react";
 import { AnimatePresence, motion } from "framer-motion";
 import LoadingSkeleton from "./LoadingSkeleton";
 
@@ -76,7 +55,7 @@ const TrackList: React.FC<Props> = ({
   const options = {
     headers: { Authorization: `Bearer ${session?.token.access_token}` },
   };
-
+  
   // data fetching
   useEffect(() => {
     fetch(url, options)
@@ -152,14 +131,18 @@ const TrackList: React.FC<Props> = ({
     };
 
     return (
-      <motion.li {...itemAnimation} style={{lineHeight: '1.15em', paddingBottom: '0.5em'}} key={songName}>
+      <motion.li
+        {...itemAnimation}
+        style={{ lineHeight: "1.15em", paddingBottom: "0.5em" }}
+        key={songName}
+      >
         <Link
           href={songLink}
           isExternal
           _hover={{ textDecoration: "none" }}
-          textIndent={'-1.2em'}
+          textIndent={"-1.2em"}
         >
-          <Text display={"inline-block"} fontWeight={'thin'} color={'gray.700'}>
+          <Text display={"inline-block"} fontWeight={"thin"} color={"gray.700"}>
             {listNumber}.
           </Text>
           <Box display={"inline"}>
