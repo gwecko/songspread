@@ -33,35 +33,23 @@ interface Props {
 const ListTabs: React.FC<Props> = ({ session }) => {
   const [short, medium, long] = ["short_term", "medium_term", "long_term"];
   const [numTracksToDisplay, setNumTracksToDisplay] = useState(5);
-  const [timespanText, setTimespanText] = useState('1-month')
-  const username = session?.token.username ?? session?.token.name
-  const shortTermRef = useRef(null)
-  const mediumTermRef = useRef(null)
-  const longTermRef = useRef(null)
+  const [timespanText, setTimespanText] = useState("1-month");
+  const username = session?.token.username || session?.token.name;
   const panelStyles = {
     m: 0,
     pl: "30px", // item numbers will be cut off otherwise
     pt: "0px",
   };
 
-  const animationKeyframes = keyframes`
-    0% { background-position: 0% 0% }
-    100% { background-position: 200% 0% }
-  `;
-  const animation = `${animationKeyframes} 2s ease-in-out infinite`;
-  const animationGradient = `linear-gradient(to right, #9F7AEA, #6B46C1, #9F7AEA)`;
-  
-  // useEffect(() => {
-    function handleTabFocus(ref: MutableRefObject<any>) {
-      if (ref === shortTermRef) {
-        setTimespanText('1-month')
-      } else if (ref === mediumTermRef) {
-        setTimespanText('6-month')
-      } else {
-        setTimespanText('all-time')
-      }
+  function handleTabFocus(index: Number) {
+    if (index === 0) {
+      setTimespanText("1-month");
+    } else if (index === 1) {
+      setTimespanText("6-month");
+    } else {
+      setTimespanText("all-time");
     }
-  // }, [])
+  }
 
   return (
     <Box>
@@ -71,20 +59,21 @@ const ListTabs: React.FC<Props> = ({ session }) => {
           colorScheme={"purple"}
           size={"sm"}
           align="center"
+          onChange={(index) => handleTabFocus(index)}
           isLazy
           // lazyBehavior='keepMounted'
         >
           <TabList w={"max-content"}>
-            <Tab>one month</Tab>
-            <Tab>six months</Tab>
-            <Tab>all months</Tab>
+            <Tab>1-month</Tab>
+            <Tab>6-months</Tab>
+            <Tab>all-time</Tab>
           </TabList>
 
           <Divider mt={3} w={"80vw"} />
           <Box /* needed for padding on editable page but not image page */
             textAlign={"center"}
             mx={"auto"}
-            w={'fit-content'}
+            w={"fit-content"}
             maxW={"400px"}
             id="tabDownload"
           >
@@ -101,7 +90,7 @@ const ListTabs: React.FC<Props> = ({ session }) => {
                 whiteSpace={"nowrap"}
               >
                 {username}&apos;s{" "}
-                <Text fontWeight={"semibold"} display={"inline"}>
+                <Text fontWeight={"semibold"} display={"inline"} fontStyle={'italic'}>
                   {timespanText}
                 </Text>{" "}
                 SongSpread
@@ -111,35 +100,23 @@ const ListTabs: React.FC<Props> = ({ session }) => {
             )}
 
             <TabPanels textAlign={"left"}>
-              <TabPanel
-                {...panelStyles}
-                onClick={() => handleTabFocus(shortTermRef)}
-              >
+              <TabPanel {...panelStyles}>
                 {/* weird image padding is here */}
                 <TrackList
-                  ref={shortTermRef}
                   timeRange={short}
                   session={session}
                   numTracksToDisplay={numTracksToDisplay}
                 />
               </TabPanel>
-              <TabPanel
-                {...panelStyles}
-                onClick={() => handleTabFocus(mediumTermRef)}
-              >
+              <TabPanel {...panelStyles}>
                 <TrackList
-                  ref={mediumTermRef}
                   timeRange={medium}
                   session={session}
                   numTracksToDisplay={numTracksToDisplay}
                 />
               </TabPanel>
-              <TabPanel
-                {...panelStyles}
-                onClick={() => handleTabFocus(longTermRef)}
-              >
+              <TabPanel {...panelStyles}>
                 <TrackList
-                  ref={longTermRef}
                   timeRange={long}
                   session={session}
                   numTracksToDisplay={numTracksToDisplay}

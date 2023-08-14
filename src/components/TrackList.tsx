@@ -6,7 +6,6 @@ import { AnimatePresence, motion } from "framer-motion";
 import LoadingSkeleton from "./LoadingSkeleton";
 
 interface Props {
-  ref: MutableRefObject<any>;
   numTracksToDisplay: number;
   timeRange?: string;
   session: {

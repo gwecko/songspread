@@ -1,4 +1,4 @@
-import { Box, Heading, keyframes } from "@chakra-ui/react";
+import { Box, Heading, keyframes, Text } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import { ReactNode } from "react";
 
@@ -34,13 +34,17 @@ const Layout: React.FC<Props> = ({ children }) => {
           backgroundSize: "200% 100%",
           backgroundClip: "text",
         }}
-        fontWeight={'extrabold'}
+        fontWeight={"extrabold"}
         letterSpacing={"tighter"}
         animation={animation}
         whiteSpace={"nowrap"}
       >
         SongSpread
       </Heading>
+      
+      <Text fontStyle={"italic"} color={"purple.600"} fontWeight={'medium'} pb={2}>
+        powered by Spotify
+      </Text>
 
       {children}
     </Box>

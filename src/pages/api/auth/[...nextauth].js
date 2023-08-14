@@ -43,6 +43,9 @@ const authOptions = {
           ...token,
           username: token.username,
           profile_pic: token.profile_pic,
+          access_token: token.access_token,
+          refresh_token: token.refresh_token,
+          expires_at: token.expires_at,
         }
       } else {
         try {
@@ -61,11 +64,11 @@ const authOptions = {
           
           if (!res.ok) throw tokens
           cl('else try:')
-          // cl(tokens)
+          cl(tokens)
           
           return {
             ...token,
-            username: tokens.name,
+            username: tokens.name ?? tokens.username,
             profile_pic: tokens.picture,
             access_token: tokens.access_token,
             expires_at: tokens.expires_at * 1000,

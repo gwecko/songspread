@@ -25,9 +25,6 @@ const DownloadPage: React.FC = () => {
         <title>My SongSpread&#x1F47E;</title>
       </Head>
       <Layout>
-        <Text fontStyle={"italic"} color={"purple.600"} fontWeight={"semibold"}>
-          powered by Spotify
-        </Text>
         <Text fontSize={"sm"} mt={3}>
           —— Press + hold image to save ——
         </Text>
