@@ -162,7 +162,7 @@ const TrackList: React.FC<Props> = ({
   };
 
   return displayedTrackData?.length ? (
-    <Box fontSize={["sm", "md"]} w={["95%", null, null, null, "480px"]}>
+    <Box fontSize={["sm", "md"]} w={'90%'}>
       <AnimatePresence>
         <List>
           {displayedTrackData.map((track, i) => (
