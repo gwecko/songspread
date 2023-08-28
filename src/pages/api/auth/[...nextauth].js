@@ -41,8 +41,8 @@ const authOptions = {
         cl(token)
         return {
           ...token,
-          username: token.username,
-          profile_pic: token.profile_pic,
+          // username: token.username,
+          // profile_pic: token.profile_pic,
           access_token: token.access_token,
           refresh_token: token.refresh_token,
           expires_at: token.expires_at,
@@ -68,8 +68,8 @@ const authOptions = {
           
           return {
             ...token,
-            username: tokens.name ?? tokens.username,
-            profile_pic: tokens.picture,
+            // username: tokens.name ?? tokens.username,
+            // profile_pic: tokens.picture,
             access_token: tokens.access_token,
             expires_at: tokens.expires_at * 1000,
             refresh_token: tokens.refresh_token ?? token.refresh_token,
