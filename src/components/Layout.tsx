@@ -12,8 +12,8 @@ const Layout: React.FC<Props> = ({ children }) => {
     0% { background-position: 0% 0% }
     100% { background-position: 200% 0% }
   `;
-  const animation = `${animationKeyframes} 3s ease-in-out infinite`;
-  const animationGradient = `linear-gradient(to right, #9F7AEA, #6B46C1, #9F7AEA)`;
+  const animation = `${animationKeyframes} 3s linear infinite`;
+  const animationGradient = `linear-gradient(to right, #B794F4, #6B46C1, #B794F4)`;
   
   return (
     <Box
@@ -33,6 +33,7 @@ const Layout: React.FC<Props> = ({ children }) => {
           backgroundImage: animationGradient,
           backgroundSize: "200% 100%",
           backgroundClip: "text",
+          WebkitBackgroundClip: "text"
         }}
         fontWeight={"extrabold"}
         letterSpacing={"tighter"}
