@@ -17,7 +17,7 @@ import {
   color,
 } from "@chakra-ui/react";
 import TrackList from "./TrackList";
-import React, { MutableRefObject, useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import { cl } from "@/helpers";
 import { motion } from "framer-motion";
 import { content } from "html2canvas/dist/types/css/property-descriptors/content";
@@ -29,6 +29,7 @@ interface Props {
     token.profile_pic
   */
 }
+
 
 const ListTabs: React.FC<Props> = ({ session }) => {
   const [short, medium, long] = ["short_term", "medium_term", "long_term"];
@@ -87,7 +88,7 @@ const ListTabs: React.FC<Props> = ({ session }) => {
                 fontWeight={"normal"}
                 ml={"-5%"}
                 mb={"15px"}
-                whiteSpace={"nowrap"}
+                whiteSpace={'normal'}
               >
                 {username}&apos;s{" "}
                 <Text fontWeight={"semibold"} display={"inline"} fontStyle={'italic'}>
