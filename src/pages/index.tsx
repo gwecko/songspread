@@ -43,8 +43,7 @@ export default function Home() {
               fontWeight={"semibold"}
               pt={"10%"}
             >
-              Please be patient (: I&apos;m waiting for Spotify to approve the
-              app for public release
+              Coming soon. Dependent on Spotify&apos;s review process.
             </Heading>
           </Box>
         ) : (
@@ -52,8 +51,8 @@ export default function Home() {
             <Box id="boxDownload" display={"block"}>
               <ListTabs session={session} />
             </Box>
-            <Box mt={"auto"} position={"sticky"} textAlign={"center"}>
-              <DownloadButton />
+            <Box textAlign={"center"} display={'flex'} justifyContent={'center'} padding={2}>
+              <DownloadButton backgroundColor="" />
               <SignOutButton />
             </Box>
           </Stack>

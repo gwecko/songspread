@@ -5,14 +5,21 @@ import { useRouter } from "next/router";
 // supported CSS properties:
 // https://html2canvas.hertzen.com/features/
 
-const imageOptions = {
-  // width: window.innerWidth,
-  // height: window.innerHeight,
-  backgroundColor: "#D6BCFA",
-};
 
-const DownloadButton: React.FC = () => {
+interface Props {
+  backgroundColor: string,
+}
+
+const DownloadButton: React.FC<Props> = ({backgroundColor}) => {
   const router = useRouter();
+  
+  const imageOptions = {
+    // width: window.innerWidth,
+    // height: window.innerHeight,
+    // backgroundColor: "#D6BCFA",
+    backgroundColor: backgroundColor,
+    // backgroundImage: 
+  };
 
   const getDataUrl = async (e: any) => {
     e.preventDefault();
@@ -28,7 +35,7 @@ const DownloadButton: React.FC = () => {
 
   return (
     <Button
-      mt={5}
+      // mt={5}
       px={'3em'}
       colorScheme={"purple"}
       onClick={(e) => getDataUrl(e)}
