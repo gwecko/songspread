@@ -6,19 +6,14 @@ import { useRouter } from "next/router";
 // https://html2canvas.hertzen.com/features/
 
 
-interface Props {
-  backgroundColor: string,
-}
-
-const DownloadButton: React.FC<Props> = ({backgroundColor}) => {
+const DownloadButton: React.FC = () => {
   const router = useRouter();
   
   const imageOptions = {
     // width: window.innerWidth,
     // height: window.innerHeight,
     // backgroundColor: "#D6BCFA",
-    backgroundColor: backgroundColor,
-    // backgroundImage: 
+    backgroundColor: 'null',
   };
 
   const getDataUrl = async (e: any) => {
@@ -35,9 +30,9 @@ const DownloadButton: React.FC<Props> = ({backgroundColor}) => {
 
   return (
     <Button
-      // mt={5}
-      px={'3em'}
+      px={'4em'}
       colorScheme={"purple"}
+      boxShadow={'lg'}
       onClick={(e) => getDataUrl(e)}
       role="link"
     >

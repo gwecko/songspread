@@ -132,7 +132,7 @@ const TrackList: React.FC<Props> = ({
     return (
       <motion.li
         {...itemAnimation}
-        style={{ lineHeight: "1.15em", paddingBottom: "0.5em" }}
+        style={{ lineHeight: "1em", paddingBottom: "1em",  }}
         key={songName}
       >
         <Link
@@ -141,8 +141,8 @@ const TrackList: React.FC<Props> = ({
           _hover={{ textDecoration: "none" }}
           textIndent={"-1.2em"}
         >
-          <Text display={"inline-block"} fontWeight={"thin"} color={"gray.700"}>
-            {listNumber}.
+          <Text display={"inline-block"} fontWeight={"thin"} fontStyle={'italic'} color={"gray.700"}>
+            {listNumber}.&nbsp;
           </Text>
           <Box display={"inline"}>
             <Text

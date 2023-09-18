@@ -1,7 +1,7 @@
 import Head from "next/head";
 import { signIn, useSession } from "next-auth/react";
 import { Layout, SignInButton, ListTabs, SignOutButton, DownloadButton, SpotifyIcon, BorderAnimation } from "@/components";
-import { Box, Heading, Stack, } from "@chakra-ui/react";
+import { Box, ButtonGroup, Heading, Stack, } from "@chakra-ui/react";
 import { useEffect } from "react";
 
 // the home page; at location '/'
@@ -51,9 +51,17 @@ export default function Home() {
             <Box id="boxDownload" display={"block"}>
               <ListTabs session={session} />
             </Box>
-            <Box textAlign={"center"} display={'flex'} justifyContent={'center'} padding={2}>
-              <DownloadButton backgroundColor="" />
-              <SignOutButton />
+            <Box
+              pos={"fixed"}
+              transform={'auto'}
+              left={"50%"}
+              translateX={'-50%'}
+              bottom={['8%', '', '', '250px']}
+            >
+              <ButtonGroup spacing={2}>
+                <DownloadButton />
+                <SignOutButton />
+              </ButtonGroup>
             </Box>
           </Stack>
         )}

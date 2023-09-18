@@ -19,8 +19,7 @@ import {
 import TrackList from "./TrackList";
 import React, { useState } from "react";
 import { cl } from "@/helpers";
-import { motion } from "framer-motion";
-import { content } from "html2canvas/dist/types/css/property-descriptors/content";
+
 
 interface Props {
   session: any;
@@ -37,9 +36,13 @@ const ListTabs: React.FC<Props> = ({ session }) => {
   const [timespanText, setTimespanText] = useState("1-month");
   const username = session?.token.username || session?.token.name;
   const panelStyles = {
-    m: 0,
     pl: "30px", // item numbers will be cut off otherwise
-    pt: "0px",
+    pt: "10px",
+    pb: '10px',
+    // mr: '4%',
+    // right: '30px',
+    borderRadius: '10px',
+    // shadow: 'inner'
   };
 
   function handleTabFocus(index: Number) {
@@ -70,28 +73,32 @@ const ListTabs: React.FC<Props> = ({ session }) => {
             <Tab>all-time</Tab>
           </TabList>
 
-          <Divider mt={3} w={"80vw"} />
+          <Divider mt={3} w={"90vw"} />
           <Box /* needed for padding on editable page but not image page */
-            textAlign={"center"}
-            mx={"auto"}
+            // textAlign={"center"}
+            ml={"-10%"}
             w={"fit-content"}
-            maxW={"400px"}
+            maxW={"390px"}
             id="tabDownload"
+            borderRadius={'10px'}
+            shadow={'base'}
+            bgColor={'whiteAlpha.200'}
           >
             {username ? (
               <Heading
                 as="h2"
                 color={"purple.500"}
                 fontSize={"1.7em"}
-                marginTop={3}
-                letterSpacing={"-0.06em"}
+                mt={2}
+                pt={2}
+                letterSpacing={"-0.05em"}
                 fontWeight={"normal"}
-                ml={"-5%"}
-                mb={"15px"}
+                mr={'7%'}
+                mb={"10px"}
                 whiteSpace={'normal'}
               >
                 {username}&apos;s{" "}
-                <Text fontWeight={"semibold"} display={"inline"} fontStyle={'italic'}>
+                <Text fontWeight={'bold'} display={"inline"} fontStyle={'italic'}>
                   {timespanText}
                 </Text>{" "}
                 SongSpread

@@ -20,7 +20,7 @@ const BorderAnimation: React.FC<Props> = ({ children, dimensions: [height, width
       <motion.div
         style={{
           position: "relative",
-          zIndex: "2",
+          zIndex: "1",
           padding: "0.3em",
           borderRadius: "10px",
           overflow: "hidden",
