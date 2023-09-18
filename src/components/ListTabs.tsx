@@ -73,12 +73,12 @@ const ListTabs: React.FC<Props> = ({ session }) => {
             <Tab>all-time</Tab>
           </TabList>
 
-          <Divider mt={3} w={"90vw"} />
+          <Divider mt={2} w={"90vw"} />
           <Box /* needed for padding on editable page but not image page */
             // textAlign={"center"}
             ml={"-10%"}
             w={"fit-content"}
-            maxW={"390px"}
+            maxW={"350px"}
             id="tabDownload"
             borderRadius={'10px'}
             shadow={'base'}
@@ -94,7 +94,6 @@ const ListTabs: React.FC<Props> = ({ session }) => {
                 letterSpacing={"-0.05em"}
                 fontWeight={"normal"}
                 mr={'7%'}
-                mb={"10px"}
                 whiteSpace={'normal'}
               >
                 {username}&apos;s{" "}
@@ -133,7 +132,7 @@ const ListTabs: React.FC<Props> = ({ session }) => {
             </TabPanels>
           </Box>
         </Tabs>
-        <Box position={"fixed"} right={"6%"} top={"15%"}>
+        <Box position={"fixed"} right={"3%"} top={"15%"}>
           <Slider
             defaultValue={numTracksToDisplay}
             min={5}
@@ -150,9 +149,9 @@ const ListTabs: React.FC<Props> = ({ session }) => {
               <SliderFilledTrack bgColor={"purple.100"} />
             </SliderTrack>
             <SliderThumb
-              boxSize={"5"}
+              boxSize={"6"}
               bgColor={"purple.500"}
-              w={"35px"}
+              w={"33px"}
               _focus={{ decoration: "none", border: "none" }}
             />
           </Slider>

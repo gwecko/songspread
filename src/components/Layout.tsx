@@ -33,17 +33,16 @@ const Layout: React.FC<Props> = ({ children }) => {
           backgroundImage: animationGradient,
           backgroundSize: "200% 100%",
           backgroundClip: "text",
-          WebkitBackgroundClip: "text"
+          WebkitBackgroundClip: "text",
         }}
         fontWeight={"extrabold"}
         letterSpacing={"tighter"}
         animation={animation}
-        whiteSpace={"nowrap"}
       >
         SongSpread
       </Heading>
       
-      <Text fontStyle={"italic"} color={"purple.600"} fontWeight={'medium'} pb={2}>
+      <Text fontStyle={"italic"} color={"purple.600"} fontWeight={'medium'} pb={2} mt={-2}>
         powered by Spotify
       </Text>
 
