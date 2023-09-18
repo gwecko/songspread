@@ -132,7 +132,7 @@ const TrackList: React.FC<Props> = ({
     return (
       <motion.li
         {...itemAnimation}
-        style={{ lineHeight: "1em", paddingBottom: "1em",  }}
+        style={{ lineHeight: "1em", paddingBottom: "0.9em",  }}
         key={songName}
       >
         <Link

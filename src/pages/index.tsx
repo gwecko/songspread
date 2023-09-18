@@ -56,7 +56,7 @@ export default function Home() {
               transform={'auto'}
               left={"50%"}
               translateX={'-50%'}
-              bottom={['8%', '', '', '250px']}
+              bottom={['2%', '', '', '250px']}
             >
               <ButtonGroup spacing={2}>
                 <DownloadButton />
