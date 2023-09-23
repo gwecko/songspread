@@ -80,9 +80,10 @@ const ListTabs: React.FC<Props> = ({ session }) => {
             w={"fit-content"}
             maxW={"350px"}
             id="tabDownload"
-            borderRadius={'10px'}
-            shadow={'base'}
-            bgColor={'whiteAlpha.200'}
+            borderRadius={"10px"}
+            shadow={"inner"}
+            // boxShadow={'lg'}
+            bgColor={"whiteAlpha.200"}
           >
             {username ? (
               <Heading
@@ -93,11 +94,16 @@ const ListTabs: React.FC<Props> = ({ session }) => {
                 pt={2}
                 letterSpacing={"-0.05em"}
                 fontWeight={"normal"}
-                mr={'7%'}
-                whiteSpace={'normal'}
+                mr={"7%"}
+                whiteSpace={"normal"}
+                textShadow={"5px 4px 10px rgba(0,0,0,.4)"}
               >
                 {username}&apos;s{" "}
-                <Text fontWeight={'bold'} display={"inline"} fontStyle={'italic'}>
+                <Text
+                  fontWeight={"bold"}
+                  display={"inline"}
+                  fontStyle={"italic"}
+                >
                   {timespanText}
                 </Text>{" "}
                 SongSpread
@@ -136,7 +142,7 @@ const ListTabs: React.FC<Props> = ({ session }) => {
           <Slider
             defaultValue={numTracksToDisplay}
             min={5}
-            max={15}
+            max={12}
             onChange={(val) => setNumTracksToDisplay(val)}
             orientation={"vertical"}
             isReversed

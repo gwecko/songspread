@@ -40,7 +40,7 @@ const TrackList: React.FC<Props> = ({
   numTracksToDisplay,
   session,
 }) => {
-  const songNumLimit = 15;
+  const songNumLimit = 12;
   const [trackData, setTrackData] = useState<Track[]>();
   const [displayedTrackData, setDisplayedTrackData] = useState<Track[]>();
 
@@ -132,7 +132,7 @@ const TrackList: React.FC<Props> = ({
     return (
       <motion.li
         {...itemAnimation}
-        style={{ lineHeight: "1em", paddingBottom: "0.9em",  }}
+        style={{ lineHeight: "1em", paddingBottom: "0.9em" }}
         key={songName}
       >
         <Link
@@ -141,18 +141,29 @@ const TrackList: React.FC<Props> = ({
           _hover={{ textDecoration: "none" }}
           textIndent={"-1.2em"}
         >
-          <Text display={"inline-block"} fontWeight={"thin"} fontStyle={'italic'} color={"gray.700"}>
+          <Text
+            display={"inline-block"}
+            fontWeight={"thin"}
+            fontStyle={"italic"}
+            color={"gray.600"}
+            textShadow={"0px 1px 2px rgba(80,80,80,.5)"}
+          >
             {listNumber}.&nbsp;
           </Text>
           <Box display={"inline"}>
             <Text
               fontWeight={"semibold"}
-              color={"purple.900"}
+              color={"purple.700"}
               display={"inline"}
+              textShadow={"3px 3px 8px rgba(80,80,80,.6)"}
             >
               {songName}
             </Text>
-            <Text fontWeight={"thin"} display={"inline"}>
+            <Text
+              fontWeight={"thin"}
+              display={"inline"}
+              textShadow={"3px 3px 5px rgba(80,80,80,.5)"}
+            >
               &nbsp;-&nbsp;{artistNames}
             </Text>
           </Box>
