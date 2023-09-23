@@ -146,23 +146,23 @@ const TrackList: React.FC<Props> = ({
             fontWeight={"thin"}
             fontStyle={"italic"}
             color={"gray.600"}
-            textShadow={"0px 1px 2px rgba(80,80,80,.5)"}
+            textShadow={"2px 2px 10px rgba(190,190,190,.7)"}
           >
             {listNumber}.&nbsp;
           </Text>
           <Box display={"inline"}>
             <Text
               fontWeight={"semibold"}
-              color={"purple.700"}
+              color={"purple.500"}
               display={"inline"}
-              textShadow={"3px 3px 8px rgba(80,80,80,.6)"}
+              textShadow={"2px 2px 10px rgba(190,190,190,.7)"}
             >
               {songName}
             </Text>
             <Text
               fontWeight={"thin"}
               display={"inline"}
-              textShadow={"3px 3px 5px rgba(80,80,80,.5)"}
+              textShadow={"2px 2px 10px rgba(190,190,190,.7)"}
             >
               &nbsp;-&nbsp;{artistNames}
             </Text>

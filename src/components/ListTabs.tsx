@@ -42,7 +42,6 @@ const ListTabs: React.FC<Props> = ({ session }) => {
     // mr: '4%',
     // right: '30px',
     borderRadius: '10px',
-    // shadow: 'inner'
   };
 
   function handleTabFocus(index: Number) {
@@ -81,14 +80,14 @@ const ListTabs: React.FC<Props> = ({ session }) => {
             maxW={"350px"}
             id="tabDownload"
             borderRadius={"10px"}
-            shadow={"inner"}
+            shadow={"lg"}
             // boxShadow={'lg'}
             bgColor={"whiteAlpha.200"}
           >
             {username ? (
               <Heading
                 as="h2"
-                color={"purple.500"}
+                color={"purple.400"}
                 fontSize={"1.7em"}
                 mt={2}
                 pt={2}
@@ -96,7 +95,7 @@ const ListTabs: React.FC<Props> = ({ session }) => {
                 fontWeight={"normal"}
                 mr={"7%"}
                 whiteSpace={"normal"}
-                textShadow={"5px 4px 10px rgba(0,0,0,.4)"}
+                textShadow={"5px 4px 10px rgba(190,190,190,.7)"}
               >
                 {username}&apos;s{" "}
                 <Text
