@@ -87,15 +87,15 @@ const ListTabs: React.FC<Props> = ({ session }) => {
             {username ? (
               <Heading
                 as="h2"
-                color={"purple.400"}
+                color={"gray.100"}
                 fontSize={"1.7em"}
                 mt={2}
                 pt={2}
                 letterSpacing={"-0.05em"}
-                fontWeight={"normal"}
+                fontWeight={"bold"}
                 mr={"7%"}
                 whiteSpace={"normal"}
-                textShadow={"5px 4px 10px rgba(190,190,190,.7)"}
+                textShadow={"2px 2px 3px #6B46C1"}
               >
                 {username}&apos;s{" "}
                 <Text
