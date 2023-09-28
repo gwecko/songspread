@@ -79,7 +79,7 @@ const ListTabs: React.FC<Props> = ({ session }) => {
             id="tabDownload"
             borderRadius={"10px"}
             shadow={"lg"}
-            bgColor={"whiteAlpha.200"}
+            bgColor={"whiteAlpha.300"}
           >
             {username ? (
               <Heading
