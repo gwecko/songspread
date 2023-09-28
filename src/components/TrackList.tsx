@@ -133,6 +133,7 @@ const TrackList: React.FC<TrackListProps> = ({
           _hover={{ textDecoration: "none" }}
           textIndent={"-1.2em"}
         >
+          {/* LIST NUMBER */}
           <Text
             display={"inline-block"}
             fontWeight={"medium"}
@@ -142,20 +143,22 @@ const TrackList: React.FC<TrackListProps> = ({
           >
             {listNumber}.&nbsp;
           </Text>
+          {/* SONG NAME */}
           <Box display={"inline"}>
             <Text
               fontWeight={"extrabold"}
               color={"gray.50"}
               display={"inline"}
-              textShadow={`2px 2px 3px ${shadowColor}, 2px 2px 10px gray`}
+              textShadow={`2px 2px 1px ${shadowColor}, 1px 1px 6px gray`}
             >
               {songName}
             </Text>
+            {/* ARTIST NAMES */}
             <Text
               fontWeight={'medium'}
               display={"inline"}
               color={"gray.50"}
-              textShadow={`2px 2px 3px ${shadowColor}, 1px 1px 5px gray`}
+              textShadow={`2px 2px 2px ${shadowColor}, 1px 1px 3px gray`}
             >
               &nbsp;-&nbsp;{artistNames}
             </Text>
