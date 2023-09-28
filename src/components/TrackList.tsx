@@ -135,10 +135,10 @@ const TrackList: React.FC<TrackListProps> = ({
         >
           <Text
             display={"inline-block"}
-            fontWeight={"normal"}
+            fontWeight={"medium"}
             fontStyle={"italic"}
             color={"gray.100"}
-            textShadow={`1px 1px 2px ${shadowColor}}`}
+            textShadow={`1px 1px 1px ${shadowColor}, 1px 1px 3px gray`}
           >
             {listNumber}.&nbsp;
           </Text>
@@ -147,15 +147,15 @@ const TrackList: React.FC<TrackListProps> = ({
               fontWeight={"extrabold"}
               color={"gray.50"}
               display={"inline"}
-              textShadow={`1px 2px 2px ${shadowColor}}`}
+              textShadow={`2px 2px 3px ${shadowColor}, 2px 2px 10px gray`}
             >
               {songName}
             </Text>
             <Text
-              fontWeight={"semibold"}
+              fontWeight={'medium'}
               display={"inline"}
-              color={"gray.100"}
-              textShadow={`1px 1px 1px ${shadowColor}}`}
+              color={"gray.50"}
+              textShadow={`2px 2px 3px ${shadowColor}, 1px 1px 5px gray`}
             >
               &nbsp;-&nbsp;{artistNames}
             </Text>
