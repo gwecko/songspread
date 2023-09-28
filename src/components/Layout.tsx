@@ -2,11 +2,11 @@ import { Box, Heading, keyframes, Text } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import { ReactNode } from "react";
 
-type Props = {
+type LayoutProps = {
   children: ReactNode;
 };
 
-const Layout: React.FC<Props> = ({ children }) => {
+const Layout: React.FC<LayoutProps> = ({ children }) => {
   
   const animationKeyframes = keyframes`
     0% { background-position: 0% 0% }

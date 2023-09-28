@@ -18,7 +18,7 @@ import {
 } from "@chakra-ui/react";
 import TrackList from "./TrackList";
 import React, { useState } from "react";
-import { cl } from "@/helpers";
+import { cl, hslToHex } from "@/helpers";
 
 
 interface Props {
@@ -32,19 +32,19 @@ interface Props {
 
 const ListTabs: React.FC<Props> = ({ session }) => {
   const [short, medium, long] = ["short_term", "medium_term", "long_term"];
+  // hsl values where pageColor is the hue ('h'sl)
+  const [pageColor, setPageColor] = useState(259);
   const [numTracksToDisplay, setNumTracksToDisplay] = useState(5);
   const [timespanText, setTimespanText] = useState("1-month");
   const username = session?.token.username || session?.token.name;
   const panelStyles = {
-    pl: "30px", // item numbers will be cut off otherwise
+    pl: "30px", // item numbers are otherwise cut-off
     pt: "10px",
     pb: '10px',
-    // mr: '4%',
-    // right: '30px',
     borderRadius: '10px',
   };
 
-  function handleTabFocus(index: Number) {
+  function handleTabFocus(index: Number): void {
     if (index === 0) {
       setTimespanText("1-month");
     } else if (index === 1) {
@@ -64,7 +64,6 @@ const ListTabs: React.FC<Props> = ({ session }) => {
           align="center"
           onChange={(index) => handleTabFocus(index)}
           isLazy
-          // lazyBehavior='keepMounted'
         >
           <TabList w={"max-content"}>
             <Tab>1-month</Tab>
@@ -74,14 +73,12 @@ const ListTabs: React.FC<Props> = ({ session }) => {
 
           <Divider mt={2} w={"90vw"} />
           <Box /* needed for padding on editable page but not image page */
-            // textAlign={"center"}
-            ml={"-10%"}
+            // ml={"-0%"}
             w={"fit-content"}
             maxW={"350px"}
             id="tabDownload"
             borderRadius={"10px"}
             shadow={"lg"}
-            // boxShadow={'lg'}
             bgColor={"whiteAlpha.200"}
           >
             {username ? (
@@ -95,7 +92,7 @@ const ListTabs: React.FC<Props> = ({ session }) => {
                 fontWeight={"bold"}
                 mr={"7%"}
                 whiteSpace={"normal"}
-                textShadow={"2px 2px 3px #6B46C1"}
+                textShadow={`2px 2px 3px ${hslToHex(pageColor, 60, 40)}`}
               >
                 {username}&apos;s{" "}
                 <Text
@@ -118,6 +115,7 @@ const ListTabs: React.FC<Props> = ({ session }) => {
                   timeRange={short}
                   session={session}
                   numTracksToDisplay={numTracksToDisplay}
+                  shadowColor={hslToHex(pageColor, 60, 40)}
                 />
               </TabPanel>
               <TabPanel {...panelStyles}>
@@ -125,6 +123,7 @@ const ListTabs: React.FC<Props> = ({ session }) => {
                   timeRange={medium}
                   session={session}
                   numTracksToDisplay={numTracksToDisplay}
+                  shadowColor={hslToHex(pageColor, 60, 40)}
                 />
               </TabPanel>
               <TabPanel {...panelStyles}>
@@ -132,12 +131,13 @@ const ListTabs: React.FC<Props> = ({ session }) => {
                   timeRange={long}
                   session={session}
                   numTracksToDisplay={numTracksToDisplay}
+                  shadowColor={hslToHex(pageColor, 60, 40)}
                 />
               </TabPanel>
             </TabPanels>
           </Box>
         </Tabs>
-        <Box position={"fixed"} right={"3%"} top={"15%"}>
+        <Box position={"fixed"} right={"1%"} top={"15%"}>
           <Slider
             defaultValue={numTracksToDisplay}
             min={5}
@@ -156,7 +156,31 @@ const ListTabs: React.FC<Props> = ({ session }) => {
             <SliderThumb
               boxSize={"6"}
               bgColor={"purple.500"}
-              w={"33px"}
+              h={"40px"}
+              _focus={{ decoration: "none", border: "none" }}
+            />
+          </Slider>
+        </Box>
+        <Box position={"fixed"} left={"1%"} top={"15%"}>
+          <Slider
+            defaultValue={pageColor}
+            min={0}
+            max={360}
+            onChange={(val) => setPageColor(val)}
+            orientation={"vertical"}
+            isReversed
+            position={"fixed"}
+            top={"100px"}
+            h={"35vh"}
+            minH={"250px"}
+          >
+            <SliderTrack bgColor={"purple.100"}>
+              <SliderFilledTrack bgColor={"purple.100"} />
+            </SliderTrack>
+            <SliderThumb
+              boxSize={"6"}
+              bgColor={`hsl(${pageColor}deg 59% 59%)`}
+              h={"40px"}
               _focus={{ decoration: "none", border: "none" }}
             />
           </Slider>
