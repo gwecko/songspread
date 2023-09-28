@@ -1,13 +1,13 @@
-import React, { MutableRefObject, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import queryString from "query-string";
 import { formatDuration, formatArtist, cl } from "@/helpers";
 import { List, Box, Link, Text } from "@chakra-ui/react";
 import { AnimatePresence, motion } from "framer-motion";
 import LoadingSkeleton from "./LoadingSkeleton";
 
-interface Props {
+interface TrackListProps {
   numTracksToDisplay: number;
-  timeRange?: string;
+  timeRange: string;
   session: {
     token: {
       name?: string;
@@ -16,6 +16,7 @@ interface Props {
       access_token?: string;
     };
   };
+  shadowColor: string;
 }
 
 type FetchedTrack = {
@@ -35,26 +36,27 @@ type Track = {
   listNumber: number;
 };
 
-const TrackList: React.FC<Props> = ({
+const TrackList: React.FC<TrackListProps> = ({
   timeRange,
   numTracksToDisplay,
   session,
+  shadowColor,
 }) => {
   const songNumLimit = 12;
-  const [trackData, setTrackData] = useState<Track[]>();
-  const [displayedTrackData, setDisplayedTrackData] = useState<Track[]>();
+  const [trackData, setTrackData] = useState<Track[]>([]);
+  // ** for displayed tracks
+  const [displayedTrackIds, setDisplayedTrackIds] = useState<number[]>(
+    Array.from({ length: numTracksToDisplay })
+  );
 
   // get data from spotify on page load
   const url =
     "https://api.spotify.com/v1/me/top/tracks?" +
-    queryString.stringify({
-      time_range: timeRange,
-      limit: songNumLimit,
-    });
+    queryString.stringify({ time_range: timeRange, limit: songNumLimit });
   const options = {
     headers: { Authorization: `Bearer ${session?.token.access_token}` },
   };
-  
+
   // data fetching
   useEffect(() => {
     fetch(url, options)
@@ -78,62 +80,52 @@ const TrackList: React.FC<Props> = ({
         }
       })
       .then((tracks: Track[]) => {
-        setTrackData([...tracks.slice(numTracksToDisplay, 15)]);
-        setDisplayedTrackData([...tracks.slice(0, numTracksToDisplay)]);
+        setTrackData([...tracks]);
+        // setTrackData([...tracks.slice(numTracksToDisplay, 15)]);
+        // setDisplayedTrackData([...tracks.slice(0, numTracksToDisplay)]);
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [session]);
 
-  // controls displayed through transferring a track between the arrays
-  useEffect(() => {
-    if (trackData && displayedTrackData) {
+  // ** controls displayed tracks
+  /*   useEffect(() => {
+    if (trackData && displayedTrackIds) {
       // add a new track to the displayed list
-      if (numTracksToDisplay > displayedTrackData.length) {
-        const track: any = trackData.shift();
-        setDisplayedTrackData([...displayedTrackData, track]);
-        setTrackData([...trackData]);
+      if (numTracksToDisplay > displayedTrackIds.length) {
+        const trackId: number = numTracksToDisplay;
+        setDisplayedTrackIds([...displayedTrackIds, trackId]);
       }
       // remove a track from the displayed list
-      else if (numTracksToDisplay < displayedTrackData.length) {
-        const track: any = displayedTrackData.pop();
-        setDisplayedTrackData([...displayedTrackData]);
-        setTrackData([track, ...trackData]);
+      else if (numTracksToDisplay < displayedTrackIds.length) {
+        displayedTrackIds.pop();
+        setDisplayedTrackIds([...displayedTrackIds]);
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [numTracksToDisplay]);
+  }, [numTracksToDisplay]); */
 
-  const Item = ({ songLink, songName, artistNames, listNumber }: Track) => {
+  const Item: React.FC<Track> = ({
+    songDuration,
+    artistNames,
+    songName,
+    songLink,
+    albumName,
+    listNumber,
+  }) => {
     const itemAnimation = {
-      layout: true,
-      transition: { duration: 0.2 },
-      variants: {
-        lastItem: {
-          opacity: 0.5,
-          scale: 1,
-          transform: "rotateX(90deg)",
-        },
-        in: {
-          opacity: 1,
-          scale: 1,
-          transform: "rotateX(0deg)",
-          transition: { type: "spring", stiffness: "500" },
-        },
-      },
-      initial: listNumber === numTracksToDisplay ? "lastItem" : "in",
-      animate: "in",
-      exit: {
-        opacity: 0,
-        transform: "rotateX(180deg)",
-        transition: { ease: "easeIn", duration: 0.2 },
-      },
+      // layout: true,
+      // initial: { rotateX: 90 },
+      // animate: { rotateX: 0 },
+      // transition: {
+      //   type: "spring",
+      //   stiffness: 500,
+      // },
     };
 
     return (
       <motion.li
         {...itemAnimation}
         style={{ lineHeight: "1em", paddingBottom: "0.9em" }}
-        key={songName}
       >
         <Link
           href={songLink}
@@ -146,7 +138,7 @@ const TrackList: React.FC<Props> = ({
             fontWeight={"normal"}
             fontStyle={"italic"}
             color={"gray.100"}
-            textShadow={"1px 1px 2px #6B46C1"}
+            textShadow={`1px 1px 2px ${shadowColor}}`}
           >
             {listNumber}.&nbsp;
           </Text>
@@ -155,7 +147,7 @@ const TrackList: React.FC<Props> = ({
               fontWeight={"extrabold"}
               color={"gray.50"}
               display={"inline"}
-              textShadow={"1px 2px 2px #6B46C1"}
+              textShadow={`1px 2px 2px ${shadowColor}}`}
             >
               {songName}
             </Text>
@@ -163,7 +155,7 @@ const TrackList: React.FC<Props> = ({
               fontWeight={"semibold"}
               display={"inline"}
               color={"gray.100"}
-              textShadow={"1px 1px 1px #553C9A"}
+              textShadow={`1px 1px 1px ${shadowColor}}`}
             >
               &nbsp;-&nbsp;{artistNames}
             </Text>
@@ -173,13 +165,16 @@ const TrackList: React.FC<Props> = ({
     );
   };
 
-  return displayedTrackData?.length ? (
-    <Box fontSize={["sm", "md"]} w={'90%'}>
+  return trackData ? (
+    <Box fontSize={["sm", "md"]} w={"90%"}>
       <AnimatePresence>
         <List>
-          {displayedTrackData.map((track, i) => (
-            <Item key={i} {...track} />
-          ))}
+          {trackData.map((item) => {
+            // ** controls displayed tracks
+            if (item.listNumber <= numTracksToDisplay) {
+              return <Item {...item} key={item.listNumber} />;
+            }
+          })}
         </List>
       </AnimatePresence>
     </Box>
