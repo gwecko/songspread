@@ -22,7 +22,7 @@ export default function Home() {
         <title>SongSpread &#x1F47E;</title>
         <meta
           name="description"
-          content="SongSpread shows your top songs from Spotify."
+          content="SongSpread displays your top songs in a downloadable image format."
         />
         <meta
           name="viewport"
@@ -56,7 +56,7 @@ export default function Home() {
               transform={'auto'}
               left={"50%"}
               translateX={'-50%'}
-              bottom={['2%', '', '', '250px']}
+              bottom={['0.5em', '', '', '', '250px']}
             >
               <ButtonGroup spacing={2}>
                 <DownloadButton />

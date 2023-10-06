@@ -74,7 +74,7 @@ const ListTabs: React.FC<Props> = ({ session }) => {
           <Divider mt={2} w={"90vw"} />
           <Box /* needed for padding on editable page but not image page */
             // ml={"-0%"}
-            w={"fit-content"}
+            w={"80vw"}
             maxW={"350px"}
             id="tabDownload"
             borderRadius={"10px"}
@@ -92,7 +92,7 @@ const ListTabs: React.FC<Props> = ({ session }) => {
                 fontWeight={"bold"}
                 mr={"7%"}
                 whiteSpace={"normal"}
-                textShadow={`2px 2px 3px ${hslToHex( pageColor, 60, 40)}, 2px 2px 12px gray`}
+                textShadow={`2px 2px 3px ${hslToHex(pageColor, 60, 40)}, 2px 2px 12px gray`}
               >
                 {username}&apos;s{" "}
                 <Text
@@ -137,7 +137,7 @@ const ListTabs: React.FC<Props> = ({ session }) => {
             </TabPanels>
           </Box>
         </Tabs>
-        <Box position={"fixed"} left={"1%"} top={"15%"}>
+        <Box position={"fixed"} left={"0.5em"} top={"15%"}>
           <Slider
             defaultValue={pageColor}
             min={0}
@@ -160,7 +160,7 @@ const ListTabs: React.FC<Props> = ({ session }) => {
             />
           </Slider>
         </Box>
-        <Box position={"fixed"} right={"1%"} top={"15%"}>
+        <Box position={"fixed"} right={"0.5em"} top={"15%"}>
           <Slider
             defaultValue={numTracksToDisplay}
             min={5}

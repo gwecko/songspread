@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import queryString from "query-string";
 import { formatDuration, formatArtist, cl } from "@/helpers";
-import { List, Box, Link, Text } from "@chakra-ui/react";
-import { AnimatePresence, motion } from "framer-motion";
+import { List, Box, Link, Text, list } from "@chakra-ui/react";
+import { AnimatePresence, animate, motion, useIsPresent } from "framer-motion";
 import LoadingSkeleton from "./LoadingSkeleton";
 
 interface TrackListProps {
@@ -34,6 +34,7 @@ type Track = {
   songLink: string;
   albumName: string;
   listNumber: number;
+  initial: object;
 };
 
 const TrackList: React.FC<TrackListProps> = ({
@@ -44,10 +45,6 @@ const TrackList: React.FC<TrackListProps> = ({
 }) => {
   const songNumLimit = 12;
   const [trackData, setTrackData] = useState<Track[]>([]);
-  // ** for displayed tracks
-  const [displayedTrackIds, setDisplayedTrackIds] = useState<number[]>(
-    Array.from({ length: numTracksToDisplay })
-  );
 
   // get data from spotify on page load
   const url =
@@ -87,23 +84,6 @@ const TrackList: React.FC<TrackListProps> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [session]);
 
-  // ** controls displayed tracks
-  /*   useEffect(() => {
-    if (trackData && displayedTrackIds) {
-      // add a new track to the displayed list
-      if (numTracksToDisplay > displayedTrackIds.length) {
-        const trackId: number = numTracksToDisplay;
-        setDisplayedTrackIds([...displayedTrackIds, trackId]);
-      }
-      // remove a track from the displayed list
-      else if (numTracksToDisplay < displayedTrackIds.length) {
-        displayedTrackIds.pop();
-        setDisplayedTrackIds([...displayedTrackIds]);
-      }
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [numTracksToDisplay]); */
-
   const Item: React.FC<Track> = ({
     songDuration,
     artistNames,
@@ -111,21 +91,23 @@ const TrackList: React.FC<TrackListProps> = ({
     songLink,
     albumName,
     listNumber,
+    initial
   }) => {
-    const itemAnimation = {
-      // layout: true,
-      // initial: { rotateX: 90 },
-      // animate: { rotateX: 0 },
-      // transition: {
-      //   type: "spring",
-      //   stiffness: 500,
-      // },
-    };
-
     return (
       <motion.li
-        {...itemAnimation}
+        initial={initial}
+        animate={{ opacity: 1, translateY: '0' }}
+        exit={{ transition:{
+          type: "spring",
+          damping: 25,
+          stiffness: 400
+        }, opacity: 0, translateY: '-1em', height: 0, margin: 0, padding: 0 }}
         style={{ lineHeight: "1em", paddingBottom: "0.9em" }}
+        transition={{
+          type: "spring",
+          damping: 25,
+          stiffness: 400
+        }}
       >
         <Link
           href={songLink}
@@ -155,7 +137,7 @@ const TrackList: React.FC<TrackListProps> = ({
             </Text>
             {/* ARTIST NAMES */}
             <Text
-              fontWeight={'medium'}
+              fontWeight={"medium"}
               display={"inline"}
               color={"gray.50"}
               textShadow={`2px 2px 2px ${shadowColor}, 1px 1px 3px gray`}
@@ -167,22 +149,30 @@ const TrackList: React.FC<TrackListProps> = ({
       </motion.li>
     );
   };
+  
+  // last item is animated only if it is "new"
+  const [animatedIndex, setAnimatedIndex] = useState(numTracksToDisplay + 1)
+  useEffect(() => {
+    if (numTracksToDisplay > animatedIndex) {
+      setAnimatedIndex(numTracksToDisplay - 1)
+    } else if (numTracksToDisplay < animatedIndex) {
+      setAnimatedIndex(numTracksToDisplay)
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [numTracksToDisplay])
 
-  return trackData ? (
+  return trackData.length ? (
     <Box fontSize={["sm", "md"]} w={"90%"}>
-      <AnimatePresence>
-        <List>
-          {trackData.map((item) => {
-            // ** controls displayed tracks
-            if (item.listNumber <= numTracksToDisplay) {
-              return <Item {...item} key={item.listNumber} />;
-            }
-          })}
-        </List>
+      <motion.ul style={{listStyle: 'none'}}>
+      <AnimatePresence mode="popLayout">
+        {trackData.slice(0, numTracksToDisplay).map((item, index) => (
+          <Item {...item} key={index} initial={index === animatedIndex ? {opacity: 0, translateY: '-1.6em'} : {opacity: 1}} />
+        ))}
       </AnimatePresence>
+      </motion.ul>
     </Box>
   ) : (
-    <Box w={"100%"} mx={"auto"}>
+    <Box w={"100%"} ml={"-0.5em"}>
       <LoadingSkeleton
         maxLength={songNumLimit}
         displayLength={numTracksToDisplay}
