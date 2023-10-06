@@ -166,7 +166,7 @@ const TrackList: React.FC<TrackListProps> = ({
       <motion.ul style={{listStyle: 'none'}}>
       <AnimatePresence mode="popLayout">
         {trackData.slice(0, numTracksToDisplay).map((item, index) => (
-          <Item {...item} key={index} initial={index === animatedIndex ? {opacity: 0, translateY: '-1.6em'} : {opacity: 1}} />
+          <Item {...item} key={index} initial={index === animatedIndex ? {opacity: 0, translateY: '-1.2em'} : {opacity: 1}} />
         ))}
       </AnimatePresence>
       </motion.ul>
