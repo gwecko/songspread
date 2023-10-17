@@ -91,7 +91,11 @@ const ListTabs: React.FC<Props> = ({ session }) => {
                 fontWeight={"bold"}
                 mr={"7%"}
                 whiteSpace={"normal"}
-                textShadow={`2px 2px 3px ${hslToHex(pageColor, 60, 40)}, 2px 2px 12px gray`}
+                textShadow={`2px 2px 3px ${hslToHex(
+                  pageColor,
+                  60,
+                  40
+                )}, 2px 2px 12px gray`}
               >
                 {username}&apos;s{" "}
                 <Text
@@ -138,6 +142,25 @@ const ListTabs: React.FC<Props> = ({ session }) => {
         </Tabs>
         <Box position={"fixed"} left={"0.5em"} top={"15%"}>
           <Slider
+            defaultValue={numTracksToDisplay}
+            min={5}
+            max={12}
+            onChange={(val) => setNumTracksToDisplay(val)}
+            orientation={"vertical"}
+            isReversed
+            position={"fixed"}
+            top={"100px"}
+            h={"35vh"}
+            minH={"250px"}
+          >
+            <SliderTrack bgColor={"purple.100"}>
+              <SliderFilledTrack bgColor={"purple.100"} />
+            </SliderTrack>
+            <SliderThumb boxSize={"6"} bgColor={"purple.500"} h={"40px"} />
+          </Slider>
+        </Box>
+        <Box position={"fixed"} right={"0.5em"} top={"15%"}>
+          <Slider
             defaultValue={pageColor}
             min={0}
             max={360}
@@ -157,25 +180,6 @@ const ListTabs: React.FC<Props> = ({ session }) => {
               bgColor={`hsl(${pageColor}deg 59% 59%)`}
               h={"40px"}
             />
-          </Slider>
-        </Box>
-        <Box position={"fixed"} right={"0.5em"} top={"15%"}>
-          <Slider
-            defaultValue={numTracksToDisplay}
-            min={5}
-            max={12}
-            onChange={(val) => setNumTracksToDisplay(val)}
-            orientation={"vertical"}
-            isReversed
-            position={"fixed"}
-            top={"100px"}
-            h={"35vh"}
-            minH={"250px"}
-          >
-            <SliderTrack bgColor={"purple.100"}>
-              <SliderFilledTrack bgColor={"purple.100"} />
-            </SliderTrack>
-            <SliderThumb boxSize={"6"} bgColor={"purple.500"} h={"40px"} />
           </Slider>
         </Box>
       </Flex>

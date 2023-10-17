@@ -1,6 +1,6 @@
 import React from "react";
 import { signOut } from "next-auth/react";
-import { Box, Button } from "@chakra-ui/react";
+import { Button } from "@chakra-ui/react";
 import SpotifyIcon from "./SpotifyIcon";
 
 const SignOutButton: React.FC = () => {
@@ -12,11 +12,11 @@ const SignOutButton: React.FC = () => {
       bgColor={"whiteAlpha.400"}
       boxShadow={"sm"}
       rightIcon={<SpotifyIcon />}
-      iconSpacing={"0px"}
+      iconSpacing={"2px"}
       _active={{ transform: "scale(0.95)" }}
       onClick={() => signOut()}
     >
-      Logout
+      Sign out
     </Button>
   );
 };
