@@ -72,14 +72,13 @@ const ListTabs: React.FC<Props> = ({ session }) => {
           </TabList>
 
           <Divider mt={2} w={"90vw"} />
-          <Box /* needed for padding on editable page but not image page */
-            // ml={"-0%"}
+          <Box
             w={"80vw"}
             maxW={"350px"}
             id="tabDownload"
             borderRadius={"10px"}
             shadow={"lg"}
-            bgColor={"whiteAlpha.400"}
+            bgColor={"whiteAlpha.300"}
           >
             {username ? (
               <Heading

@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { signIn, useSession } from "next-auth/react";
-import { Layout, SignInButton, ListTabs, SignOutButton, DownloadButton, SpotifyIcon, BorderAnimation } from "@/components";
+import { Layout, SignInButton, ListTabs, SignOutButton, GetImageButton, SpotifyIcon, BorderAnimation } from "@/components";
 import { Box, ButtonGroup, Heading, Stack, } from "@chakra-ui/react";
 import { useEffect } from "react";
 
@@ -56,10 +56,10 @@ export default function Home() {
               transform={'auto'}
               left={"50%"}
               translateX={'-50%'}
-              bottom={['0.5em', '', '', '', '250px']}
+              bottom={['0.5em', '3em',]}
             >
               <ButtonGroup spacing={2}>
-                <DownloadButton />
+                <GetImageButton />
                 <SignOutButton />
               </ButtonGroup>
             </Box>

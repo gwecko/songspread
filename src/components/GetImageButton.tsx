@@ -6,13 +6,10 @@ import { useRouter } from "next/router";
 // https://html2canvas.hertzen.com/features/
 
 
-const DownloadButton: React.FC = () => {
+const GetImageButton: React.FC = () => {
   const router = useRouter();
   
   const imageOptions = {
-    // width: window.innerWidth,
-    // height: window.innerHeight,
-    // backgroundColor: "#D6BCFA",
     backgroundColor: 'null',
   };
 
@@ -32,6 +29,7 @@ const DownloadButton: React.FC = () => {
     <Button
       px={'4em'}
       colorScheme={"purple"}
+      bgGradient={'linear(to-r, purple.500 60%, purple.600)'}
       boxShadow={'lg'}
       onClick={(e) => getDataUrl(e)}
       role="link"
@@ -41,4 +39,4 @@ const DownloadButton: React.FC = () => {
   );
 };
 
-export default DownloadButton;
+export default GetImageButton;
