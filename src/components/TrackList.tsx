@@ -78,8 +78,6 @@ const TrackList: React.FC<TrackListProps> = ({
       })
       .then((tracks: Track[]) => {
         setTrackData([...tracks]);
-        // setTrackData([...tracks.slice(numTracksToDisplay, 15)]);
-        // setDisplayedTrackData([...tracks.slice(0, numTracksToDisplay)]);
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [session]);
@@ -156,13 +154,13 @@ const TrackList: React.FC<TrackListProps> = ({
     if (numTracksToDisplay > animatedIndex) {
       setAnimatedIndex(numTracksToDisplay - 1)
     } else if (numTracksToDisplay < animatedIndex) {
-      setAnimatedIndex(numTracksToDisplay)
+      setAnimatedIndex(numTracksToDisplay);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [numTracksToDisplay])
 
   return trackData.length ? (
-    <Box fontSize={["sm", "md"]} w={"90%"}>
+    <Box fontSize={["sm", "md"]}>
       <motion.ul style={{listStyle: 'none'}}>
       <AnimatePresence mode="popLayout">
         {trackData.slice(0, numTracksToDisplay).map((item, index) => (

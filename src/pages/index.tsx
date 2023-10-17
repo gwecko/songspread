@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { signIn, useSession } from "next-auth/react";
-import { Layout, SignInButton, ListTabs, SignOutButton, GetImageButton, SpotifyIcon, BorderAnimation } from "@/components";
+import { Layout, SignInButton, ListTabs, SignOutButton, GetImageButton, BorderAnimation } from "@/components";
 import { Box, ButtonGroup, Heading, Stack, } from "@chakra-ui/react";
 import { useEffect } from "react";
 
