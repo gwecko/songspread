@@ -21,7 +21,7 @@ const useOrientation = () => {
 
       // Check if the device is in a vertical orientation
       // 2.167 is 19.5:9 aspect ratio (iPhone aspect ratio)
-      setIsVertical(window.innerWidth / 2.2 < window.innerHeight);
+      setIsVertical(window.innerWidth / 2 < window.innerHeight);
     };
 
     // Initial check
