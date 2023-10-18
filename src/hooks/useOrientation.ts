@@ -20,8 +20,8 @@ const useOrientation = () => {
       setIsLaptop(window.innerWidth > 860);
 
       // Check if the device is in a vertical orientation
-      // 1.77 is 16:9 aspect ratio
-      setIsVertical(window.innerWidth / 1.77 < window.innerHeight);
+      // 2.167 is 19.5:9 aspect ratio (iPhone aspect ratio)
+      setIsVertical(window.innerWidth / 2.2 < window.innerHeight);
     };
 
     // Initial check
