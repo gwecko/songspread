@@ -17,11 +17,11 @@ const useOrientation = () => {
   useEffect(() => {
     const handleOrientationChange = () => {
       // Check if the device is a laptop
-      setIsLaptop(window.innerWidth > 860);
+      setIsLaptop(window.innerWidth > 900);
 
       // Check if the device is in a vertical orientation
-      // 2.167 is 19.5:9 aspect ratio (iPhone aspect ratio)
-      setIsVertical(window.innerWidth / 2 < window.innerHeight);
+      // 2.165 is 19.5:9 aspect ratio (iPhone aspect ratio)
+      setIsVertical(window.innerWidth < window.innerHeight * 2.164);
     };
 
     // Initial check
