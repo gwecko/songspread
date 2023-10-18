@@ -75,6 +75,7 @@ const ListTabs: React.FC<Props> = ({ session }) => {
           <Box
             w={"80vw"}
             maxW={"350px"}
+            mt={2}
             id="tabDownload"
             borderRadius={"10px"}
             shadow={"lg"}
@@ -85,7 +86,6 @@ const ListTabs: React.FC<Props> = ({ session }) => {
                 as="h2"
                 color={"gray.100"}
                 fontSize={"1.7em"}
-                mt={2}
                 pt={2}
                 letterSpacing={"-0.05em"}
                 fontWeight={"bold"}

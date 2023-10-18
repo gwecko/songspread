@@ -55,6 +55,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         powered by Spotify
       </Text>
 
+      {/* Check for device orientation */}
       {isVertical ? (
         children
       ) : (
