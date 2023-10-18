@@ -159,7 +159,7 @@ const TrackList: React.FC<TrackListProps> = ({
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [numTracksToDisplay])
 
-  return !trackData.length ? (
+  return trackData.length ? (
     <Box fontSize={["sm", "md"]}>
       <motion.ul style={{listStyle: 'none'}}>
       <AnimatePresence mode="popLayout">
