@@ -62,12 +62,13 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         <Box>
             <Heading
             position={"absolute"}
-            top={"2.3em"}
+            top={"2.6em"}
             left={"50%"}
             transform={"auto"}
             translateX={"-50%"}
             color={"purple.500"}
-            whiteSpace={'nowrap'}
+              whiteSpace={'nowrap'}
+              fontSize={'1.8em'}
           >
             Turn your phone vertical &#40;:
           </Heading>
@@ -77,7 +78,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             height="180"
             pos={"absolute"}
             alt="comedian Tim Robinson confused, saying 'What the heck?'"
-            top={"8em"}
+            top={"7em"}
             left={"50%"}
             transform={"auto"}
             translateX={"-50%"}
