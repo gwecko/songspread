@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import queryString from "query-string";
 import { formatDuration, formatArtist, cl } from "@/helpers";
-import { List, Box, Link, Text, list } from "@chakra-ui/react";
-import { AnimatePresence, animate, motion, useIsPresent } from "framer-motion";
+import { Box, Link, Text, Image } from "@chakra-ui/react";
+import { AnimatePresence, motion, } from "framer-motion";
 import LoadingSkeleton from "./LoadingSkeleton";
 
 interface TrackListProps {
@@ -161,13 +161,29 @@ const TrackList: React.FC<TrackListProps> = ({
 
   return trackData.length ? (
     <Box fontSize={["sm", "md"]}>
-      <motion.ul style={{listStyle: 'none'}}>
-      <AnimatePresence mode="popLayout">
-        {trackData.slice(0, numTracksToDisplay).map((item, index) => (
-          <Item {...item} key={index} initial={index === animatedIndex ? {opacity: 0, translateY: '-1.2em'} : {opacity: 1}} />
-        ))}
-      </AnimatePresence>
+      <motion.ul style={{ listStyle: "none" }}>
+        <AnimatePresence mode="popLayout">
+          {trackData.slice(0, numTracksToDisplay).map((item, index) => (
+            <Item
+              {...item}
+              key={index}
+              initial={
+                index === animatedIndex
+                  ? { opacity: 0, translateY: "-1.2em" }
+                  : { opacity: 1 }
+              }
+            />
+          ))}
+        </AnimatePresence>
       </motion.ul>
+      <Box display={'flex'}>
+        <Image
+          src="/SpotifyLogoWhite.png"
+          alt="white spotify logo"
+          width={'75px'}
+          mx={'auto'}
+        />
+      </Box>
     </Box>
   ) : (
     <Box w={"100%"} ml={"-0.5em"}>

@@ -25,7 +25,7 @@ const DownloadPage: React.FC = () => {
         <title>My SongSpread&#x1F47E;</title>
       </Head>
       <Layout>
-        <Text fontSize={"sm"} mt={3}>
+        <Text fontSize={"sm"} mt={3} color={'purple.800'} fontWeight={'semibold'}>
           —— Press + hold image to save ——
         </Text>
         <Box m={5} borderRadius={'10px'} maxW={"600px"} shadow={'base'}>

@@ -11,6 +11,7 @@ const GetImageButton: React.FC = () => {
   
   const imageOptions = {
     backgroundColor: 'null',
+    scale: 3.5 
   };
 
   const getDataUrl = async (e: any) => {
