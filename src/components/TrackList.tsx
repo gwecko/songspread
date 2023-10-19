@@ -182,6 +182,7 @@ const TrackList: React.FC<TrackListProps> = ({
           alt="white spotify logo"
           width={'75px'}
           mx={'auto'}
+          mt={'0.3em'}
         />
       </Box>
     </Box>
