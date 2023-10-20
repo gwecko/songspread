@@ -100,7 +100,7 @@ const TrackList: React.FC<TrackListProps> = ({
           damping: 25,
           stiffness: 400
         }, opacity: 0, translateY: '-1em', height: 0, margin: 0, padding: 0 }}
-        style={{ lineHeight: "1em", paddingBottom: "0.9em" }}
+        style={{ lineHeight: "1em", paddingBottom: "0.95em" }}
         transition={{
           type: "spring",
           damping: 25,
@@ -176,13 +176,12 @@ const TrackList: React.FC<TrackListProps> = ({
           ))}
         </AnimatePresence>
       </motion.ul>
-      <Box display={'flex'}>
+      <Box display={'flex'} my={'4px'}>
         <Image
           src="/SpotifyLogoWhite.png"
           alt="white spotify logo"
-          width={'75px'}
+          width={'70px'}
           mx={'auto'}
-          mt={'0.3em'}
         />
       </Box>
     </Box>
