@@ -20,7 +20,6 @@ import TrackList from "./TrackList";
 import React, { useState } from "react";
 import { cl, hslToHex } from "@/helpers";
 
-
 interface Props {
   session: any;
   /* 
@@ -29,9 +28,8 @@ interface Props {
   */
 }
 
-
 const ListTabs: React.FC<Props> = ({ session }) => {
-  const [short, medium, long] = ["short_term", "medium_term", "long_term"];
+  const timeRanges = ["short_term", "medium_term", "long_term"];
   // hsl values where pageColor is the hue ('h'sl)
   const [pageColor, setPageColor] = useState(259);
   const [numTracksToDisplay, setNumTracksToDisplay] = useState(5);
@@ -40,11 +38,11 @@ const ListTabs: React.FC<Props> = ({ session }) => {
   const panelStyles = {
     pl: "30px", // item numbers are otherwise cut-off
     pt: "10px",
-    pb: '10px',
-    borderRadius: '10px',
+    pb: "10px",
+    borderRadius: "10px",
   };
 
-  function handleTabFocus(index: Number): void {
+  function handleTabTitle(index: Number): void {
     if (index === 0) {
       setTimespanText("1-month");
     } else if (index === 1) {
@@ -62,7 +60,7 @@ const ListTabs: React.FC<Props> = ({ session }) => {
           colorScheme={"purple"}
           size={"sm"}
           align="center"
-          onChange={(index) => handleTabFocus(index)}
+          onChange={(index) => handleTabTitle(index)}
           isLazy
         >
           <TabList w={"max-content"}>
@@ -112,31 +110,16 @@ const ListTabs: React.FC<Props> = ({ session }) => {
             )}
 
             <TabPanels textAlign={"left"}>
-              <TabPanel {...panelStyles}>
-                {/* weird image padding is here */}
-                <TrackList
-                  timeRange={short}
-                  session={session}
-                  numTracksToDisplay={numTracksToDisplay}
-                  shadowColor={hslToHex(pageColor, 60, 40)}
-                />
-              </TabPanel>
-              <TabPanel {...panelStyles}>
-                <TrackList
-                  timeRange={medium}
-                  session={session}
-                  numTracksToDisplay={numTracksToDisplay}
-                  shadowColor={hslToHex(pageColor, 60, 40)}
-                />
-              </TabPanel>
-              <TabPanel {...panelStyles}>
-                <TrackList
-                  timeRange={long}
-                  session={session}
-                  numTracksToDisplay={numTracksToDisplay}
-                  shadowColor={hslToHex(pageColor, 60, 40)}
-                />
-              </TabPanel>
+              {timeRanges.map((range) => (
+                <TabPanel {...panelStyles} key={range}>
+                  <TrackList
+                    timeRange={range}
+                    session={session}
+                    numTracksToDisplay={numTracksToDisplay}
+                    shadowColor={hslToHex(pageColor, 60, 40)}
+                  />
+                </TabPanel>
+              ))}
             </TabPanels>
           </Box>
         </Tabs>
