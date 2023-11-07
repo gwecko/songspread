@@ -37,14 +37,6 @@ export default function Home() {
             <BorderAnimation dimensions={[]}>
               <SignInButton />
             </BorderAnimation>
-            <Heading
-              as={"h2"}
-              fontSize={"sm"}
-              fontWeight={"semibold"}
-              pt={"10%"}
-            >
-              Coming soon. Dependent on Spotify&apos;s review process.
-            </Heading>
           </Box>
         ) : (
           <Stack>
