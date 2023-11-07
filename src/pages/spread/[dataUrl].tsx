@@ -25,10 +25,15 @@ const DownloadPage: React.FC = () => {
         <title>My SongSpread&#x1F47E;</title>
       </Head>
       <Layout>
-        <Text fontSize={"sm"} mt={3} color={'purple.800'} fontWeight={'semibold'}>
+        <Text
+          fontSize={"sm"}
+          mt={3}
+          color={"purple.800"}
+          fontWeight={"semibold"}
+        >
           —— Press + hold image to save ——
         </Text>
-        <Box m={5} borderRadius={'10px'} maxW={"600px"} shadow={'base'}>
+        <Box m={5} borderRadius={"10px"} maxW={"600px"} shadow={"base"}>
           {/* <BorderAnimation dimensions={[height, width]}> */}
           <Image
             src={imageUrl}
@@ -37,6 +42,8 @@ const DownloadPage: React.FC = () => {
             width={width}
             height={height}
             ref={focusRef}
+            placeholder="blur"
+            blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNMYfjvAgAD3AGpprqP0wAAAABJRU5ErkJggg=="
           />
           {/* </BorderAnimation> */}
         </Box>
