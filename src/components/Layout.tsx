@@ -40,7 +40,6 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         fontWeight={"extrabold"}
         letterSpacing={"tighter"}
         animation={animation}
-        pt={0}
       >
         SongSpread
       </Heading>
@@ -60,15 +59,15 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         children
       ) : (
         <Box>
-            <Heading
+          <Heading
             position={"absolute"}
             top={"2.6em"}
             left={"50%"}
             transform={"auto"}
             translateX={"-50%"}
             color={"purple.500"}
-              whiteSpace={'nowrap'}
-              fontSize={'1.8em'}
+            whiteSpace={"nowrap"}
+            fontSize={"1.8em"}
           >
             Turn your phone vertical &#40;:
           </Heading>
