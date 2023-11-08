@@ -40,7 +40,6 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         fontWeight={"extrabold"}
         letterSpacing={"tighter"}
         animation={animation}
-        py={'200px'}
       >
         SongSpread
       </Heading>

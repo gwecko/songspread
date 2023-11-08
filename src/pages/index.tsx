@@ -11,7 +11,7 @@ import {
 import { Box, ButtonGroup, Heading, Stack } from "@chakra-ui/react";
 import { useEffect } from "react";
 
-const ogImagePath = "songspread_header.gif";
+const ogImagePath = "og-image.gif";
 
 // the home page; at location '/'
 export default function Home() {
