@@ -11,7 +11,8 @@ import {
 import { Box, ButtonGroup, Heading, Stack } from "@chakra-ui/react";
 import { useEffect } from "react";
 
-const ogImagePath = "og-image.gif";
+// .gif functions, but in iMessage the gif will go full-screen instead of opening link
+const ogImagePath = "og-image.png";
 
 // the home page; at location '/'
 export default function Home() {
@@ -37,11 +38,14 @@ export default function Home() {
           name="description"
           content="SongSpread displays your top Spotify songs. Save them to camera roll, and share with friends or online."
         />
-        <meta property="og:title" content="SongSpread" />
-        <meta property="og:image" content={ogImagePath} />
+        <meta
+          property="og:title"
+          content="Your SongSpread is waiting for you &#128064;"
+        />
+        <meta property="og:image:gif" content={ogImagePath} />
         <meta
           property="og:description"
-          content="Your SongSpread is waiting for you &#128064;"
+          content="View, save, and share your top Spotify songs!"
         />
         <meta property="og:url" content="https://songspread.app" />
         <meta property="og:type" content="website" />
