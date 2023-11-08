@@ -40,9 +40,9 @@ export default function Home() {
         />
         <meta
           property="og:title"
-          content="SongSpread"
+          content="Your SongSpread is waiting for you &#128064;"
         />
-        <meta property="og:image:gif" content={ogImagePath} />
+        <meta property="og:image" content={ogImagePath} />
         <meta
           property="og:description"
           content="View, save, and share your top Spotify songs!"
