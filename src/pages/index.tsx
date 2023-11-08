@@ -40,7 +40,7 @@ export default function Home() {
         />
         <meta
           property="og:title"
-          content="Your SongSpread is waiting for you &#128064;"
+          content="Your SongSpread's waiting for you &#128064;"
         />
         <meta property="og:image" content={ogImagePath} />
         <meta
