@@ -85,15 +85,15 @@ const ListTabs: React.FC<Props> = ({ session }) => {
                 color={"gray.100"}
                 fontSize={"1.7em"}
                 pt={2}
-                letterSpacing={"-0.05em"}
+                letterSpacing={"-0.03em"}
                 fontWeight={"bold"}
                 mr={"7%"}
                 whiteSpace={"normal"}
-                textShadow={`2px 2px 3px ${hslToHex(
+                textShadow={`1px 1px 4px ${hslToHex(
                   pageColor,
-                  60,
+                  80,
                   40
-                )}, 2px 2px 12px gray`}
+                )}, 2px 2px 15px gray`}
               >
                 {username}&apos;s{" "}
                 <Text
@@ -116,16 +116,16 @@ const ListTabs: React.FC<Props> = ({ session }) => {
                     timeRange={range}
                     session={session}
                     numTracksToDisplay={numTracksToDisplay}
-                    shadowColor={hslToHex(pageColor, 60, 40)}
+                    shadowColor={hslToHex(pageColor, 90, 40)}
                   />
                 </TabPanel>
               ))}
             </TabPanels>
           </Box>
         </Tabs>
-        <Box position={"fixed"} left={"0.5em"} top={"15%"}>
+        <Box position={"fixed"} left={["0.45em", "10%", "20%"]} top={"15%"}>
           <Slider
-            defaultValue={numTracksToDisplay}
+            value={numTracksToDisplay}
             min={5}
             max={12}
             onChange={(val) => setNumTracksToDisplay(val)}
@@ -136,15 +136,15 @@ const ListTabs: React.FC<Props> = ({ session }) => {
             h={"35vh"}
             minH={"250px"}
           >
-            <SliderTrack bgColor={"purple.100"}>
+            <SliderTrack bgColor={"purple.50"}>
               <SliderFilledTrack bgColor={"purple.100"} />
             </SliderTrack>
             <SliderThumb boxSize={"6"} bgColor={"purple.500"} h={"40px"} />
           </Slider>
         </Box>
-        <Box position={"fixed"} right={"0.5em"} top={"15%"}>
+        <Box position={"fixed"} right={["0.45em", "10%", "20%"]} top={"15%"}>
           <Slider
-            defaultValue={pageColor}
+            value={pageColor}
             min={0}
             max={360}
             onChange={(val) => setPageColor(val)}
@@ -155,7 +155,7 @@ const ListTabs: React.FC<Props> = ({ session }) => {
             h={"35vh"}
             minH={"250px"}
           >
-            <SliderTrack bgColor={"purple.100"}>
+            <SliderTrack bgColor={"purple.50"}>
               <SliderFilledTrack bgColor={"purple.100"} />
             </SliderTrack>
             <SliderThumb
