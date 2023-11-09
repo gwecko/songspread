@@ -8,7 +8,7 @@ import {
   GetImageButton,
   BorderAnimation,
 } from "@/components";
-import { Box, ButtonGroup, Heading, Stack } from "@chakra-ui/react";
+import { Box, ButtonGroup, Stack } from "@chakra-ui/react";
 import { useEffect } from "react";
 
 // A .gif works, but in iMessage the gif will go full-screen instead of opening link
@@ -67,6 +67,11 @@ export default function Home() {
           href="favicons/favicon-16x16.png"
         />
         <link rel="manifest" href="favicons/site.webmanifest" />
+        <style>{`
+        body {
+          background-color: #A0AEC0; !important
+        }
+      `}</style>
       </Head>
 
       <Layout>
@@ -80,7 +85,7 @@ export default function Home() {
               transform={"auto"}
               left={"50%"}
               translateX={"-50%"}
-              bottom={["0.5em", "3em"]}
+              bottom={["1em", "3em"]}
             >
               <ButtonGroup spacing={2}>
                 <GetImageButton />

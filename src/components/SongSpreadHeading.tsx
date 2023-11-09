@@ -28,6 +28,8 @@ const SongSpreadHeading: React.FC = () => {
         fontWeight={"extrabold"}
         letterSpacing={"tighter"}
         animation={animation}
+        // white bar if not present
+        pt={0}
       >
         SongSpread
       </Heading>
