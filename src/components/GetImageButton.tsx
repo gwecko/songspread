@@ -38,6 +38,7 @@ const GetImageButton: React.FC = () => {
       role="link"
       isLoading={loading}
       loadingText="skrrttt"
+      _active={{ transform: "scale(0.95)" }}
     >
       Get Image
     </Button>

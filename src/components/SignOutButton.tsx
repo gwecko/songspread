@@ -14,7 +14,7 @@ const SignOutButton: React.FC = () => {
       rightIcon={<SpotifyIcon />}
       iconSpacing={"2px"}
       _active={{ transform: "scale(0.95)" }}
-      onClick={() => signOut()}
+      onClick={() => signOut({ redirect: false, callbackUrl: "/" })}
     >
       Sign out
     </Button>
