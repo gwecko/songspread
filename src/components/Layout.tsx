@@ -1,19 +1,13 @@
-import { Box, Heading, keyframes, Text, Image } from "@chakra-ui/react";
-import { motion } from "framer-motion";
+import { Box, Heading, Image } from "@chakra-ui/react";
 import { ReactNode } from "react";
 import useOrientation from "@/hooks/useOrientation";
+import SongSpreadHeading from "./SongSpreadHeading";
 
 type LayoutProps = {
   children: ReactNode;
 };
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
-  const animationKeyframes = keyframes`
-    0% { background-position: 0% 0% }
-    100% { background-position: 200% 0% }
-  `;
-  const animation = `${animationKeyframes} 4s linear infinite`;
-  const animationGradient = `linear-gradient(to right, #B794F4, #553C9A, #B794F4)`;
 
   const isVertical = useOrientation();
 
@@ -27,32 +21,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       bgGradient={"linear(to bottom, gray.300 30%, purple.400 90%)"}
       bgAttachment={"fixed"}
     >
-      <Heading
-        as={motion.h1}
-        style={{
-          fontSize: "3.5em",
-          color: "transparent",
-          backgroundImage: animationGradient,
-          backgroundSize: "200% 100%",
-          backgroundClip: "text",
-          WebkitBackgroundClip: "text",
-        }}
-        fontWeight={"extrabold"}
-        letterSpacing={"tighter"}
-        animation={animation}
-      >
-        SongSpread
-      </Heading>
-
-      <Text
-        fontStyle={"italic"}
-        color={"purple.600"}
-        fontWeight={"medium"}
-        pb={2}
-        mt={-2}
-      >
-        powered by Spotify
-      </Text>
+    
+      <SongSpreadHeading />
 
       {/* Check for device orientation */}
       {isVertical ? (
