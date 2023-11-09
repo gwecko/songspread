@@ -11,7 +11,7 @@ import {
 import { Box, ButtonGroup, Heading, Stack } from "@chakra-ui/react";
 import { useEffect } from "react";
 
-// .gif functions, but in iMessage the gif will go full-screen instead of opening link
+// A .gif works, but in iMessage the gif will go full-screen instead of opening link
 const ogImagePath = "og-image.png";
 
 // the home page; at location '/'

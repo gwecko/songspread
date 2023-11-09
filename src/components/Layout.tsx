@@ -1,4 +1,4 @@
-import { Box, Heading, keyframes, Stack, Text, Image } from "@chakra-ui/react";
+import { Box, Heading, keyframes, Text, Image } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import { ReactNode } from "react";
 import useOrientation from "@/hooks/useOrientation";
@@ -12,8 +12,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     0% { background-position: 0% 0% }
     100% { background-position: 200% 0% }
   `;
-  const animation = `${animationKeyframes} 3s linear infinite`;
-  const animationGradient = `linear-gradient(to right, #B794F4, #6B46C1, #B794F4)`;
+  const animation = `${animationKeyframes} 4s linear infinite`;
+  const animationGradient = `linear-gradient(to right, #B794F4, #553C9A, #B794F4)`;
 
   const isVertical = useOrientation();
 

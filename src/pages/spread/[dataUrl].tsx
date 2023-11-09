@@ -22,7 +22,7 @@ const DownloadPage: React.FC = () => {
   return (
     <>
       <Head>
-        <title>My SongSpread&#x1F47E;</title>
+        <title>SongSpread</title>
       </Head>
       <Layout>
         <Text
