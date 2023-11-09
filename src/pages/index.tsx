@@ -66,12 +66,6 @@ export default function Home() {
           sizes="16x16"
           href="favicons/favicon-16x16.png"
         />
-        <link rel="manifest" href="favicons/site.webmanifest" />
-        <style>{`
-        body {
-          background-color: #A0AEC0; !important
-        }
-      `}</style>
       </Head>
 
       <Layout>

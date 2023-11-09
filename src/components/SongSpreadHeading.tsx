@@ -1,4 +1,3 @@
-import useOrientation from "@/hooks/useOrientation";
 import { Heading, Text } from "@chakra-ui/react";
 import { keyframes } from "@emotion/react";
 import { motion } from "framer-motion";
@@ -28,8 +27,6 @@ const SongSpreadHeading: React.FC = () => {
         fontWeight={"extrabold"}
         letterSpacing={"tighter"}
         animation={animation}
-        // white bar if not present
-        pt={0}
       >
         SongSpread
       </Heading>
