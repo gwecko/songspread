@@ -13,8 +13,6 @@ import {
   Box,
   Flex,
   Heading,
-  keyframes,
-  color,
 } from "@chakra-ui/react";
 import TrackList from "./TrackList";
 import React, { useState } from "react";
@@ -36,7 +34,7 @@ const ListTabs: React.FC<Props> = ({ session }) => {
   const [timespanText, setTimespanText] = useState("1-month");
   const username = session?.token.username || session?.token.name;
   const panelStyles = {
-    pl: "30px", // item numbers are otherwise cut-off
+    pl: "35px", // item numbers are otherwise cut-off
     pt: "10px",
     pb: "10px",
     borderRadius: "10px",
