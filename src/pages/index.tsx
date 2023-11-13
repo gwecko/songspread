@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-sync-scripts */
 import Head from "next/head";
 import { signIn, useSession } from "next-auth/react";
 import {
@@ -10,6 +11,7 @@ import {
 } from "@/components";
 import { Box, ButtonGroup, Stack } from "@chakra-ui/react";
 import { useEffect } from "react";
+import BuyMeACoffeeWidget from "@/components/BuyMeACoffee";
 
 // A .gif works, but in iMessage the gif will go full-screen instead of opening link
 const ogImagePath = "og-image.png";

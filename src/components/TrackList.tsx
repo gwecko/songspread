@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import queryString from "query-string";
 import { formatDuration, formatArtist, cl } from "@/helpers";
 import { Box, Link, Text, Image } from "@chakra-ui/react";
-import { AnimatePresence, motion, } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import LoadingSkeleton from "./LoadingSkeleton";
 
 interface TrackListProps {
@@ -89,22 +89,29 @@ const TrackList: React.FC<TrackListProps> = ({
     songLink,
     albumName,
     listNumber,
-    initial
+    initial,
   }) => {
     return (
       <motion.li
         initial={initial}
-        animate={{ opacity: 1, translateY: '0' }}
-        exit={{ transition:{
-          type: "spring",
-          damping: 25,
-          stiffness: 400
-        }, opacity: 0, translateY: '-1em', height: 0, margin: 0, padding: 0 }}
+        animate={{ opacity: 1, translateY: "0" }}
+        exit={{
+          transition: {
+            type: "spring",
+            damping: 25,
+            stiffness: 400,
+          },
+          opacity: 0,
+          translateY: "-1em",
+          height: 0,
+          margin: 0,
+          padding: 0,
+        }}
         style={{ lineHeight: "1em", paddingBottom: "0.95em" }}
         transition={{
           type: "spring",
           damping: 25,
-          stiffness: 400
+          stiffness: 400,
         }}
       >
         <Link
@@ -147,17 +154,17 @@ const TrackList: React.FC<TrackListProps> = ({
       </motion.li>
     );
   };
-  
+
   // last item is animated only if it is "new"
-  const [animatedIndex, setAnimatedIndex] = useState(numTracksToDisplay + 1)
+  const [animatedIndex, setAnimatedIndex] = useState(numTracksToDisplay + 1);
   useEffect(() => {
     if (numTracksToDisplay > animatedIndex) {
-      setAnimatedIndex(numTracksToDisplay - 1)
+      setAnimatedIndex(numTracksToDisplay - 1);
     } else if (numTracksToDisplay < animatedIndex) {
       setAnimatedIndex(numTracksToDisplay);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [numTracksToDisplay])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [numTracksToDisplay]);
 
   return trackData.length ? (
     <Box fontSize={["sm", "md"]}>
@@ -169,19 +176,19 @@ const TrackList: React.FC<TrackListProps> = ({
               key={index}
               initial={
                 index === animatedIndex
-                  ? { opacity: 0, translateY: "-1.2em" }
+                  ? { opacity: 0, translateY: "-1em" }
                   : { opacity: 1 }
               }
             />
           ))}
         </AnimatePresence>
       </motion.ul>
-      <Box display={'flex'} my={'4px'}>
+      <Box display={"flex"} my={"4px"}>
         <Image
           src="/SpotifyLogoWhite.png"
           alt="white spotify logo"
-          width={'70px'}
-          mx={'auto'}
+          width={"70px"}
+          mx={"auto"}
         />
       </Box>
     </Box>
