@@ -3,7 +3,7 @@ import Head from "next/head";
 import { Layout } from "@/components";
 import { Box, Button, Text, Link, Heading, IconButton } from "@chakra-ui/react";
 import { AiOutlineInstagram } from "react-icons/ai";
-import {HiOutlineMail} from "react-icons/hi"
+import { HiOutlineMail } from "react-icons/hi";
 import Script from "next/script";
 
 // A .gif works, but in iMessage the gif will go full-screen instead of opening link
@@ -119,21 +119,28 @@ export default function FAQ() {
           ))}
 
           <Box mx={"auto"} pt={5}>
-            <IconButton
-              aria-label="email grantwecker@live.com"
-              as={HiOutlineMail}
-              to="mailto:grantwecker@live.com"
-              variant={"ghost"}
-              color={"whiteAlpha.800"}
-              overlineThickness={1}
-            ></IconButton>
-            <IconButton
-              aria-label="instagram @g_weck"
-              as={AiOutlineInstagram}
-              to="https://www.instagram.com/g_weck/"
-              variant={"ghost"}
-              color={"whiteAlpha.800"}
-            />
+            <Link href="mailto:grantwecker@live.com" p={1} mx={1}>
+              <IconButton
+                aria-label="email grantwecker@live.com"
+                as={HiOutlineMail}
+                variant={"ghost"}
+                color={"whiteAlpha.800"}
+                overlineThickness={1}
+              />
+            </Link>
+            <Link
+              isExternal
+              href="https://www.instagram.com/g_weck/"
+              p={1}
+              mx={1}
+            >
+              <IconButton
+                aria-label="instagram @g_weck"
+                as={AiOutlineInstagram}
+                variant={"ghost"}
+                color={"whiteAlpha.800"}
+              ></IconButton>
+            </Link>
           </Box>
 
           <Box pt={"20%"} w={"70%"} mx={"auto"}>
