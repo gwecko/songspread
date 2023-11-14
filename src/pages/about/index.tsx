@@ -68,6 +68,8 @@ export default function About() {
         data-position="Right"
         data-x_margin="18"
         data-y_margin="18"
+        // docs say not to do this but it doesn't function if set otherwise
+        strategy={"beforeInteractive"}
       />
 
       <Layout>
