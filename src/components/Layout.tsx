@@ -15,7 +15,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     <Box
       display={"flex"}
       flexDirection={"column"}
-      minH={"100vh"}
+      h={'100vh'}
       alignItems={"center"}
       bg={"gray.400"}
       bgGradient={"linear(to bottom, gray.300 30%, purple.400 90%)"}

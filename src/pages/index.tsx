@@ -1,17 +1,19 @@
-/* eslint-disable @next/next/no-sync-scripts */
 import Head from "next/head";
 import { signIn, useSession } from "next-auth/react";
 import {
   Layout,
   SignInButton,
   ListTabs,
-  SignOutButton,
   GetImageButton,
   BorderAnimation,
 } from "@/components";
-import { Box, ButtonGroup, Stack } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Link,
+  Stack,
+} from "@chakra-ui/react";
 import { useEffect } from "react";
-import BuyMeACoffeeWidget from "@/components/BuyMeACoffee";
 
 // A .gif works, but in iMessage the gif will go full-screen instead of opening link
 const ogImagePath = "og-image.png";
@@ -72,21 +74,32 @@ export default function Home() {
 
       <Layout>
         {authed ? (
-          <Stack>
-            <Box id="boxDownload" display={"block"}>
+          <Stack align={"center"}>
+            <Box id="boxDownload">
               <ListTabs session={session} />
             </Box>
-            <Box
-              pos={"fixed"}
-              transform={"auto"}
-              left={"50%"}
-              translateX={"-50%"}
-              bottom={["1em", "3em"]}
-            >
-              <ButtonGroup spacing={2}>
-                <GetImageButton />
-                <SignOutButton />
-              </ButtonGroup>
+            <Box w={"100%"} maxWidth={"260px"}>
+              <GetImageButton />
+            </Box>
+            <Box pt={"30%"}>
+              <Link href={"/faq"} mx={1}>
+                <Button
+                  variant={"link"}
+                  colorScheme={"whiteAlpha"}
+                  borderRightRadius={0}
+                >
+                  faq
+                </Button>
+              </Link>
+              <Link href={"/about"} mx={1}>
+                <Button
+                  variant={"link"}
+                  colorScheme={"blackAlpha"}
+                  borderLeftRadius={0}
+                >
+                  about
+                </Button>
+              </Link>
             </Box>
           </Stack>
         ) : (
