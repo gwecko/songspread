@@ -1,24 +1,50 @@
 /* eslint-disable @next/next/no-sync-scripts */
 import Head from "next/head";
 import { Layout } from "@/components";
-import { Box, Button, Code, Text, Link, Heading } from "@chakra-ui/react";
+import { Box, Button, Text, Link, Heading, IconButton } from "@chakra-ui/react";
+import { AiOutlineInstagram } from "react-icons/ai";
+import {HiOutlineMail} from "react-icons/hi"
 import Script from "next/script";
 
 // A .gif works, but in iMessage the gif will go full-screen instead of opening link
 const ogImagePath = "og-image.png";
 
-// the about/faq; at location '/about'
-export default function About() {
+type questionAndAnswer = {
+  q: string;
+  a: string;
+};
+
+// the about/faq; at location '/faq'
+export default function FAQ() {
   const highlightStyle = {
     color: "purple.600",
     fontWeight: "semibold",
     display: "inline",
   };
 
+  const questionsAndAnswers: questionAndAnswer[] = [
+    {
+      q: "Will you steal my Spotify login?",
+      a: `No, I can't see it even if I wanted to.`,
+    },
+    {
+      q: "What does SongSpread do?",
+      a: "SongSpread shows your top songs over different spans of time. You can customize the list and save it to your camera roll.",
+    },
+    {
+      q: "What do I do with the list?",
+      a: `Whatever you like. Text it to your mom, or post to Instagram stories. I noticed people like sharing songs on social media, now you can share multiple in a kickass list.`,
+    },
+    {
+      q: "Will you add <feature> ??",
+      a: `Let me know what you're thinking!`,
+    },
+  ];
+
   return (
     <>
       <Head>
-        <title>About</title>
+        <title>FAQ</title>
         <meta
           name="viewport"
           content="width=device-width, initial-scale=1.0, viewport-fit=cover"
@@ -32,10 +58,7 @@ export default function About() {
           content="Your SongSpread's waiting for you &#128064;"
         />
         <meta property="og:image" content={ogImagePath} />
-        <meta
-          property="og:description"
-          content="About the creator of SongSpread"
-        />
+        <meta property="og:description" content="Questions about SongSpread" />
         <meta property="og:url" content="https://songspread.app" />
         <meta property="og:type" content="website" />
         <link
@@ -63,7 +86,7 @@ export default function About() {
         src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js"
         data-id="grantwecker"
         data-description="Support me on Buy me a coffee!"
-        data-message="☕️?"
+        data-message="☕?"
         data-color="#D6BCFA"
         data-position="Right"
         data-x_margin="18"
@@ -72,58 +95,47 @@ export default function About() {
 
       <Layout>
         <Box display={"flex"} flexDir={"column"} w={"90%"} maxW={"480px"}>
-          <Box m={"auto"}>
-            <Heading
-              color={"purple.500"}
-              fontFamily={"monospace"}
-              fontWeight={"medium"}
-              pb={3}
-            >
-              About
-            </Heading>
-            <Box
-              id="about-paragraph"
-              mx={6}
-              display={"inline-block"}
-              lineHeight={"1.3em"}
-            >
-              <Text>
-                I&apos;m Grant. It took 236 days(!) from the time I began
-                working on SongSpread until Spotify approved the app for all of
-                you to use—I&apos;m immensely happy to share it. While building
-                SongSpread, I&nbsp;
-                <Text {...highlightStyle}>
-                  moved to a place I didn&apos;t know anyone
-                </Text>
-                &nbsp;and learned a lot about myself. I&apos;d pull out my
-                laptop on&nbsp;
-                <Text {...highlightStyle}>
-                  lunch breaks during 60-hour work weeks
-                </Text>
-                &nbsp;to make this. It was something I just had to do. In that
-                new place, I proved something to myself that I had known for
-                some time: I&apos;m&nbsp;
-                <Text {...highlightStyle}>obsessed with making software.</Text>
-                <Text pt={4} mx={-2}>
-                  Let&apos;s put that obsession to use:
-                </Text>
-                <Code
-                  colorScheme={"purple"}
-                  display={"block"}
-                  w={"fit-content"}
-                  p={1}
-                  m={2}
-                >
-                  <Link href="mailto:grantwecker@live.com">
-                    grantwecker@live.com
-                  </Link>
-                </Code>
+          <Heading
+            color={"purple.500"}
+            fontFamily={"monospace"}
+            fontWeight={"medium"}
+            pb={3}
+          >
+            FAQ
+          </Heading>
+          {questionsAndAnswers.map((qna, i) => (
+            <Box key={i} mb={3}>
+              <Text
+                fontSize={"xl"}
+                fontWeight={"semibold"}
+                color={"purple.700"}
+              >
+                {qna.q}
               </Text>
-              <Text pt={2} mx={-2}>
-                Cheers!
+              <Text lineHeight={"1.2em"} ml={2}>
+                {qna.a}
               </Text>
             </Box>
+          ))}
+
+          <Box mx={"auto"} pt={5}>
+            <IconButton
+              aria-label="email grantwecker@live.com"
+              as={HiOutlineMail}
+              to="mailto:grantwecker@live.com"
+              variant={"ghost"}
+              color={"whiteAlpha.800"}
+              overlineThickness={1}
+            ></IconButton>
+            <IconButton
+              aria-label="instagram @g_weck"
+              as={AiOutlineInstagram}
+              to="https://www.instagram.com/g_weck/"
+              variant={"ghost"}
+              color={"whiteAlpha.800"}
+            />
           </Box>
+
           <Box pt={"20%"} w={"70%"} mx={"auto"}>
             <Link href={"/"}>
               <Button

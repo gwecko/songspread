@@ -45,7 +45,7 @@ const BorderAnimation: React.FC<Props> = ({ children, dimensions: [height, width
           animate={{
             rotate: 360,
           }}
-          transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+          transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
         />
         {children}
       </motion.div>

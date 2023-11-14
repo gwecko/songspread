@@ -30,7 +30,7 @@ const GetImageButton: React.FC = () => {
 
   return (
     <Button
-      px={"4em"}
+      w={"100%"}
       colorScheme={"purple"}
       bgGradient={"linear(to-r, purple.500 60%, purple.600)"}
       boxShadow={"lg"}
@@ -39,8 +39,9 @@ const GetImageButton: React.FC = () => {
       isLoading={loading}
       loadingText="skrrttt"
       _active={{ transform: "scale(0.95)" }}
+      borderBottomRadius={'80px'}
     >
-      Get Image
+      Get Spread
     </Button>
   );
 };
