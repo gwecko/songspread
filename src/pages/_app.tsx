@@ -10,7 +10,7 @@ export default function App({ Component, pageProps: {session, ...pageProps} }: A
       <ChakraProvider>
         <Component {...pageProps} />
         <Analytics />
-        </ChakraProvider>
+      </ChakraProvider>
     </SessionProvider>
   )
 }
