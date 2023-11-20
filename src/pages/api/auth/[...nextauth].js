@@ -64,6 +64,7 @@ const authOptions = {
           
           if (!res.ok) throw tokens
           cl('else try:')
+          cl(token)
           cl(tokens)
           
           return {
