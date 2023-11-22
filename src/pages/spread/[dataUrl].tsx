@@ -1,4 +1,4 @@
-import { Layout, BorderAnimation, ShareToIGButton } from "@/components";
+import { Layout } from "@/components";
 import { Box, Button, Text } from "@chakra-ui/react";
 import Head from "next/head";
 import Image from "next/image";
@@ -37,8 +37,7 @@ const DownloadPage: React.FC = () => {
           <Image
             style={{zIndex: 99}}
             src={imageUrl}
-            id="song-image"
-              alt="list of top songs"
+            alt="list of your top songs"
             width={width}
             height={height}
             ref={focusRef}
