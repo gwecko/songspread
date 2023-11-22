@@ -1,4 +1,4 @@
-import { Layout, BorderAnimation } from "@/components";
+import { Layout, BorderAnimation, ShareToIGButton } from "@/components";
 import { Box, Button, Text } from "@chakra-ui/react";
 import Head from "next/head";
 import Image from "next/image";
@@ -34,20 +34,21 @@ const DownloadPage: React.FC = () => {
           —— Press + hold image to save ——
         </Text>
         <Box m={5} borderRadius={"10px"} maxW={"600px"} shadow={"base"}>
-          {/* <BorderAnimation dimensions={[height, width]}> */}
           <Image
+            style={{zIndex: 99}}
             src={imageUrl}
             id="song-image"
-            alt="list of top songs"
+              alt="list of top songs"
             width={width}
             height={height}
             ref={focusRef}
             placeholder="blur"
+            // this is the color purple as a base-64 1x1 pixel string
             blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNMYfjvAgAD3AGpprqP0wAAAABJRU5ErkJggg=="
           />
-          {/* </BorderAnimation> */}
         </Box>
         <Box mb={"10%"}>
+          {/* <ShareToIGButton file={imageUrl} /> */}
           <Link href={"/"}>
             <Button colorScheme="purple" width={"10em"}>
               back
