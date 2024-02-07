@@ -9,7 +9,7 @@ type ButtonBoxProps = {
 const ButtonBox: React.FC<ButtonBoxProps> = () =>
   // { children }
   {
-    const boxShadowBlack = `0px 4px 4px 2px #00000050`;
+    const boxShadowBlack = `0px 4px 4px 1px #00000050`;
     const boxShadowWhite = `0px 2px 10px 0px rgb(255, 255, 255, .5)`;
     const boxShadowPurple = `0px 10px 20px 2px #7634bd`;
     const insetShadow = `inset 0px 0px 10px 3px #00000030`;
@@ -24,7 +24,7 @@ const ButtonBox: React.FC<ButtonBoxProps> = () =>
         // bg="green.100"
         borderRadius="12px"
         border={"1px solid rgba(255, 255, 255, 0.71)"}
-        bgGradient="linear(to-br, #e8a4ec 10%, rgb(171, 124, 221) 50%)"
+        bgGradient="linear(to-br, #ecdbed 30%, rgb(200, 181, 221))"
         boxShadow={`${boxShadowBlack}, ${boxShadowWhite}, ${boxShadowPurple}, ${insetShadow}`}
       >
         <SignInButton />
@@ -36,7 +36,7 @@ const ButtonBox: React.FC<ButtonBoxProps> = () =>
           p={0}
           mt={4}
         >
-          <Link href={"/about"} w={"100%"} mr={3}>
+          <Link href={"/faq"} w={"100%"} mr={3}>
             <Button
               w={"100%"}
               fontSize={"smaller"}
@@ -45,12 +45,15 @@ const ButtonBox: React.FC<ButtonBoxProps> = () =>
               bg={"whiteAlpha.400"}
               boxShadow={boxShadowBlack}
               color={"#6B46C1"}
-              _active={{ transform: "scale(0.98)" }}
+              _active={{
+                transform: "scale(0.98)",
+                boxShadow: "0px 1px 1px 1px #00000070",
+              }}
             >
               what is this
             </Button>
           </Link>
-          <Link href={"/faq"} w={"100%"}>
+          <Link href={"/about"} w={"100%"}>
             <Button
               w={"100%"}
               fontSize={"smaller"}
@@ -59,7 +62,10 @@ const ButtonBox: React.FC<ButtonBoxProps> = () =>
               bg={"whiteAlpha.200"}
               boxShadow={boxShadowBlack}
               color={"white"}
-              _active={{ transform: "scale(0.98)" }}
+              _active={{
+                transform: "scale(0.98)",
+                boxShadow: "0px 1px 1px 1px #00000070",
+              }}
             >
               about
             </Button>

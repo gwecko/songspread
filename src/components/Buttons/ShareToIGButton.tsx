@@ -9,7 +9,7 @@ const ShareToIGButton: React.FC<Props> = ({ file }) => {
   
   
   const shareImageAsset = async () => {
-    const blob = await new Blob(file)
+    const blob = await new Blob([file]);
     const filesArray = [
       new File([blob], `songspread.png`, {
         type: 'image/png',
