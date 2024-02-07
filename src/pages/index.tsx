@@ -71,7 +71,7 @@ export default function Home() {
       </Head>
 
       <Layout>
-        {!authed ? (
+        {authed ? (
           <Stack align={"center"}>
             <Box id="boxDownload">
               <ListTabs session={session} />
