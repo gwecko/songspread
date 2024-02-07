@@ -3,7 +3,7 @@ import queryString from "query-string";
 import { formatDuration, formatArtist, cl } from "@/helpers";
 import { Box, Link, Text, Image } from "@chakra-ui/react";
 import { AnimatePresence, motion } from "framer-motion";
-import LoadingSkeleton from "./LoadingSkeleton";
+import LoadingSkeleton from "../LoadingSkeleton";
 
 interface TrackListProps {
   numTracksToDisplay: number;

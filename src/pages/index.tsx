@@ -6,14 +6,11 @@ import {
   ListTabs,
   GetImageButton,
   BorderAnimation,
+  ShareToIGButton,
 } from "@/components";
-import {
-  Box,
-  Button,
-  Link,
-  Stack,
-} from "@chakra-ui/react";
+import { Box, Button, Link, Stack } from "@chakra-ui/react";
 import { useEffect } from "react";
+import ButtonBox from "@/components/ButtonBox";
 
 // A .gif works, but in iMessage the gif will go full-screen instead of opening link
 const ogImagePath = "og-image.png";
@@ -38,6 +35,7 @@ export default function Home() {
           name="viewport"
           content="width=device-width, initial-scale=1.0, viewport-fit=cover"
         />
+        <meta name="theme-color" content="#e9dbed"></meta>
         <meta
           name="description"
           content="SongSpread displays your top Spotify songs. Save them to camera roll, and share with friends or online."
@@ -104,9 +102,9 @@ export default function Home() {
           </Stack>
         ) : (
           <Box textAlign={"center"} margin={"20%"}>
-            <BorderAnimation dimensions={[]}>
-              <SignInButton />
-            </BorderAnimation>
+            {/* <BorderAnimation dimensions={[]}> */}
+              <ButtonBox />
+            {/* </BorderAnimation> */}
           </Box>
         )}
       </Layout>
