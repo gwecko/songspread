@@ -9,7 +9,7 @@ const SongSpreadHeading: React.FC = () => {
     100% { background-position: 200% 0% }
   `;
   const animation = `${animationKeyframes} 4s linear infinite`;
-  const animationGradient = `linear-gradient(to right, #B794F4, #553C9A, #B794F4)`;
+  const animationGradient = `linear-gradient(to right, #b390f0, #7D4FD3, #b390f0)`;
 
   const boxShadowBlack = `0px 6px 4px 2px #00000030`;
   const boxShadowWhite = `0px 1px 10px 0px rgb(255, 255, 255, .5)`;
