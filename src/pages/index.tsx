@@ -2,13 +2,12 @@ import Head from "next/head";
 import { signIn, useSession } from "next-auth/react";
 import {
   Layout,
-  SignInButton,
-  ListTabs,
+  SpreadTabs,
   GetImageButton,
-  BorderAnimation,
-  ShareToIGButton,
+  AboutButton,
+  FaqButton,
 } from "@/components";
-import { Box, Button, Link, Stack } from "@chakra-ui/react";
+import { Box, Container, Stack } from "@chakra-ui/react";
 import { useEffect } from "react";
 import ButtonBox from "@/components/ButtonBox";
 
@@ -74,37 +73,19 @@ export default function Home() {
         {authed ? (
           <Stack align={"center"}>
             <Box id="boxDownload">
-              <ListTabs session={session} />
+              <SpreadTabs session={session} />
             </Box>
-            <Box w={"100%"} maxWidth={"260px"}>
+            <Container w={"16em"}>
               <GetImageButton />
-            </Box>
-            <Box pt={"30%"}>
-              <Link href={"/faq"} mx={1}>
-                <Button
-                  variant={"link"}
-                  colorScheme={"whiteAlpha"}
-                  borderRightRadius={0}
-                >
-                  faq
-                </Button>
-              </Link>
-              <Link href={"/about"} mx={1}>
-                <Button
-                  variant={"link"}
-                  colorScheme={"blackAlpha"}
-                  borderLeftRadius={0}
-                >
-                  about
-                </Button>
-              </Link>
-            </Box>
+            </Container>
+            <Container pt={5} px={20} maxW={'500px'} display={'flex'} opacity={'70%'}>
+              <FaqButton />
+              <AboutButton />
+            </Container>
           </Stack>
         ) : (
           <Box textAlign={"center"} margin={"20%"}>
-            {/* <BorderAnimation dimensions={[]}> */}
-              <ButtonBox />
-            {/* </BorderAnimation> */}
+            <ButtonBox />
           </Box>
         )}
       </Layout>
