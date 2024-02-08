@@ -26,11 +26,11 @@ const SongSpreadHeading: React.FC = () => {
         justifyContent={"end"}
         textAlign={"center"}
         pos={"relative"}
-        top={"-2rem"}
+        top={"-3rem"}
         height={"9rem"}
-        p={3}
+        p={2}
         borderBottomRadius="6.5rem"
-        border={"1px solid rgba(255, 255, 255, 0.71)"}
+        border={"1px solid rgba(255, 255, 255, 0.7)"}
         bgGradient="linear(to-b, #ecdbed 30%, rgb(200, 181, 221))"
         boxShadow={`${boxShadowBlack}, ${boxShadowWhite}, ${boxShadowPurple}, ${insetShadow}`}
       >

@@ -1,6 +1,8 @@
 import React from "react";
-import { Button, Container, Link } from "@chakra-ui/react";
+import { Container } from "@chakra-ui/react";
 import SignInButton from "./Buttons/SignInButton";
+import FaqButton from "./Buttons/FaqButton";
+import AboutButton from "./Buttons/AboutButton";
 
 type ButtonBoxProps = {
   // children: React.ReactNode;
@@ -36,40 +38,8 @@ const ButtonBox: React.FC<ButtonBoxProps> = () =>
           p={0}
           mt={4}
         >
-          <Link href={"/faq"} w={"100%"} mr={3}>
-            <Button
-              w={"100%"}
-              fontSize={"smaller"}
-              variant={"outline"}
-              border={"1px solid rgba(255, 255, 255, 0.6)"}
-              bg={"whiteAlpha.400"}
-              boxShadow={boxShadowBlack}
-              color={"#6B46C1"}
-              _active={{
-                transform: "scale(0.98)",
-                boxShadow: "0px 1px 1px 1px #00000070",
-              }}
-            >
-              what is this
-            </Button>
-          </Link>
-          <Link href={"/about"} w={"100%"}>
-            <Button
-              w={"100%"}
-              fontSize={"smaller"}
-              variant={"outline"}
-              border={"1px solid rgba(255, 255, 255, 0.4)"}
-              bg={"whiteAlpha.200"}
-              boxShadow={boxShadowBlack}
-              color={"white"}
-              _active={{
-                transform: "scale(0.98)",
-                boxShadow: "0px 1px 1px 1px #00000070",
-              }}
-            >
-              about
-            </Button>
-          </Link>
+          <FaqButton />
+          <AboutButton />
         </Container>
       </Container>
     );
