@@ -1,15 +1,17 @@
 import React from "react";
-import { Box, Link, Text, Image, List } from "@chakra-ui/react";
+import { Box, Container, Image, List } from "@chakra-ui/react";
 import LoadingSkeleton from "../LoadingSkeleton";
 import SpreadHeader from "./SpreadHeader";
 import SongItem from "./SongItem";
+import { FormattedTrack } from "./SpreadTabs";
 
 type SpreadCardProps = {
   username: string;
   timeRange: string;
   numTracksToDisplay: number;
-  songlist: Object[];
+  songlist: FormattedTrack[];
 };
+
 
 const songNumLimit = 12;
 
@@ -21,14 +23,14 @@ const SpreadCard: React.FC<SpreadCardProps> = ({
 }) => {
 
   return songlist.length ? (
-    <Box fontSize={["sm", "md"]}>
+    <Container fontSize={["sm", "md"]} maxW={'md'} px={1}>
       <SpreadHeader username={username} timeRange={timeRange} />
-      <List>
-        {songlist.slice(0, numTracksToDisplay).map((item, index) => (
-          <SongItem key={index} {...item} />
+      <List spacing={1}>
+        {songlist.slice(0, numTracksToDisplay).map((song, index) => (
+          <SongItem key={index} {...song} />
         ))}
       </List>
-      <Box display={"flex"} my={"4px"}>
+      <Box my={2}>
         <Image
           src="/SpotifyLogoWhite.png"
           alt="white spotify logo"
@@ -36,14 +38,14 @@ const SpreadCard: React.FC<SpreadCardProps> = ({
           mx={"auto"}
         />
       </Box>
-    </Box>
+    </Container>
   ) : (
-    <Box w={"100%"} ml={"-0.5em"}>
+    <Container w={"100%"} ml={"-0.5em"}>
       <LoadingSkeleton
         maxLength={songNumLimit}
         displayLength={numTracksToDisplay}
       />
-    </Box>
+    </Container>
   );
 };
 

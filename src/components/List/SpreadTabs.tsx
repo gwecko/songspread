@@ -12,6 +12,7 @@ import {
   Box,
   Flex,
   List,
+  Container,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { formatArtist, formatDuration } from "@/helpers";
@@ -22,6 +23,7 @@ import SpreadCard from "./SpreadCard";
 
 type ListTabProps = {
   session: any;
+  numTracksToDisplay: number;
 };
 
 type RawTrackData = {
@@ -32,7 +34,7 @@ type RawTrackData = {
   external_urls: { spotify: string };
 };
 
-type FormattedTrack = {
+export type FormattedTrack = {
   songDuration: string;
   artistNames: string;
   songName: string;
@@ -42,23 +44,18 @@ type FormattedTrack = {
   initial: object;
 };
 
-const SpreadTabs: React.FC<ListTabProps> = ({ session }) => {
-  const [numTracksToDisplay, setNumTracksToDisplay] = useState(5);
+const SpreadTabs: React.FC<ListTabProps> = ({ session, numTracksToDisplay }) => {
+
   const username = session?.token.username || session?.token.name;
 
-  const songNumLimit = 12;
+  const songNumLimit = 12 as const;
 
-  const [shortTermTrackData, setShortTermTrackData] = useState([]);
-  const [mediumTermTrackData, setMediumTermTrackData] = useState([]);
-  const [longTermTrackData, setLongTermTrackData] = useState([]);
-  
   const timeRanges = ["short_term", "medium_term", "long_term"];
   const [trackData, setTrackData] = useState({
-    short_term: shortTermTrackData,
-    medium_term: mediumTermTrackData,
-    long_term: longTermTrackData,
+    short_term: [],
+    medium_term: [],
+    long_term: [],
   });
-
 
   // query Spotify for all 3 time ranges at once
   useEffect(() => {
@@ -100,32 +97,35 @@ const SpreadTabs: React.FC<ListTabProps> = ({ session }) => {
   }, [session]);
 
   return (
-    <Box>
-      <Flex justifyContent={"center"}>
-        <Tabs
-          variant={"soft-rounded"}
-          colorScheme={"purple"}
-          size={"sm"}
-          align="center"
-          isLazy
-        >
-          <TabList w={"max-content"}>
-            <Tab>1-month</Tab>
-            <Tab>6-months</Tab>
-            <Tab>all-time</Tab>
-          </TabList>
+    <Flex flexDir={"row"} justifyContent={"space-between"} mx={2}>
+      <Tabs
+        variant={"soft-rounded"}
+        colorScheme={"purple"}
+        size={"sm"}
+        align="center"
+        isLazy
+      >
+        <TabList w={"max-content"}>
+          <Tab>1-month</Tab>
+          <Tab>6-months</Tab>
+          <Tab>all-time</Tab>
+        </TabList>
 
-          <Divider mt={2} w={"90vw"} />
-          <Box
-            w={"80vw"}
-            maxW={"350px"}
-            mt={2}
-            id="tabDownload"
-            borderRadius={"10px"}
-            shadow={"lg"}
-            bgColor={"whiteAlpha.300"}
-          >
-            <TabPanels>
+        <Divider mt={2} w={"80%"} />
+
+        <Container
+          id="tabDownload"
+          display={"flex"}
+          mt={4}
+          mb={2}
+          px={0}
+          borderRadius={"16px"}
+          shadow={"0px 4px 4px rgba(0, 0, 0, 0.4), 0px 2px 0px rgb(255, 255, 255, 0.6), 0px 8px 15px rgb(0, 0, 0, .4)"}
+          bgColor={"whiteAlpha.300"}
+          w={"90%"}
+          border={'1px solid white'}
+        >
+          <TabPanels>
             {timeRanges.map((range, index) => (
               <TabPanel key={index}>
                 <List>
@@ -138,30 +138,10 @@ const SpreadTabs: React.FC<ListTabProps> = ({ session }) => {
                 </List>
               </TabPanel>
             ))}
-            </TabPanels>
-          </Box>
-        </Tabs>
-        <Box position={"fixed"} left={["0.45em", "10%", "20%"]} top={"15%"}>
-          <Slider
-            value={numTracksToDisplay}
-            min={5}
-            max={12}
-            onChange={(val) => setNumTracksToDisplay(val)}
-            orientation={"vertical"}
-            isReversed
-            position={"fixed"}
-            top={"100px"}
-            h={"35vh"}
-            minH={"250px"}
-          >
-            <SliderTrack bgColor={"purple.50"}>
-              <SliderFilledTrack bgColor={"purple.100"} />
-            </SliderTrack>
-            <SliderThumb boxSize={"6"} bgColor={"purple.500"} h={"40px"} />
-          </Slider>
-        </Box>
-      </Flex>
-    </Box>
+          </TabPanels>
+        </Container>
+      </Tabs>
+    </Flex>
   );
 };
 

@@ -24,16 +24,15 @@ const SpreadHeader: React.FC<SpreadHeader> = ({ username, timeRange }) => {
   }
   
   return (
-    <Container>
+    <Container minH={'3rem'}>
       <Heading
         as="h2"
         color={"gray.100"}
         fontSize={"1.7em"}
-        pt={2}
         letterSpacing={"-0.03em"}
         fontWeight={"bold"}
-        mr={"7%"}
         whiteSpace={"normal"}
+        textShadow={"0px 0px 13px rgb(0,0,0)"}
       >
         {username}&apos;s{" "}
         <Text fontWeight={"bold"} display={"inline"} fontStyle={"italic"}>

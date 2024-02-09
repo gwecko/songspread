@@ -17,7 +17,7 @@ const SongSpreadHeading: React.FC = () => {
   const insetShadow = `inset 0px 0px 15px 3px rgba(255, 255, 255, 0.7)`;
   
   return (
-    <div style={{ display: "flex", justifyContent: "center" }}>
+    <div style={{ display: "flex", justifyContent: "center"}}>
       <Container
         w={"100vw"}
         maxW="container.sm"
@@ -26,8 +26,8 @@ const SongSpreadHeading: React.FC = () => {
         justifyContent={"end"}
         textAlign={"center"}
         pos={"relative"}
-        top={"-3rem"}
-        height={"9rem"}
+        top={"-2rem"}
+        height={"8rem"}
         p={2}
         borderBottomRadius="6.5rem"
         border={"1px solid rgba(255, 255, 255, 0.7)"}

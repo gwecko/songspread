@@ -39,7 +39,7 @@ const GetImageButton: React.FC = () => {
       isLoading={loading}
       loadingText="skrrttt"
       _active={{ transform: "scale(0.95)" }}
-      borderBottomRadius={'50px'}
+      borderBottomRadius={'40px'}
     >
       Get Spread
     </Button>

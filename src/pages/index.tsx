@@ -6,10 +6,12 @@ import {
   GetImageButton,
   AboutButton,
   FaqButton,
+  SongSlider,
 } from "@/components";
-import { Box, Container, Stack } from "@chakra-ui/react";
-import { useEffect } from "react";
+import { Box, Container, Flex, Stack } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
 import ButtonBox from "@/components/ButtonBox";
+import { cl } from "@/helpers";
 
 // A .gif works, but in iMessage the gif will go full-screen instead of opening link
 const ogImagePath = "og-image.png";
@@ -18,6 +20,7 @@ const ogImagePath = "og-image.png";
 export default function Home() {
   const { data: session, status } = useSession();
   const authed = status === "authenticated";
+  
 
   useEffect(() => {
     // Force sign in attempt to resolve error. String is passed from JWT
@@ -25,6 +28,9 @@ export default function Home() {
       signIn("spotify");
     }
   }, [session]);
+  
+  // shared state between SongSlider and SpreadTabs
+  const [numTracks, setNumTracks] = useState(5);
 
   return (
     <>
@@ -71,14 +77,15 @@ export default function Home() {
 
       <Layout>
         {authed ? (
-          <Stack align={"center"}>
-            <Box id="boxDownload">
-              <SpreadTabs session={session} />
-            </Box>
-            <Container w={"16em"}>
+          <Stack align={"center"} spacing={5}>
+            <Flex flexDir={'row'}>
+              <SpreadTabs session={session} numTracksToDisplay={numTracks}/>
+              <SongSlider numTracks={numTracks} updateParentState={val => setNumTracks(val)} />
+            </Flex>
+            <Container px={8}>
               <GetImageButton />
             </Container>
-            <Container pt={5} px={20} maxW={'500px'} display={'flex'} opacity={'70%'}>
+            <Container pt={8} px={20} maxW={'500px'} display={'flex'} opacity={'70%'}>
               <FaqButton />
               <AboutButton />
             </Container>

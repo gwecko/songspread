@@ -7,7 +7,6 @@ type SongItemProps = {
   songLink?: string | undefined;
   albumName?: string | undefined;
   listNumber?: number | undefined;
-  initial?: object | undefined;
 };
 
 const SongItem: React.FC<SongItemProps> = ({
@@ -17,16 +16,13 @@ const SongItem: React.FC<SongItemProps> = ({
   songLink,
   albumName,
   listNumber,
-  initial,
 }) => {
   return (
-    <ListItem>
-      <Link
-        href={songLink}
-        isExternal
-        _hover={{ textDecoration: "none" }}
-        textIndent={"-1.2em"}
-      >
+    <ListItem
+      textAlign={"left"}
+      textShadow={"0px 0px 16px rgb(0,0,0)"}
+    >
+      <Link href={songLink} isExternal _hover={{ textDecoration: "none" }}>
         {/* LIST NUMBER */}
         <Text
           display={"inline-block"}
