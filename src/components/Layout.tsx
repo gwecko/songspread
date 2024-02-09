@@ -20,7 +20,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       bg={"gray.400"}
       bgGradient={"linear(to bottom, gray.300 30%, purple.400 90%)"}
       bgAttachment={"fixed"}
-      pb={'120px'}
+      // pb={'120px'}
     >
     
       <SongSpreadHeading />
