@@ -15,7 +15,6 @@ import queryString from "query-string";
 import SpreadCard from "./SpreadCard";
 import { cardBorderRadius } from "@/globals";
 
-
 // This is parent component for Spread Card: contains Spread Header and List items
 
 type ListTabProps = {
@@ -41,8 +40,10 @@ export type FormattedTrack = {
   initial: object;
 };
 
-const SpreadTabs: React.FC<ListTabProps> = ({ session, numTracksToDisplay }) => {
-
+const SpreadTabs: React.FC<ListTabProps> = ({
+  session,
+  numTracksToDisplay,
+}) => {
   const username = session?.token.username || session?.token.name;
 
   const songNumLimit = maxNumTracks;
@@ -113,13 +114,22 @@ const SpreadTabs: React.FC<ListTabProps> = ({ session, numTracksToDisplay }) => 
         <Container
           id="tabDownload"
           px={0}
-          borderRadius={cardBorderRadius}
-          shadow={"0px 4px 4px rgba(0, 0, 0, 0.4), 0px 2px 0px rgb(255, 255, 255, 0.6), 0px 8px 15px rgb(0, 0, 0, .4)"}
-          bgColor={"whiteAlpha.400"}
+          bgColor={"whiteAlpha.300"}
           minW={"80%"}
-          border={"1px solid white"}
+          borderBottom={"6px solid rgba(0, 0, 0, 0.3)"}
+          borderBottomRadius={cardBorderRadius}
+          borderLeft={'1px solid rgba(0, 0, 0, 0.3)'}
+          borderLeftRadius={'24px'}
+          borderRight={'1px solid rgba(0, 0, 0, 0.3)'}
+          borderRightRadius={'24px'}
+          bgGradient={"linear(to-br,rgba(100, 100, 100, 0.1)0, rgba(0, 0, 0, 0))"}
         >
-          <TabPanels>
+          <TabPanels
+            border={"1px solid white"}
+            borderRadius={cardBorderRadius}
+            bgImage={"/noise.png"}
+            bgSize={"contain"}
+          >
             {timeRanges.map((range, index) => (
               <TabPanel key={index}>
                 <List>

@@ -43,7 +43,6 @@ const [songspread, setSongspread] = useState<FormattedTrack[]>(songlist);
       {songlist.length ? (
         <List spacing={"0.8em"} mt={1}>
           {songspread
-            // .slice(0, numTracksToDisplay)
             .map((song, index) => (
               <Collapse
                 key={song.songName}
