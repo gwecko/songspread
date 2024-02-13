@@ -37,7 +37,7 @@ const GetImageButton: React.FC = () => {
       onClick={getDataUrl}
       role="link"
       isLoading={loading}
-      loadingText="skrrttt"
+      loadingText="skrrtt"
       _active={{ transform: "scale(0.95)" }}
       borderBottomRadius={'40px'}
     >

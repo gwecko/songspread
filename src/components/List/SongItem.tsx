@@ -1,4 +1,4 @@
-import { Text, Link, Box, ListItem } from "@chakra-ui/react";
+import { Text, Link, ListItem, Box } from "@chakra-ui/react";
 
 type SongItemProps = {
   songDuration?: string | undefined;
@@ -18,29 +18,25 @@ const SongItem: React.FC<SongItemProps> = ({
   listNumber,
 }) => {
   return (
-    <ListItem
-      textAlign={"left"}
-      textShadow={"0px 0px 16px rgb(0,0,0)"}
-    >
-      <Link href={songLink} isExternal _hover={{ textDecoration: "none" }}>
-        {/* LIST NUMBER */}
-        <Text
-          display={"inline-block"}
-          fontWeight={"medium"}
-          fontStyle={"italic"}
-          color={"gray.100"}
-        >
-          {listNumber}.&nbsp;
+    <ListItem color={"white"} lineHeight={"1.1em"} mx={2} textAlign={"left"}>
+      <Link
+        href={songLink}
+        isExternal
+        _hover={{ textDecoration: "none" }}
+        textShadow={"0px 0px 16px rgb(0,0,0)"}
+        display={'flex'}
+        gap={2}
+      >
+        <Text as={"i"} display={"inline"} textShadow={'0px 0px 8px rgb(0,0,0)'}>
+          {listNumber}.
         </Text>
-        {/* SONG NAME */}
-        <Box display={"inline"}>
-          <Text fontWeight={"extrabold"} color={"gray.100"} display={"inline"}>
-            {songName}
+        <Box display={'inline'}>
+          {/* SONG NAME */}
+          <Text fontWeight={"bold"} display={"inline"}>
+            {songName} &nbsp;•{" "}
           </Text>
           {/* ARTIST NAMES */}
-          <Text fontWeight={"medium"} display={"inline"} color={"gray.100"}>
-            &nbsp;-&nbsp;{artistNames}
-          </Text>
+          <Text display={"inline"}>{artistNames}</Text>
         </Box>
       </Link>
     </ListItem>

@@ -13,10 +13,10 @@ const SpreadHeader: React.FC<SpreadHeader> = ({ username, timeRange }) => {
   
   switch (timeRange) {
     case "short_term":
-      timeRangeText = "1-month";
+      timeRangeText = "current";
       break;
     case "medium_term":
-      timeRangeText = "6-month";
+      timeRangeText = "recent";
       break;
     case "long_term":
       timeRangeText = "all-time";
@@ -24,24 +24,23 @@ const SpreadHeader: React.FC<SpreadHeader> = ({ username, timeRange }) => {
   }
   
   return (
-    <Container minH={'3rem'}>
-      <Heading
+    <Container minH={'3rem'} mx={2}>
+      <Text
         as="h2"
-        color={"gray.100"}
+        color={"white"}
         fontSize={"1.7em"}
-        letterSpacing={"-0.03em"}
+        // letterSpacing={"-0.02em"}
         fontWeight={"bold"}
         whiteSpace={"normal"}
-        textShadow={"0px 0px 13px rgb(0,0,0)"}
+        textShadow={"0px 0px 16px rgb(0,0,0,0.9)"}
+        lineHeight={"1.1em"}
       >
-        {username}&apos;s{" "}
-        <Text fontWeight={"bold"} display={"inline"} fontStyle={"italic"}>
-          {timeRangeText}
-        </Text>{" "}
-        SongSpread
-      </Heading>
+        {username}&apos;s {timeRangeText} SongSpread
+      </Text>
     </Container>
   );
 };
+
+
 
 export default SpreadHeader;

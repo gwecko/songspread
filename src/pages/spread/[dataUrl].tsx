@@ -1,4 +1,5 @@
 import { Layout } from "@/components";
+import { cardBorderRadius } from "@/globals";
 import { Box, Button, Text } from "@chakra-ui/react";
 import Head from "next/head";
 import Image from "next/image";
@@ -33,9 +34,14 @@ const DownloadPage: React.FC = () => {
         >
           —— Press + hold image to save ——
         </Text>
-        <Box m={5} borderRadius={"10px"} maxW={"600px"} shadow={"base"}>
+        <Box
+          m={5}
+          borderRadius={cardBorderRadius}
+          maxW={"600px"}
+          shadow={"base"}
+        >
           <Image
-            style={{zIndex: 99}}
+            style={{ zIndex: 99 }}
             src={imageUrl}
             alt="list of your top songs"
             width={width}
