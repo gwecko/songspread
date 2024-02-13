@@ -5,19 +5,16 @@ import {
   TabPanels,
   TabPanel,
   Divider,
-  SliderTrack,
-  SliderFilledTrack,
-  Slider,
-  SliderThumb,
-  Box,
-  Flex,
   List,
   Container,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { formatArtist, formatDuration } from "@/helpers";
+import { maxNumTracks } from "@/globals";
 import queryString from "query-string";
 import SpreadCard from "./SpreadCard";
+import { cardBorderRadius } from "@/globals";
+
 
 // This is parent component for Spread Card: contains Spread Header and List items
 
@@ -48,7 +45,7 @@ const SpreadTabs: React.FC<ListTabProps> = ({ session, numTracksToDisplay }) => 
 
   const username = session?.token.username || session?.token.name;
 
-  const songNumLimit = 12 as const;
+  const songNumLimit = maxNumTracks;
 
   const timeRanges = ["short_term", "medium_term", "long_term"];
   const [trackData, setTrackData] = useState({
@@ -97,7 +94,7 @@ const SpreadTabs: React.FC<ListTabProps> = ({ session, numTracksToDisplay }) => 
   }, [session]);
 
   return (
-    <Flex flexDir={"row"} justifyContent={"space-between"} mx={2}>
+    <Container mx={2}>
       <Tabs
         variant={"soft-rounded"}
         colorScheme={"purple"}
@@ -111,19 +108,16 @@ const SpreadTabs: React.FC<ListTabProps> = ({ session, numTracksToDisplay }) => 
           <Tab>all-time</Tab>
         </TabList>
 
-        <Divider mt={2} w={"80%"} />
+        <Divider my={2} w={"80%"} />
 
         <Container
           id="tabDownload"
-          display={"flex"}
-          mt={4}
-          mb={2}
           px={0}
-          borderRadius={"16px"}
+          borderRadius={cardBorderRadius}
           shadow={"0px 4px 4px rgba(0, 0, 0, 0.4), 0px 2px 0px rgb(255, 255, 255, 0.6), 0px 8px 15px rgb(0, 0, 0, .4)"}
-          bgColor={"whiteAlpha.300"}
-          w={"90%"}
-          border={'1px solid white'}
+          bgColor={"whiteAlpha.400"}
+          minW={"80%"}
+          border={"1px solid white"}
         >
           <TabPanels>
             {timeRanges.map((range, index) => (
@@ -141,7 +135,7 @@ const SpreadTabs: React.FC<ListTabProps> = ({ session, numTracksToDisplay }) => 
           </TabPanels>
         </Container>
       </Tabs>
-    </Flex>
+    </Container>
   );
 };
 
