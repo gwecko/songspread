@@ -1,9 +1,10 @@
 import React from "react";
-import { Box, Container, Image, List } from "@chakra-ui/react";
+import { Box, Collapse, Container, Fade, Image, List, ScaleFade, Slide, SlideFade } from "@chakra-ui/react";
 import LoadingSkeleton from "../LoadingSkeleton";
 import SpreadHeader from "./SpreadHeader";
 import SongItem from "./SongItem";
 import { FormattedTrack } from "./SpreadTabs";
+import { createKey } from "next/dist/shared/lib/router/router";
 
 type SpreadCardProps = {
   username: string;
@@ -21,13 +22,18 @@ const SpreadCard: React.FC<SpreadCardProps> = ({
   numTracksToDisplay,
   songlist,
 }) => {
+  
 
   return songlist.length ? (
-    <Container fontSize={["sm", "md"]} maxW={'md'} px={1}>
+    <Container fontSize={["sm", "md"]} maxW={"md"} px={1}>
       <SpreadHeader username={username} timeRange={timeRange} />
       <List spacing={1}>
-        {songlist.slice(0, numTracksToDisplay).map((song, index) => (
-          <SongItem key={index} {...song} />
+        {songlist
+          // .slice(0, numTracksToDisplay)
+          .map((song, index) => (
+            <Collapse key={song.songName} in={index < numTracksToDisplay} style={{overflow: 'visible'}}>
+              <SongItem {...song} />
+            </Collapse>
         ))}
       </List>
       <Box my={2}>
