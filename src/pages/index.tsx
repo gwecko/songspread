@@ -77,8 +77,8 @@ export default function Home() {
 
       <Layout>
         {authed ? (
-          <Stack align={"center"} spacing={5}>
-            <Flex flexDir={'row'}>
+          <Stack align={"center"} spacing={2}>
+            <Flex display={'inline-flex'} py={3}>
               <SpreadTabs session={session} numTracksToDisplay={numTracks}/>
               <SongSlider numTracks={numTracks} updateParentState={val => setNumTracks(val)} />
             </Flex>
