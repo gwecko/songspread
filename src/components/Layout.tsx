@@ -17,7 +17,6 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       flexDirection={"column"}
       minH={'100vh'}
       alignItems={"center"}
-      bg={"purple.400"}
       bgGradient={"linear(to bottom, gray.300 30%, purple.400 90%)"}
       bgAttachment={"fixed"}
       pb={'120px'}

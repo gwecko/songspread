@@ -35,10 +35,8 @@ const DownloadPage: React.FC = () => {
           —— Press + hold image to save ——
         </Text>
         <Box
-          m={5}
-          borderRadius={cardBorderRadius}
+          m={10}
           maxW={"600px"}
-          shadow={"base"}
         >
           <Image
             style={{ zIndex: 99 }}

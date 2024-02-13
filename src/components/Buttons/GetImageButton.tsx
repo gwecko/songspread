@@ -41,7 +41,7 @@ const GetImageButton: React.FC = () => {
       _active={{ transform: "scale(0.95)" }}
       borderBottomRadius={'40px'}
     >
-      Get Spread
+      Download Spread
     </Button>
   );
 };
