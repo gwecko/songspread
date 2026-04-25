@@ -6,17 +6,15 @@ import SpotifyIcon from "../Icons/SpotifyIcon";
 const SignOutButton: React.FC = () => {
   return (
     <Button
-      colorScheme={"whiteAlpha"}
-      variant={"solid"}
-      color={"purple.500"}
-      bgColor={"whiteAlpha.400"}
-      boxShadow={"sm"}
-      rightIcon={<SpotifyIcon />}
-      iconSpacing={"2px"}
+      variant="solid"
+      color="purple.500"
+      bg="whiteAlpha.400"
+      boxShadow="sm"
       _active={{ transform: "scale(0.95)" }}
       onClick={() => signOut({ redirect: false, callbackUrl: "/" })}
     >
       Sign out
+      <SpotifyIcon />
     </Button>
   );
 };

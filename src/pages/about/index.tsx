@@ -93,33 +93,35 @@ export default function About() {
                 working on SongSpread until Spotify approved the app for all of
                 you to use—I&apos;m immensely happy to share it. While building
                 SongSpread, I&nbsp;
-                <Text {...highlightStyle}>
+                <Text as="span" {...highlightStyle}>
                   moved to a place I didn&apos;t know anyone
                 </Text>
                 &nbsp;and learned a lot about myself. I&apos;d pull out my
                 laptop on&nbsp;
-                <Text {...highlightStyle}>
+                <Text as="span" {...highlightStyle}>
                   lunch breaks during 60-hour work weeks
                 </Text>
                 &nbsp;to make this. It was something I just had to do. In that
                 new place, I proved something to myself that I had known for
                 some time: I&apos;m&nbsp;
-                <Text {...highlightStyle}>obsessed with making software.</Text>
-                <Text pt={4} mx={-2}>
-                  Let&apos;s put that obsession to use:
+                <Text as="span" {...highlightStyle}>
+                  obsessed with making software.
                 </Text>
-                <Code
-                  colorScheme={"purple"}
-                  display={"block"}
-                  w={"fit-content"}
-                  p={1}
-                  m={2}
-                >
-                  <Link href="mailto:grantwecker@live.com">
-                    grantwecker@live.com
-                  </Link>
-                </Code>
               </Text>
+              <Text pt={4} mx={-2}>
+                Let&apos;s put that obsession to use:
+              </Text>
+              <Code
+                colorPalette="purple"
+                display="block"
+                w="fit-content"
+                p={1}
+                m={2}
+              >
+                <Link href="mailto:grantwecker@live.com">
+                  grantwecker@live.com
+                </Link>
+              </Code>
               <Text pt={2} mx={-2}>
                 Cheers!
               </Text>
@@ -128,10 +130,9 @@ export default function About() {
           <Box pt={"20%"} w={"70%"} mx={"auto"}>
             <Link href={"/"}>
               <Button
-                variant={"ghost"}
-                color={"purple.50"}
-                colorScheme={"whiteAlpha"}
-                w={"100%"}
+                variant="ghost"
+                color="purple.50"
+                w="100%"
               >
                 Back
               </Button>
