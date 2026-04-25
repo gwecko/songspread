@@ -17,40 +17,45 @@ const boxShadowWhite = `0px 1px 10px 0px rgb(255, 255, 255, .5)`;
 // Tighter spread + lower blur so the purple glow doesn't bleed past the pill's
 // rounded-bottom corners onto the page background.
 const boxShadowPurple = `0px 6px 18px -2px rgba(118, 52, 189, 0.55)`;
-const insetShadow = `inset 0px 0px 15px 3px rgba(255, 255, 255, 0.7)`;
+// Inset highlight only on the bottom half, so the top edge can blend into the
+// safe-area shelf without a visible white seam against the iPhone notch.
+const insetShadow = `inset 0px -10px 15px -2px rgba(255, 255, 255, 0.7)`;
 
 const SongSpreadHeading: React.FC = () => {
   return (
-    // Full-width shelf that paints the iOS safe-area / notch with the same
-    // lavender as the top of the pill, so the pill appears to grow out of it.
-    <div
-      style={{
-        width: "100%",
-        display: "flex",
-        justifyContent: "center",
-        backgroundColor: pillTopColor,
-        paddingTop: "env(safe-area-inset-top)",
-      }}
-    >
+    <>
+      {/* Lavender shelf sized to JUST the iOS safe-area / notch. Keeping it
+          thin (instead of wrapping the pill) prevents the shelf colour from
+          showing past the pill's rounded-bottom corners onto the page bg. */}
+      <div
+        style={{
+          width: "100%",
+          height: "env(safe-area-inset-top)",
+          backgroundColor: pillTopColor,
+        }}
+      />
+      {/* Centering wrapper for the pill. The pill itself uses `mt: -2rem` to
+          tuck up under the shelf — the overlap area is the same lavender as
+          the pill's gradient top stop, so the seam is invisible while pulling
+          the wordmark closer to the notch. */}
+      <div
+        style={{
+          width: "100%",
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
       <Container
         w="100vw"
         maxW="container.sm"
+        mt="-2rem"
         display="flex"
         flexDir="column"
-        // Center content vertically; the rounded-bottom corners curve inward
-        // and would clip the wordmark if we pinned it to the bottom.
-        justifyContent="center"
+        justifyContent="end"
         textAlign="center"
         position="relative"
-        // Pill needs to be taller than its bottom-radius so the corner curves
-        // don't bite into the text. Bottom-radius is 6.5rem, so a 9rem pill
-        // leaves ~2.5rem of straight side-walls for the wordmark to sit in.
-        height="9rem"
-        px={2}
-        pt={2}
-        // Nudge content up slightly so it sits in the visually safe zone,
-        // above where the bottom curves start eating in.
-        pb="2.25rem"
+        height="8rem"
+        p={2}
         borderBottomRadius="6.5rem"
         border="1px solid rgba(255, 255, 255, 0.7)"
         borderTop="none"
@@ -63,6 +68,12 @@ const SongSpreadHeading: React.FC = () => {
           as={motion.h1}
           style={{
             fontSize: "3.5em",
+            // Chakra v3's Heading recipe pins line-height to a fixed `1.875rem`
+            // (30px). With a 3.5em (56px) font that line-box is shorter than
+            // the glyphs, so `background-clip: text` only fills the top half of
+            // each letter and the rest renders as `color: transparent`.
+            // Override with a relative line-height that scales with font-size.
+            lineHeight: 1.1,
             color: "transparent",
             backgroundImage: animationGradient,
             backgroundSize: "200% 100%",
@@ -87,7 +98,8 @@ const SongSpreadHeading: React.FC = () => {
           powered by Spotify
         </Text>
       </Container>
-    </div>
+      </div>
+    </>
   );
 };
 
