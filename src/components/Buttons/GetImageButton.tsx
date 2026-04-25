@@ -3,13 +3,9 @@ import html2canvas from "html2canvas";
 import { useRouter } from "next/router";
 import { useState } from "react";
 
-// supported CSS properties:
-// https://html2canvas.hertzen.com/features/
-
 const GetImageButton: React.FC = () => {
   const router = useRouter();
-
-  let [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const imageOptions = {
     backgroundColor: "null",
@@ -18,9 +14,9 @@ const GetImageButton: React.FC = () => {
 
   const getDataUrl = async () => {
     setLoading(true);
-    const element = document.getElementById("tabDownload")!,
-      canvas = await html2canvas(element, imageOptions),
-      dataUrl = canvas.toDataURL();
+    const element = document.getElementById("tabDownload")!;
+    const canvas = await html2canvas(element, imageOptions);
+    const dataUrl = canvas.toDataURL();
 
     router.push({
       pathname: `/spread/[dataUrl]`,
@@ -30,16 +26,19 @@ const GetImageButton: React.FC = () => {
 
   return (
     <Button
-      w={"100%"}
-      colorScheme={"purple"}
-      bgGradient={"linear(to-r, purple.500 60%, purple.600)"}
-      boxShadow={"lg"}
+      w="100%"
+      colorPalette="purple"
+      boxShadow="lg"
       onClick={getDataUrl}
       role="link"
-      isLoading={loading}
+      loading={loading}
       loadingText="skrrtt"
       _active={{ transform: "scale(0.95)" }}
-      borderBottomRadius={'40px'}
+      borderBottomRadius="40px"
+      style={{
+        backgroundImage:
+          "linear-gradient(to right, var(--chakra-colors-purple-500) 60%, var(--chakra-colors-purple-600))",
+      }}
     >
       Download Spread
     </Button>

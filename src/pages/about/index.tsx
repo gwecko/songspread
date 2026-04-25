@@ -109,9 +109,9 @@ export default function About() {
                   Let&apos;s put that obsession to use:
                 </Text>
                 <Code
-                  colorScheme={"purple"}
-                  display={"block"}
-                  w={"fit-content"}
+                  colorPalette="purple"
+                  display="block"
+                  w="fit-content"
                   p={1}
                   m={2}
                 >
@@ -128,10 +128,9 @@ export default function About() {
           <Box pt={"20%"} w={"70%"} mx={"auto"}>
             <Link href={"/"}>
               <Button
-                variant={"ghost"}
-                color={"purple.50"}
-                colorScheme={"whiteAlpha"}
-                w={"100%"}
+                variant="ghost"
+                color="purple.50"
+                w="100%"
               >
                 Back
               </Button>

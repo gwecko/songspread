@@ -53,7 +53,7 @@ const DownloadPage: React.FC = () => {
         <Box mb={"10%"}>
           {/* <ShareToIGButton file={imageUrl} /> */}
           <Link href={"/"}>
-            <Button colorScheme="purple" width={"10em"}>
+            <Button colorPalette="purple" width="10em">
               back
             </Button>
           </Link>

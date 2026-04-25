@@ -11,7 +11,6 @@ import {
 import { Box, Container, Flex, Stack } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import ButtonBox from "@/components/ButtonBox";
-import { cl } from "@/helpers";
 
 // A .gif works, but in iMessage the gif will go full-screen instead of opening link
 const ogImagePath = "og-image.png";
@@ -40,7 +39,7 @@ export default function Home() {
           name="viewport"
           content="width=device-width, initial-scale=1.0, viewport-fit=cover"
         />
-        <meta name="theme-color" content="#e9dbed"></meta>
+        <meta name="theme-color" content="#ecdbed" />
         <meta
           name="description"
           content="SongSpread displays your top Spotify songs. Save them to camera roll, and share with friends or online."
@@ -77,7 +76,7 @@ export default function Home() {
 
       <Layout>
         {authed ? (
-          <Stack align={"center"} spacing={3}>
+          <Stack align="center" gap={3}>
             <Flex display={'inline-flex'} py={3}>
               <SpreadTabs session={session} numTracksToDisplay={numTracks}/>
               <SongSlider numTracks={numTracks} updateParentState={val => setNumTracks(val)} />

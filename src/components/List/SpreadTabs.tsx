@@ -1,10 +1,6 @@
 import {
   Tabs,
-  TabList,
-  Tab,
-  TabPanels,
-  TabPanel,
-  Divider,
+  Separator,
   List,
   Container,
 } from "@chakra-ui/react";
@@ -14,8 +10,6 @@ import { maxNumTracks } from "@/globals";
 import queryString from "query-string";
 import SpreadCard from "./SpreadCard";
 import { cardBorderRadius } from "@/globals";
-
-// This is parent component for Spread Card: contains Spread Header and List items
 
 type ListTabProps = {
   session: any;
@@ -40,6 +34,14 @@ export type FormattedTrack = {
   initial: object;
 };
 
+const TIME_RANGES = ["short_term", "medium_term", "long_term"] as const;
+
+const TAB_LABEL: Record<(typeof TIME_RANGES)[number], string> = {
+  short_term: "1-month",
+  medium_term: "6-months",
+  long_term: "all-time",
+};
+
 const SpreadTabs: React.FC<ListTabProps> = ({
   session,
   numTracksToDisplay,
@@ -48,19 +50,17 @@ const SpreadTabs: React.FC<ListTabProps> = ({
 
   const songNumLimit = maxNumTracks;
 
-  const timeRanges = ["short_term", "medium_term", "long_term"];
   const [trackData, setTrackData] = useState({
     short_term: [],
     medium_term: [],
     long_term: [],
   });
 
-  // query Spotify for all 3 time ranges at once
   useEffect(() => {
     const options = {
       headers: { Authorization: `Bearer ${session?.token.access_token}` },
     };
-    timeRanges.forEach((range, index) => {
+    TIME_RANGES.forEach((range) => {
       const url =
         "https://api.spotify.com/v1/me/top/tracks?" +
         queryString.stringify({ time_range: range, limit: songNumLimit });
@@ -68,10 +68,8 @@ const SpreadTabs: React.FC<ListTabProps> = ({
       fetch(url, options)
         .then((res) => res.json())
         .then((res) => {
-          // Array of formatted object data
           if (res.items) {
             return res.items.map((item: RawTrackData, i: number) => ({
-              // possible error: may need to wrap this in a return statement
               songName: item.name,
               songLink: item.external_urls.spotify,
               songDuration: formatDuration(item.duration_ms),
@@ -79,7 +77,6 @@ const SpreadTabs: React.FC<ListTabProps> = ({
               albumName: item.album.name,
               listNumber: i + 1,
             }));
-            // prevents TypeError: undefined is not an object (tracks.slice)
           } else {
             return [];
           }
@@ -96,55 +93,62 @@ const SpreadTabs: React.FC<ListTabProps> = ({
 
   return (
     <Container mx={2}>
-      <Tabs
-        variant={"soft-rounded"}
-        colorScheme={"purple"}
-        size={"sm"}
-        align="center"
-        isLazy
+      <Tabs.Root
+        defaultValue="short_term"
+        variant="subtle"
+        colorPalette="purple"
+        size="sm"
+        lazyMount
       >
-        <TabList w={"max-content"}>
-          <Tab>1-month</Tab>
-          <Tab>6-months</Tab>
-          <Tab>all-time</Tab>
-        </TabList>
+        <Tabs.List w="max-content" mx="auto" borderBottom="none">
+          {TIME_RANGES.map((range) => (
+            <Tabs.Trigger key={range} value={range}>
+              {TAB_LABEL[range]}
+            </Tabs.Trigger>
+          ))}
+        </Tabs.List>
 
-        <Divider my={2} w={"80%"} />
+        <Separator my={2} w="80%" mx="auto" />
 
         <Container
           id="tabDownload"
           px={0}
-          bgColor={"whiteAlpha.300"}
-          minW={"80%"}
-          borderBottom={"6px solid rgba(0, 0, 0, 0.3)"}
+          bgColor="whiteAlpha.300"
+          minW="80%"
+          borderBottom="6px solid rgba(0, 0, 0, 0.3)"
           borderBottomRadius={cardBorderRadius}
-          borderLeft={'1px solid rgba(0, 0, 0, 0.3)'}
-          borderLeftRadius={'24px'}
-          borderRight={'1px solid rgba(0, 0, 0, 0.3)'}
-          borderRightRadius={'24px'}
-          bgGradient={"linear(to-br,rgba(100, 100, 100, 0.1)0, rgba(0, 0, 0, 0))"}
+          borderLeft="1px solid rgba(0, 0, 0, 0.3)"
+          borderLeftRadius="24px"
+          borderRight="1px solid rgba(0, 0, 0, 0.3)"
+          borderRightRadius="24px"
+          style={{
+            backgroundImage:
+              "linear-gradient(to bottom right, rgba(100, 100, 100, 0.1) 0%, rgba(0, 0, 0, 0))",
+          }}
         >
-          <TabPanels
-            border={"1px solid white"}
-            borderRadius={cardBorderRadius}
-            bgImage={"/noise.png"}
-            bgSize={"contain"}
+          <div
+            style={{
+              border: "1px solid white",
+              borderRadius: cardBorderRadius,
+              backgroundImage: "url(/noise.png)",
+              backgroundSize: "contain",
+            }}
           >
-            {timeRanges.map((range, index) => (
-              <TabPanel key={index}>
-                <List>
+            {TIME_RANGES.map((range) => (
+              <Tabs.Content key={range} value={range} p={4}>
+                <List.Root listStyle="none">
                   <SpreadCard
                     username={username}
                     timeRange={range}
                     numTracksToDisplay={numTracksToDisplay}
                     songlist={trackData[range as keyof typeof trackData]}
                   />
-                </List>
-              </TabPanel>
+                </List.Root>
+              </Tabs.Content>
             ))}
-          </TabPanels>
+          </div>
         </Container>
-      </Tabs>
+      </Tabs.Root>
     </Container>
   );
 };

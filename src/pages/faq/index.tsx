@@ -117,38 +117,39 @@ export default function FAQ() {
             </Box>
           ))}
 
-          <Box mx={"auto"} pt={5}>
+          <Box mx="auto" pt={5}>
             <Link href="mailto:grantwecker@live.com" p={1} mx={1}>
               <IconButton
                 aria-label="email grantwecker@live.com"
-                as={HiOutlineMail}
-                variant={"ghost"}
-                color={"whiteAlpha.800"}
-                overlineThickness={1}
-              />
+                variant="ghost"
+                color="whiteAlpha.800"
+              >
+                <HiOutlineMail />
+              </IconButton>
             </Link>
             <Link
-              isExternal
               href="https://www.instagram.com/g_weck/"
+              target="_blank"
+              rel="noopener noreferrer"
               p={1}
               mx={1}
             >
               <IconButton
                 aria-label="instagram @g_weck"
-                as={AiOutlineInstagram}
-                variant={"ghost"}
-                color={"whiteAlpha.800"}
-              ></IconButton>
+                variant="ghost"
+                color="whiteAlpha.800"
+              >
+                <AiOutlineInstagram />
+              </IconButton>
             </Link>
           </Box>
 
-          <Box pt={"20%"} w={"70%"} mx={"auto"}>
-            <Link href={"/"}>
+          <Box pt="20%" w="70%" mx="auto">
+            <Link href="/">
               <Button
-                variant={"ghost"}
-                color={"purple.50"}
-                colorScheme={"whiteAlpha"}
-                w={"100%"}
+                variant="ghost"
+                color="purple.50"
+                w="100%"
               >
                 Back
               </Button>

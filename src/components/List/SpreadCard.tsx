@@ -1,7 +1,7 @@
 import React from "react";
 import {
   Box,
-  Collapse,
+  Collapsible,
   Image,
   List,
   Stack,
@@ -22,7 +22,6 @@ type SpreadCardProps = {
 
 const songNumLimit = maxNumTracks;
 
-
 const SpreadCard: React.FC<SpreadCardProps> = ({
   username,
   timeRange,
@@ -30,38 +29,38 @@ const SpreadCard: React.FC<SpreadCardProps> = ({
   songlist,
 }) => {
   return (
-    <Stack fontSize={["sm", "md"]} maxW={"md"} spacing={5}>
+    <Stack fontSize={["sm", "md"]} maxW="md" gap={5}>
       <SpreadHeader username={username} timeRange={timeRange} />
       {songlist.length ? (
-        <List spacing={"0.8em"} mt={1}>
-          {songlist
-            .map((song, index) => (
-              <Collapse
-                key={song.songName}
-                in={index < numTracksToDisplay}
-                style={{ overflow: "visible" }}
-              >
+        <List.Root gap="0.8em" mt={1} listStyle="none">
+          {songlist.map((song, index) => (
+            <Collapsible.Root
+              key={song.songName}
+              open={index < numTracksToDisplay}
+            >
+              <Collapsible.Content style={{ overflow: "visible" }}>
                 <SongItem {...song} />
-              </Collapse>
-            ))}
-        </List>
+              </Collapsible.Content>
+            </Collapsible.Root>
+          ))}
+        </List.Root>
       ) : (
         <LoadingSkeleton
           maxLength={songNumLimit}
           displayLength={numTracksToDisplay}
         />
       )}
-      <Box display={"inline-flex"} justifyContent={"space-between"}>
+      <Box display="inline-flex" justifyContent="space-between">
         <Image
           src="/SpotifyLogoWhite.png"
           alt="white spotify logo"
-          w={"80px"}
+          w="80px"
         />
         <Text
-          display={"inline-block"}
-          fontSize={"smaller"}
-          fontWeight={"500"}
-          color={"white"}
+          display="inline-block"
+          fontSize="smaller"
+          fontWeight="500"
+          color="white"
           mr={1}
         >
           songspread.app
