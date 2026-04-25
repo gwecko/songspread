@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {
   Box,
   Collapse,
-  Container,
-  Flex,
   Image,
   List,
   Stack,
@@ -31,18 +29,12 @@ const SpreadCard: React.FC<SpreadCardProps> = ({
   numTracksToDisplay,
   songlist,
 }) => {
-  
-const [songspread, setSongspread] = useState<FormattedTrack[]>(songlist);
-  useEffect(() => {
-    setSongspread(songlist);
-  }, [songlist]);
-
   return (
     <Stack fontSize={["sm", "md"]} maxW={"md"} spacing={5}>
       <SpreadHeader username={username} timeRange={timeRange} />
       {songlist.length ? (
         <List spacing={"0.8em"} mt={1}>
-          {songspread
+          {songlist
             .map((song, index) => (
               <Collapse
                 key={song.songName}

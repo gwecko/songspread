@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-sync-scripts */
 import Head from "next/head";
 import { Layout } from "@/components";
 import { Box, Button, Code, Text, Link, Heading } from "@chakra-ui/react";
