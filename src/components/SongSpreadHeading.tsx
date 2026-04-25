@@ -37,11 +37,20 @@ const SongSpreadHeading: React.FC = () => {
         maxW="container.sm"
         display="flex"
         flexDir="column"
-        justifyContent="end"
+        // Center content vertically; the rounded-bottom corners curve inward
+        // and would clip the wordmark if we pinned it to the bottom.
+        justifyContent="center"
         textAlign="center"
         position="relative"
-        height="6rem"
-        p={2}
+        // Pill needs to be taller than its bottom-radius so the corner curves
+        // don't bite into the text. Bottom-radius is 6.5rem, so a 9rem pill
+        // leaves ~2.5rem of straight side-walls for the wordmark to sit in.
+        height="9rem"
+        px={2}
+        pt={2}
+        // Nudge content up slightly so it sits in the visually safe zone,
+        // above where the bottom curves start eating in.
+        pb="2.25rem"
         borderBottomRadius="6.5rem"
         border="1px solid rgba(255, 255, 255, 0.7)"
         borderTop="none"
